@@ -4,393 +4,770 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Manish Dadhwal — Digital Solutions Manager</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<meta name="description" content="Manish Dadhwal — Digital Solutions Manager specializing in ERP, Power Platform, Python automation, and enterprise data solutions.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --bg:#0b1120;--surface:#141c2e;--surface2:#1a2540;--border:#243049;
-  --text:#e2e8f0;--muted:#8896b3;--accent:#38bdf8;--accent2:#818cf8;--accent3:#34d399;
-  --grad:linear-gradient(135deg,var(--accent),var(--accent2));
+  --bg:#050a14;--bg2:#0a1628;--surface:#0f1d32;--surface2:#142740;--surface3:#1a3050;
+  --border:#1e3a5f;--border2:#264a72;
+  --text:#e8edf5;--text2:#c8d6e5;--muted:#7a8da6;
+  --accent:#60a5fa;--accent-bright:#93c5fd;--accent-dim:#3b82f6;
+  --purple:#a78bfa;--purple-dim:#7c3aed;
+  --green:#34d399;--green-dim:#059669;
+  --amber:#fbbf24;
+  --pink:#f472b6;
+  --grad1:linear-gradient(135deg,var(--accent),var(--purple));
+  --grad2:linear-gradient(135deg,var(--green),var(--accent));
+  --grad3:linear-gradient(135deg,var(--purple),var(--pink));
+  --shadow-sm:0 2px 8px rgba(0,0,0,.3);
+  --shadow-md:0 8px 32px rgba(0,0,0,.4);
+  --shadow-lg:0 16px 64px rgba(0,0,0,.5);
+  --shadow-glow:0 0 40px rgba(96,165,250,.08);
 }
 html{scroll-behavior:smooth}
-body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
-a{color:var(--accent);text-decoration:none;transition:.2s}
-a:hover{color:var(--accent2)}
-.container{max-width:1100px;margin:auto;padding:0 2rem}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:.25s}
+a:hover{color:var(--accent-bright)}
+code,.mono{font-family:'JetBrains Mono',monospace}
+.container{max-width:1140px;margin:auto;padding:0 2rem}
+
+/* SCROLLBAR */
+::-webkit-scrollbar{width:6px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+/* GRAIN OVERLAY */
+body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  opacity:.4}
 
 /* NAV */
-nav{position:fixed;top:0;width:100%;background:rgba(11,17,32,.88);backdrop-filter:blur(14px);z-index:100;border-bottom:1px solid var(--border)}
-nav .inner{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem}
-nav .logo{font-weight:800;font-size:1.2rem;letter-spacing:-.5px}
-nav .logo span{color:var(--accent)}
-nav ul{list-style:none;display:flex;gap:1.8rem}
-nav ul a{color:var(--muted);font-size:.88rem;font-weight:500}
+nav{position:fixed;top:0;width:100%;z-index:100;transition:background .3s,box-shadow .3s}
+nav.scrolled{background:rgba(5,10,20,.92);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border)}
+nav .inner{max-width:1140px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem}
+nav .logo{font-weight:800;font-size:1.15rem;letter-spacing:-.3px}
+nav .logo span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+nav ul{list-style:none;display:flex;gap:2rem}
+nav ul a{color:var(--muted);font-size:.85rem;font-weight:500;letter-spacing:.3px;text-transform:uppercase;position:relative}
+nav ul a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--grad1);transition:.3s}
 nav ul a:hover{color:var(--text)}
-.menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.5rem;cursor:pointer}
+nav ul a:hover::after{width:100%}
+.menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer}
 
 /* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:7rem 2rem 4rem;position:relative;overflow:hidden}
-.hero::before{content:'';position:absolute;top:-50%;right:-30%;width:700px;height:700px;background:radial-gradient(circle,rgba(56,189,248,.08),transparent 70%);pointer-events:none}
-.hero-content{max-width:1100px;margin:auto;width:100%}
-.hero-label{display:inline-block;background:rgba(56,189,248,.1);color:var(--accent);padding:.35rem 1rem;border-radius:999px;font-size:.8rem;font-weight:600;margin-bottom:1.5rem;border:1px solid rgba(56,189,248,.2)}
-.hero h1{font-size:clamp(2.2rem,5.5vw,3.8rem);font-weight:800;line-height:1.15;margin-bottom:1rem;letter-spacing:-.5px}
-.hero h1 .highlight{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero p{color:var(--muted);font-size:1.1rem;max-width:600px;margin-bottom:2rem}
-.hero .btns{display:flex;gap:1rem;flex-wrap:wrap}
-.btn{display:inline-block;padding:.75rem 1.75rem;border-radius:.5rem;font-weight:600;font-size:.92rem;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer}
-.btn-primary{background:var(--grad);color:#0b1120}
-.btn-outline{border:1.5px solid var(--border);color:var(--text);background:transparent}
-.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(56,189,248,.12)}
-.hero-stats{display:flex;gap:2.5rem;margin-top:3rem;padding-top:2rem;border-top:1px solid var(--border)}
-.hero-stat h3{font-size:1.8rem;font-weight:800;color:var(--accent)}
-.hero-stat p{color:var(--muted);font-size:.82rem}
+.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 0 6rem;position:relative}
+.hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.12}
+.hero-bg .orb1{width:600px;height:600px;background:var(--accent-dim);top:-10%;right:-10%}
+.hero-bg .orb2{width:400px;height:400px;background:var(--purple-dim);bottom:10%;left:-5%}
+.hero-bg .orb3{width:300px;height:300px;background:var(--green-dim);top:40%;left:30%}
+.hero-grid{display:grid;grid-template-columns:1fr .85fr;gap:4rem;align-items:center;position:relative;z-index:1}
+.hero-label{display:inline-flex;align-items:center;gap:.5rem;background:rgba(96,165,250,.08);color:var(--accent);padding:.4rem 1rem;border-radius:999px;font-size:.78rem;font-weight:600;margin-bottom:1.5rem;border:1px solid rgba(96,165,250,.15)}
+.hero-label .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.hero h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;line-height:1.12;margin-bottom:1.2rem;letter-spacing:-.8px}
+.hero h1 .gradient{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero .subtitle{color:var(--muted);font-size:1.05rem;max-width:520px;margin-bottom:2rem}
+.hero .btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;border-radius:.6rem;font-weight:600;font-size:.9rem;transition:all .25s;border:none;cursor:pointer}
+.btn-primary{background:var(--grad1);color:#050a14;box-shadow:0 4px 20px rgba(96,165,250,.25)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(96,165,250,.35);color:#050a14}
+.btn-outline{border:1.5px solid var(--border2);color:var(--text2);background:transparent}
+.btn-outline:hover{border-color:var(--accent);color:var(--text);transform:translateY(-2px)}
+.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.2rem;text-align:center;transition:.3s}
+.metric-card:hover{border-color:var(--accent);box-shadow:var(--shadow-glow)}
+.metric-card .num{font-size:1.6rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.metric-card .label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;margin-top:.2rem}
+
+/* HERO VISUAL */
+.hero-visual{position:relative}
+.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;box-shadow:var(--shadow-lg)}
+.hero-card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
+.avatar{width:64px;height:64px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#050a14}
+.hero-card-header .name{font-weight:700;font-size:1.1rem}
+.hero-card-header .role{color:var(--muted);font-size:.82rem}
+.code-block{background:var(--bg2);border:1px solid var(--border);border-radius:.6rem;padding:1rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.8;overflow:hidden}
+.code-block .kw{color:var(--purple)}
+.code-block .str{color:var(--green)}
+.code-block .prop{color:var(--accent)}
+.code-block .cmt{color:var(--muted)}
+.floating-badge{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem 1rem;font-size:.75rem;font-weight:600;box-shadow:var(--shadow-md);white-space:nowrap}
+.badge-1{top:-12px;right:-12px;color:var(--green);animation:float 6s ease-in-out infinite}
+.badge-2{bottom:30px;left:-20px;color:var(--purple);animation:float 6s ease-in-out infinite 2s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 
 /* SECTIONS */
-section{padding:5rem 0}
-.section-header{text-align:center;margin-bottom:3.5rem}
-.section-title{font-size:2rem;font-weight:800;letter-spacing:-.3px}
-.section-title span{color:var(--accent)}
-.section-sub{color:var(--muted);margin-top:.5rem}
-.divider{width:50px;height:3px;background:var(--grad);border-radius:2px;margin:1rem auto 0}
+section{padding:6rem 0}
+.section-header{margin-bottom:3.5rem}
+.section-header.center{text-align:center}
+.section-label{display:inline-block;color:var(--accent);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.75rem}
+.section-title{font-size:2.2rem;font-weight:800;letter-spacing:-.5px;line-height:1.2}
+.section-title span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.section-sub{color:var(--muted);margin-top:.6rem;max-width:560px}
+.section-header.center .section-sub{margin-left:auto;margin-right:auto}
 
 /* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;align-items:start}
-.about-text p{color:var(--muted);margin-bottom:1rem;font-size:.95rem}
-.about-highlights{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1.5rem}
-.about-hl{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:1rem 1.2rem}
-.about-hl h4{font-size:.85rem;color:var(--accent);font-weight:600;margin-bottom:.25rem}
-.about-hl p{color:var(--muted);font-size:.82rem;margin:0}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
+.about-text p{color:var(--text2);margin-bottom:1rem;font-size:.95rem}
+.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.info-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.2rem;transition:.3s}
+.info-card:hover{border-color:var(--accent);transform:translateY(-2px)}
+.info-card .ic-icon{font-size:1.3rem;margin-bottom:.5rem}
+.info-card h4{font-size:.82rem;font-weight:700;margin-bottom:.2rem}
+.info-card p{color:var(--muted);font-size:.78rem;margin:0}
 
 /* EXPERIENCE */
-.timeline{position:relative;padding-left:2rem}
-.timeline::before{content:'';position:absolute;left:6px;top:0;bottom:0;width:2px;background:var(--border)}
-.timeline-item{position:relative;margin-bottom:2.5rem}
-.timeline-item::before{content:'';position:absolute;left:-2rem;top:6px;width:14px;height:14px;border-radius:50%;background:var(--accent);border:3px solid var(--bg)}
-.timeline-header{display:flex;justify-content:space-between;align-items:baseline;flex-wrap:wrap;gap:.5rem;margin-bottom:.5rem}
-.timeline-header h3{font-size:1.05rem;font-weight:700}
-.timeline-header .company{color:var(--accent2);font-weight:500}
-.timeline-header .date{color:var(--muted);font-size:.82rem;white-space:nowrap}
-.timeline-item p{color:var(--muted);font-size:.9rem}
-.timeline-bullets{list-style:none;margin-top:.75rem;display:flex;flex-direction:column;gap:.4rem}
-.timeline-bullets li{color:var(--muted);font-size:.85rem;padding-left:1.2rem;position:relative}
-.timeline-bullets li::before{content:'▸';position:absolute;left:0;color:var(--accent)}
+.exp-grid{display:flex;flex-direction:column;gap:2rem}
+.exp-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;transition:.3s;position:relative;overflow:hidden}
+.exp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--grad1);border-radius:0 2px 2px 0}
+.exp-card:hover{border-color:var(--border2);box-shadow:var(--shadow-glow)}
+.exp-top{display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:.75rem;margin-bottom:1rem}
+.exp-top h3{font-size:1.05rem;font-weight:700}
+.exp-top .company{color:var(--accent);font-weight:500;font-size:.92rem}
+.exp-date{color:var(--muted);font-size:.78rem;font-weight:500;background:var(--bg2);padding:.3rem .8rem;border-radius:999px;white-space:nowrap}
+.exp-desc{color:var(--text2);font-size:.88rem;margin-bottom:1rem}
+.exp-highlights{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem}
+.exp-hl{display:flex;align-items:start;gap:.5rem;color:var(--muted);font-size:.82rem;line-height:1.5}
+.exp-hl .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:.5rem;flex-shrink:0}
+.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
+.exp-tag{font-size:.7rem;padding:.25rem .65rem;border-radius:999px;font-weight:500}
 
 /* SKILLS */
-.skills-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem}
-.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-.skill-group h3{font-size:.95rem;font-weight:700;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem}
-.skill-group h3 .dot{width:8px;height:8px;border-radius:50%;background:var(--accent)}
-.skill-tags{display:flex;flex-wrap:wrap;gap:.5rem}
-.skill-tag{background:rgba(56,189,248,.08);color:var(--accent);padding:.3rem .85rem;border-radius:999px;font-size:.78rem;font-weight:500;border:1px solid rgba(56,189,248,.15)}
-.skill-tag.purple{background:rgba(129,140,248,.08);color:var(--accent2);border-color:rgba(129,140,248,.15)}
-.skill-tag.green{background:rgba(52,211,153,.08);color:var(--accent3);border-color:rgba(52,211,153,.15)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;transition:.3s}
+.skill-group:hover{border-color:var(--border2);box-shadow:var(--shadow-glow)}
+.sg-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
+.sg-icon{width:38px;height:38px;border-radius:.6rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
+.sg-header h3{font-size:.92rem;font-weight:700}
+.skill-items{display:flex;flex-direction:column;gap:.6rem}
+.skill-item{display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:var(--bg2);border-radius:.5rem;font-size:.82rem;transition:.2s}
+.skill-item:hover{background:var(--surface2)}
+.skill-item .level{display:flex;gap:3px}
+.skill-item .level span{width:16px;height:4px;border-radius:2px;background:var(--border)}
+.skill-item .level span.filled{background:var(--accent)}
+.skill-item .level span.filled.purple{background:var(--purple)}
+.skill-item .level span.filled.green{background:var(--green)}
+.skill-item .level span.filled.pink{background:var(--pink)}
 
 /* ACHIEVEMENTS */
-.achieve-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
-.achieve-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem;transition:transform .2s,border-color .2s}
-.achieve-card:hover{transform:translateY(-3px);border-color:var(--accent)}
-.achieve-card .metric{font-size:2rem;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:.25rem}
-.achieve-card h3{font-size:.95rem;font-weight:600;margin-bottom:.4rem}
-.achieve-card p{color:var(--muted);font-size:.83rem}
+.achieve-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.achieve-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;text-align:center;transition:.3s;position:relative;overflow:hidden}
+.achieve-card::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:2px;border-radius:0 0 4px 4px}
+.achieve-card:nth-child(1)::after{background:var(--grad1)}
+.achieve-card:nth-child(2)::after{background:var(--grad2)}
+.achieve-card:nth-child(3)::after{background:var(--grad3)}
+.achieve-card:nth-child(4)::after{background:linear-gradient(135deg,var(--amber),var(--pink))}
+.achieve-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.achieve-num{font-size:2.5rem;font-weight:800;line-height:1}
+.an1{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.an2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.an3{background:var(--grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.an4{background:linear-gradient(135deg,var(--amber),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.achieve-card h3{font-size:.88rem;font-weight:600;margin:.6rem 0 .3rem}
+.achieve-card p{color:var(--muted);font-size:.78rem;line-height:1.5}
 
 /* EDUCATION */
-.edu-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
-.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.5rem}
-.edu-card h3{font-size:1rem;font-weight:700;margin-bottom:.25rem}
-.edu-card .school{color:var(--accent);font-size:.88rem;margin-bottom:.15rem}
-.edu-card .year{color:var(--muted);font-size:.82rem}
+.edu-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;transition:.3s}
+.edu-card:hover{border-color:var(--border2);transform:translateY(-2px)}
+.edu-icon{font-size:1.8rem;margin-bottom:1rem}
+.edu-card h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
+.edu-card .school{color:var(--accent);font-size:.85rem;margin-bottom:.15rem}
+.edu-card .year{color:var(--muted);font-size:.78rem}
+
+/* BLOG */
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
+.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
+.blog-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-md)}
+.blog-banner{height:6px;width:100%}
+.blog-body{padding:1.8rem;flex:1;display:flex;flex-direction:column}
+.blog-cat{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem}
+.blog-body h3{font-size:1rem;font-weight:700;margin-bottom:.6rem;line-height:1.4}
+.blog-body .preview{color:var(--muted);font-size:.85rem;margin-bottom:1.2rem;flex:1;line-height:1.6}
+.blog-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border)}
+.blog-footer .read-time{color:var(--muted);font-size:.75rem}
+.blog-footer .copy-post{background:rgba(96,165,250,.1);color:var(--accent);border:none;padding:.4rem .9rem;border-radius:.4rem;font-size:.78rem;font-weight:600;cursor:pointer;transition:.2s}
+.blog-footer .copy-post:hover{background:rgba(96,165,250,.2)}
+.blog-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:200;justify-content:center;align-items:center;padding:2rem}
+.blog-modal-overlay.active{display:flex}
+.blog-modal{background:var(--surface);border:1px solid var(--border);border-radius:1rem;max-width:680px;width:100%;max-height:80vh;overflow-y:auto;padding:2.5rem;position:relative}
+.blog-modal .close-modal{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer}
+.blog-modal .close-modal:hover{color:var(--text)}
+.blog-modal h2{font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
+.blog-modal .modal-cat{font-size:.75rem;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.5rem}
+.blog-modal .modal-content{color:var(--text2);font-size:.92rem;line-height:1.8;white-space:pre-wrap}
+.blog-modal .modal-actions{display:flex;gap:1rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
+.blog-modal .modal-actions button{padding:.6rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:.2s}
+.blog-modal .btn-copy{background:var(--accent);color:var(--bg)}
+.blog-modal .btn-linkedin{background:#0a66c2;color:#fff}
 
 /* CONTACT */
-.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem}
-.contact-info p{color:var(--muted);margin-bottom:1.5rem;font-size:.95rem}
-.contact-links{display:flex;flex-direction:column;gap:.85rem}
-.contact-link{display:flex;align-items:center;gap:.75rem;color:var(--muted);font-size:.92rem;padding:.85rem 1.1rem;background:var(--surface);border:1px solid var(--border);border-radius:.6rem;transition:.2s}
-.contact-link:hover{border-color:var(--accent);color:var(--text)}
-.contact-link .cl-icon{font-size:1.1rem}
-form{display:flex;flex-direction:column;gap:1rem}
-input,textarea{background:var(--surface);border:1px solid var(--border);border-radius:.5rem;padding:.85rem 1rem;color:var(--text);font-family:inherit;font-size:.92rem;outline:none;transition:.2s}
-input:focus,textarea:focus{border-color:var(--accent)}
-textarea{resize:vertical;min-height:120px}
+.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:3.5rem}
+.contact-text{color:var(--text2);font-size:.95rem;margin-bottom:2rem}
+.contact-cards{display:flex;flex-direction:column;gap:.75rem}
+.cc{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:.75rem;transition:.3s;color:var(--text2);font-size:.9rem}
+.cc:hover{border-color:var(--accent);transform:translateX(4px);color:var(--text)}
+.cc .cc-icon{width:40px;height:40px;border-radius:.5rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.cc .cc-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px}
+form{display:flex;flex-direction:column;gap:.85rem}
+form .row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
+input,textarea{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.9rem 1.1rem;color:var(--text);font-family:inherit;font-size:.88rem;outline:none;transition:.25s;width:100%}
+input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(96,165,250,.08)}
+textarea{resize:vertical;min-height:110px}
+input::placeholder,textarea::placeholder{color:var(--muted)}
+.form-btn{width:100%;text-align:center;justify-content:center}
 
 /* FOOTER */
-footer{text-align:center;padding:2.5rem;color:var(--muted);font-size:.82rem;border-top:1px solid var(--border)}
+footer{border-top:1px solid var(--border);padding:2.5rem 0}
+.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+footer p{color:var(--muted);font-size:.8rem}
+.footer-links{display:flex;gap:1.5rem}
+.footer-links a{color:var(--muted);font-size:.8rem}
+.footer-links a:hover{color:var(--accent)}
 
 /* MOBILE */
+@media(max-width:900px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-visual{display:none}
+  .hero-metrics{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:768px){
   .menu-btn{display:block}
-  nav ul{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(11,17,32,.97);flex-direction:column;padding:1rem 2rem;gap:1rem;border-bottom:1px solid var(--border)}
+  nav ul{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(5,10,20,.97);backdrop-filter:blur(20px);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid var(--border)}
   nav ul.open{display:flex}
-  .about-grid,.contact-grid,.edu-grid{grid-template-columns:1fr}
-  .hero-stats{flex-wrap:wrap;gap:1.5rem}
-  .about-highlights{grid-template-columns:1fr}
-  .timeline-header{flex-direction:column}
+  .about-grid,.contact-layout{grid-template-columns:1fr}
+  .exp-highlights{grid-template-columns:1fr}
+  .achieve-row{grid-template-columns:repeat(2,1fr)}
+  .edu-row{grid-template-columns:1fr}
+  .hero-metrics{grid-template-columns:repeat(2,1fr)}
+  form .row{grid-template-columns:1fr}
+  section{padding:4rem 0}
 }
 
 /* ANIMATIONS */
-.fade-in{opacity:0;transform:translateY(24px);transition:opacity .6s ease,transform .6s ease}
-.fade-in.visible{opacity:1;transform:translateY(0)}
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
 </style>
 </head>
 <body>
 
-<nav>
+<nav id="nav">
   <div class="inner">
-    <a href="#" class="logo">Manish<span>.</span></a>
+    <a href="#" class="logo">manish<span>.</span></a>
     <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">&#9776;</button>
     <ul>
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#skills">Skills</a></li>
-      <li><a href="#achievements">Achievements</a></li>
+      <li><a href="#achievements">Impact</a></li>
+      <li><a href="#insights">Insights</a></li>
       <li><a href="#contact">Contact</a></li>
     </ul>
   </div>
 </nav>
 
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-content">
-    <div class="hero-label">Digital Solutions Manager</div>
-    <h1>I'm <span class="highlight">Manish Dadhwal</span><br>I build scalable<br>enterprise solutions.</h1>
-    <p>10+ years designing ERP, data platforms, and system integrations. Driving digital transformation with Dynamics 365, Power Platform, Azure, and Python automation.</p>
-    <div class="btns">
-      <a href="#experience" class="btn btn-primary">View Experience</a>
-      <a href="#contact" class="btn btn-outline">Get In Touch</a>
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <div class="hero-label"><span class="pulse"></span> Open to Opportunities</div>
+        <h1>I'm <span class="gradient">Manish Dadhwal</span>,<br>Digital Solutions<br>Manager.</h1>
+        <p class="subtitle">10+ years designing scalable ERP systems, data platforms, and automation pipelines. I turn complex business problems into elegant technical solutions.</p>
+        <div class="btns">
+          <a href="#experience" class="btn btn-primary">View Experience &darr;</a>
+          <a href="#contact" class="btn btn-outline">Let's Connect</a>
+        </div>
+        <div class="hero-metrics">
+          <div class="metric-card reveal"><div class="num">10+</div><div class="label">Years Exp.</div></div>
+          <div class="metric-card reveal reveal-delay-1"><div class="num">150+</div><div class="label">Users Served</div></div>
+          <div class="metric-card reveal reveal-delay-2"><div class="num">40%</div><div class="label">Sync Faster</div></div>
+          <div class="metric-card reveal reveal-delay-3"><div class="num">35%</div><div class="label">Adoption Up</div></div>
+        </div>
+      </div>
+      <div class="hero-visual reveal">
+        <div class="hero-card">
+          <div class="hero-card-header">
+            <div class="avatar">MD</div>
+            <div><div class="name">Manish Dadhwal</div><div class="role">Digital Solutions Lead @ Rubicon Organics</div></div>
+          </div>
+          <div class="code-block">
+            <span class="cmt">// what I do</span><br>
+            <span class="kw">const</span> <span class="prop">expertise</span> = {<br>
+            &nbsp;&nbsp;<span class="prop">erp</span>: <span class="str">"Dynamics 365 BC"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">data</span>: <span class="str">"Power BI + SQL"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">cloud</span>: <span class="str">"Azure + Power Automate"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">code</span>: <span class="str">"Python automation"</span>,<br>
+            &nbsp;&nbsp;<span class="prop">impact</span>: <span class="str">"measurable"</span><br>
+            };
+          </div>
+          <div class="floating-badge badge-1">&#10003; ITIL v4 Certified</div>
+          <div class="floating-badge badge-2">&#9733; MBA — Data Analysis</div>
+        </div>
+      </div>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><h3>10+</h3><p>Years Experience</p></div>
-      <div class="hero-stat"><h3>40%</h3><p>Data Sync Improved</p></div>
-      <div class="hero-stat"><h3>35%</h3><p>Adoption Increase</p></div>
-      <div class="hero-stat"><h3>150+</h3><p>Users Supported</p></div>
+  </div>
+</section>
+
+<!-- ===== ABOUT ===== -->
+<section id="about" style="background:var(--bg2)">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <div class="section-header reveal">
+          <div class="section-label">About Me</div>
+          <h2 class="section-title">Building the bridge between <span>business & technology</span></h2>
+        </div>
+        <div class="about-text reveal">
+          <p>I'm a hands-on Digital Solutions professional who thrives at the intersection of ERP systems, data engineering, and cloud automation. At Rubicon Organics, I architect end-to-end solutions across Dynamics 365 Business Central, Power Platform, and custom Python pipelines.</p>
+          <p>My approach is pragmatic: understand the business problem first, then build the simplest solution that scales. I've streamlined data sync by 40%, boosted user adoption by 35%, and eliminated entire categories of manual work through intelligent automation.</p>
+        </div>
+      </div>
+      <div class="info-cards reveal">
+        <div class="info-card"><div class="ic-icon">&#x1F4CD;</div><h4>Surrey, BC</h4><p>Greater Vancouver Area</p></div>
+        <div class="info-card"><div class="ic-icon">&#x1F393;</div><h4>MBA</h4><p>University Canada West '23</p></div>
+        <div class="info-card"><div class="ic-icon">&#x1F4DC;</div><h4>ITIL v4</h4><p>Foundation Certified</p></div>
+        <div class="info-card"><div class="ic-icon">&#x26A1;</div><h4>10+ Years</h4><p>Enterprise Solutions</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EXPERIENCE ===== -->
+<section id="experience">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Career Path</div>
+      <h2 class="section-title">Professional <span>Experience</span></h2>
+      <p class="section-sub">A track record of delivering scalable enterprise solutions across ERP, data, and cloud platforms.</p>
+    </div>
+    <div class="exp-grid">
+      <div class="exp-card reveal">
+        <div class="exp-top">
+          <div><h3>Digital Solutions Lead / ERP Data Analyst</h3><div class="company">Rubicon Organics &middot; Vancouver, BC</div></div>
+          <div class="exp-date">Jan 2024 &mdash; Present</div>
+        </div>
+        <p class="exp-desc">Delivering end-to-end digital solutions across ERP, SaaS integrations, and data platforms for 100&ndash;150 users spanning Finance, Supply Chain, Production, and Cultivation.</p>
+        <div class="exp-highlights">
+          <div class="exp-hl"><span class="dot"></span>Configured REST API integrations reducing data sync by 40%</div>
+          <div class="exp-hl"><span class="dot"></span>Built Power BI dashboards replacing manual reporting</div>
+          <div class="exp-hl"><span class="dot"></span>Architected Python ETL pipeline for ERP batch uploads</div>
+          <div class="exp-hl"><span class="dot"></span>Designed Power Automate hybrid cloud workflows</div>
+          <div class="exp-hl"><span class="dot"></span>Improved data accuracy 25% via governance frameworks</div>
+          <div class="exp-hl"><span class="dot"></span>Increased system adoption 35% through UAT training</div>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">D365 BC</span>
+          <span class="exp-tag" style="background:rgba(167,139,250,.1);color:var(--purple)">Power BI</span>
+          <span class="exp-tag" style="background:rgba(52,211,153,.1);color:var(--green)">Python</span>
+          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">SQL</span>
+          <span class="exp-tag" style="background:rgba(244,114,182,.1);color:var(--pink)">Azure</span>
+          <span class="exp-tag" style="background:rgba(251,191,36,.1);color:var(--amber)">Power Automate</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-top">
+          <div><h3>System Analyst</h3><div class="company">Lululemon (via Randstad) &middot; Vancouver, BC</div></div>
+          <div class="exp-date">Oct &mdash; Jan 2024</div>
+        </div>
+        <p class="exp-desc">Administered IT infrastructure for warehouse management operations including WMS, servers, networking, and Zebra label printing systems.</p>
+        <div class="exp-highlights">
+          <div class="exp-hl"><span class="dot"></span>Managed asset lifecycle in hybrid cloud environment</div>
+          <div class="exp-hl"><span class="dot"></span>Ensured system uptime and operational continuity</div>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">WMS</span>
+          <span class="exp-tag" style="background:rgba(167,139,250,.1);color:var(--purple)">Bartender</span>
+          <span class="exp-tag" style="background:rgba(52,211,153,.1);color:var(--green)">Manhattan Active</span>
+        </div>
+      </div>
+
+      <div class="exp-card reveal">
+        <div class="exp-top">
+          <div><h3>Senior Process Associate</h3><div class="company">Tata Consultancy Services &middot; Delhi, India</div></div>
+          <div class="exp-date">Aug 2016 &mdash; Oct 2023</div>
+        </div>
+        <p class="exp-desc">Led enterprise analytics initiatives, defining KPIs and delivering dashboard solutions at scale across business operations.</p>
+        <div class="exp-highlights">
+          <div class="exp-hl"><span class="dot"></span>Delivered Power BI and Tableau dashboards at scale</div>
+          <div class="exp-hl"><span class="dot"></span>Built automated reporting with Power Query & Pivot</div>
+          <div class="exp-hl"><span class="dot"></span>Defined enterprise KPIs and reporting standards</div>
+          <div class="exp-hl"><span class="dot"></span>Streamlined procurement reporting and analytics</div>
+        </div>
+        <div class="exp-tags">
+          <span class="exp-tag" style="background:rgba(167,139,250,.1);color:var(--purple)">Power BI</span>
+          <span class="exp-tag" style="background:rgba(52,211,153,.1);color:var(--green)">Tableau</span>
+          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">Excel</span>
+          <span class="exp-tag" style="background:rgba(244,114,182,.1);color:var(--pink)">Power Query</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SKILLS ===== -->
+<section id="skills" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Tech Stack</div>
+      <h2 class="section-title">Skills & <span>Expertise</span></h2>
+      <p class="section-sub">A deep toolkit spanning ERP systems, analytics platforms, cloud services, and automation frameworks.</p>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-group reveal">
+        <div class="sg-header">
+          <div class="sg-icon" style="background:rgba(96,165,250,.1)">&#x2699;</div>
+          <h3>ERP & Business Systems</h3>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">Dynamics 365 Business Central<div class="level"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div>
+          <div class="skill-item">REST API / BC Web Services<div class="level"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div>
+          <div class="skill-item">ERP Configuration & UAT<div class="level"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-1">
+        <div class="sg-header">
+          <div class="sg-icon" style="background:rgba(167,139,250,.1)">&#x1F4CA;</div>
+          <h3>Data & Analytics</h3>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">Power BI / DAX / Power Query<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span></div></div>
+          <div class="skill-item">SQL<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span></span></div></div>
+          <div class="skill-item">Tableau<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span></span></div></div>
+          <div class="skill-item">Excel (Advanced)<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span></div></div>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-2">
+        <div class="sg-header">
+          <div class="sg-icon" style="background:rgba(52,211,153,.1)">&#x2601;</div>
+          <h3>Cloud & Automation</h3>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">Azure<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span></span></div></div>
+          <div class="skill-item">Power Automate<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span></div></div>
+          <div class="skill-item">Python<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span></span></div></div>
+          <div class="skill-item">SharePoint / OneDrive<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span></span></div></div>
+        </div>
+      </div>
+      <div class="skill-group reveal reveal-delay-3">
+        <div class="sg-header">
+          <div class="sg-icon" style="background:rgba(244,114,182,.1)">&#x1F4CB;</div>
+          <h3>Methods & Governance</h3>
+        </div>
+        <div class="skill-items">
+          <div class="skill-item">Data Governance<div class="level"><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span></div></div>
+          <div class="skill-item">Master Data Management<div class="level"><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span></span></div></div>
+          <div class="skill-item">ITIL v4 / Agile<div class="level"><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span></span></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACHIEVEMENTS ===== -->
+<section id="achievements">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Results</div>
+      <h2 class="section-title">Measurable <span>Impact</span></h2>
+    </div>
+    <div class="achieve-row">
+      <div class="achieve-card reveal">
+        <div class="achieve-num an1">40%</div>
+        <h3>Faster Data Sync</h3>
+        <p>Streamlined BC integrations with SQL and Elevated Signals</p>
+      </div>
+      <div class="achieve-card reveal reveal-delay-1">
+        <div class="achieve-num an2">35%</div>
+        <h3>User Adoption</h3>
+        <p>Structured ERP training and onboarding programs</p>
+      </div>
+      <div class="achieve-card reveal reveal-delay-2">
+        <div class="achieve-num an3">25%</div>
+        <h3>Data Accuracy</h3>
+        <p>Governance frameworks reducing repeat incidents 30%</p>
+      </div>
+      <div class="achieve-card reveal reveal-delay-3">
+        <div class="achieve-num an4">Zero</div>
+        <h3>Manual Reports</h3>
+        <p>Migrated to dynamic Power BI dashboards</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== EDUCATION ===== -->
+<section style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Education</div>
+      <h2 class="section-title">Academic <span>Background</span></h2>
+    </div>
+    <div class="edu-row">
+      <div class="edu-card reveal">
+        <div class="edu-icon">&#x1F393;</div>
+        <h3>MBA &mdash; Data Analysis & PM</h3>
+        <div class="school">University Canada West, Vancouver</div>
+        <div class="year">2023</div>
+      </div>
+      <div class="edu-card reveal reveal-delay-1">
+        <div class="edu-icon">&#x1F3DB;</div>
+        <h3>B.E. &mdash; Electronics & Telecom</h3>
+        <div class="school">Amravati University, India</div>
+        <div class="year">2012</div>
+      </div>
+      <div class="edu-card reveal reveal-delay-2">
+        <div class="edu-icon">&#x1F4DC;</div>
+        <h3>ITIL v4 Foundation</h3>
+        <div class="school">Credential: GR671097346MD</div>
+        <div class="year">2019</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== INSIGHTS / BLOG ===== -->
+<section id="insights" style="background:var(--bg2)">
+  <div class="container">
+    <div class="section-header center reveal">
+      <div class="section-label">Insights</div>
+      <h2 class="section-title">Thoughts & <span>Articles</span></h2>
+      <p class="section-sub">Practical insights from 10+ years of building enterprise solutions. Click any card to read the full post.</p>
+    </div>
+    <div class="blog-grid">
+
+      <div class="blog-card reveal" onclick="openPost(0)">
+        <div class="blog-banner" style="background:var(--grad1)"></div>
+        <div class="blog-body">
+          <div class="blog-cat" style="color:var(--accent)">Automation</div>
+          <h3>One Line of Python Saved Our Team 6 Hours a Week</h3>
+          <p class="preview">How I replaced manual Excel-to-ERP data entry with a Python pipeline that brought upload failures to near zero.</p>
+          <div class="blog-footer">
+            <span class="read-time">2 min read</span>
+            <button class="copy-post" onclick="event.stopPropagation();copyPost(0)">Copy for LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-delay-1" onclick="openPost(1)">
+        <div class="blog-banner" style="background:var(--grad2)"></div>
+        <div class="blog-body">
+          <div class="blog-cat" style="color:var(--green)">Data Governance</div>
+          <h3>Why Most ERP Implementations Fail (It's Not the Technology)</h3>
+          <p class="preview">The real reason ERP projects struggle isn't configuration — it's data governance. Here's how we fixed it at Rubicon Organics.</p>
+          <div class="blog-footer">
+            <span class="read-time">2 min read</span>
+            <button class="copy-post" onclick="event.stopPropagation();copyPost(1)">Copy for LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-delay-2" onclick="openPost(2)">
+        <div class="blog-banner" style="background:var(--grad3)"></div>
+        <div class="blog-body">
+          <div class="blog-cat" style="color:var(--purple)">Career</div>
+          <h3>From Electronics Engineer to Digital Solutions Lead</h3>
+          <p class="preview">My 10-year journey from India to Vancouver — through TCS, Lululemon, an MBA, and building ERP solutions.</p>
+          <div class="blog-footer">
+            <span class="read-time">2 min read</span>
+            <button class="copy-post" onclick="event.stopPropagation();copyPost(2)">Copy for LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card reveal" onclick="openPost(3)">
+        <div class="blog-banner" style="background:linear-gradient(135deg,var(--amber),var(--pink))"></div>
+        <div class="blog-body">
+          <div class="blog-cat" style="color:var(--amber)">Power BI</div>
+          <h3>5 Power BI Mistakes I See in Every Organization</h3>
+          <p class="preview">From building dashboards before defining KPIs to skipping row-level security — common mistakes and how to fix them.</p>
+          <div class="blog-footer">
+            <span class="read-time">2 min read</span>
+            <button class="copy-post" onclick="event.stopPropagation();copyPost(3)">Copy for LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="blog-card reveal reveal-delay-1" onclick="openPost(4)">
+        <div class="blog-banner" style="background:linear-gradient(135deg,var(--accent),var(--green))"></div>
+        <div class="blog-body">
+          <div class="blog-cat" style="color:var(--accent)">Open to Work</div>
+          <h3>Looking for My Next Challenge in Vancouver</h3>
+          <p class="preview">10+ years in enterprise digital solutions. Targeting Data Analyst, ERP Analyst, and BI roles in the Greater Vancouver Area.</p>
+          <div class="blog-footer">
+            <span class="read-time">1 min read</span>
+            <button class="copy-post" onclick="event.stopPropagation();copyPost(4)">Copy for LinkedIn</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- Post Modal -->
+<div class="blog-modal-overlay" id="postModal" onclick="if(event.target===this)closePost()">
+  <div class="blog-modal">
+    <button class="close-modal" onclick="closePost()">&times;</button>
+    <h2 id="modalTitle"></h2>
+    <div class="modal-cat" id="modalCat"></div>
+    <div class="modal-content" id="modalContent"></div>
+    <div class="modal-actions">
+      <button class="btn-copy" onclick="copyCurrentPost()">Copy to Clipboard</button>
+      <button class="btn-linkedin" onclick="window.open('https://www.linkedin.com/feed/?shareActive=true','_blank')">Post on LinkedIn</button>
     </div>
   </div>
 </div>
 
-<!-- ABOUT -->
-<section id="about">
+<!-- ===== CONTACT ===== -->
+<section id="contact">
   <div class="container">
-    <div class="section-header fade-in">
-      <h2 class="section-title">About <span>Me</span></h2>
-      <div class="divider"></div>
+    <div class="section-header reveal">
+      <div class="section-label">Get In Touch</div>
+      <h2 class="section-title">Let's <span>Connect</span></h2>
     </div>
-    <div class="about-grid">
-      <div class="about-text fade-in">
-        <p>Results-driven Digital Solutions professional with deep hands-on expertise in Microsoft Dynamics 365 Business Central, Power Platform, SQL, Azure, and API integrations across hybrid cloud and on-premises environments.</p>
-        <p>I translate complex business requirements into automated, integrated solutions — driving data governance, master data integrity, and process optimization across Finance, Supply Chain, Production, and Warehouse operations.</p>
-        <p>Based in Surrey, BC, I bring a unique blend of technical depth and business acumen backed by an MBA in Data Analysis & Project Management and a B.E. in Electronics & Telecommunication.</p>
-      </div>
-      <div class="fade-in">
-        <div class="about-highlights">
-          <div class="about-hl"><h4>Location</h4><p>Surrey, BC, Canada</p></div>
-          <div class="about-hl"><h4>MBA</h4><p>University Canada West</p></div>
-          <div class="about-hl"><h4>Certification</h4><p>ITIL v4 Foundation</p></div>
-          <div class="about-hl"><h4>Domains</h4><p>ERP, Data, Cloud</p></div>
+    <div class="contact-layout">
+      <div class="reveal">
+        <p class="contact-text">I'm always interested in discussing ERP modernization, data-driven solutions, or new career opportunities. Let's talk.</p>
+        <div class="contact-cards">
+          <a href="mailto:manish.mani27@outlook.com" class="cc">
+            <div class="cc-icon" style="background:rgba(96,165,250,.1)">&#x2709;</div>
+            <div><div class="cc-label">Email</div>manish.mani27@outlook.com</div>
+          </a>
+          <a href="tel:+17788379715" class="cc">
+            <div class="cc-icon" style="background:rgba(52,211,153,.1)">&#x260E;</div>
+            <div><div class="cc-label">Phone</div>+1 (778) 837-9715</div>
+          </a>
+          <a href="https://linkedin.com/in/md7788379715" target="_blank" class="cc">
+            <div class="cc-icon" style="background:rgba(167,139,250,.1)">&#x1F310;</div>
+            <div><div class="cc-label">LinkedIn</div>linkedin.com/in/md7788379715</div>
+          </a>
+          <a href="https://github.com/Manish120889" target="_blank" class="cc">
+            <div class="cc-icon" style="background:rgba(244,114,182,.1)">&#x2B22;</div>
+            <div><div class="cc-label">GitHub</div>github.com/Manish120889</div>
+          </a>
         </div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- EXPERIENCE -->
-<section id="experience" style="background:var(--surface2)">
-  <div class="container">
-    <div class="section-header fade-in">
-      <h2 class="section-title">Professional <span>Experience</span></h2>
-      <div class="divider"></div>
-    </div>
-    <div class="timeline">
-      <div class="timeline-item fade-in">
-        <div class="timeline-header">
-          <h3>Digital Solutions Lead / ERP Data Analyst <span class="company">— Rubicon Organics</span></h3>
-          <span class="date">Jan 2024 – Present</span>
+      <form class="reveal" action="https://formspree.io/f/your-form-id" method="POST">
+        <div class="row">
+          <input type="text" name="name" placeholder="Your Name" required>
+          <input type="email" name="email" placeholder="Your Email" required>
         </div>
-        <p>Vancouver, BC</p>
-        <ul class="timeline-bullets">
-          <li>Delivered end-to-end digital solutions across ERP (Dynamics 365 BC), SQL, Azure, and SaaS integrations for 100–150 users</li>
-          <li>Led cross-functional solution design sessions, translating requirements into scalable configurations and automated workflows</li>
-          <li>Configured REST API integrations (CRUD via BC Web Services), reducing data sync times by 40%</li>
-          <li>Built Power BI dashboards (DAX, Power Query) replacing manual reporting with self-serve analytics</li>
-          <li>Architected Python-based automation pipeline for data ingestion, transformation, and ERP batch upload</li>
-          <li>Designed Power Automate flows integrated with OneDrive/SharePoint for fully automated hybrid cloud workflows</li>
-          <li>Mentored users through structured UAT and training programs, increasing adoption rates by 35%</li>
-        </ul>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-header">
-          <h3>System Analyst <span class="company">— Lululemon (via Randstad)</span></h3>
-          <span class="date">Oct 2023 – Jan 2024</span>
-        </div>
-        <p>Vancouver, BC</p>
-        <ul class="timeline-bullets">
-          <li>Administered IT infrastructure for warehouse management (WMS), servers, networking, and Zebra label systems</li>
-          <li>Managed asset lifecycle processes within hybrid on-premises and cloud environment</li>
-          <li>Delivered technical support ensuring system uptime and operational continuity</li>
-        </ul>
-      </div>
-      <div class="timeline-item fade-in">
-        <div class="timeline-header">
-          <h3>Senior Process Associate <span class="company">— Tata Consultancy Services</span></h3>
-          <span class="date">Aug 2016 – Oct 2023</span>
-        </div>
-        <p>Delhi, India</p>
-        <ul class="timeline-bullets">
-          <li>Led stakeholder engagement to define enterprise KPIs and reporting standards</li>
-          <li>Delivered Power BI and Tableau dashboard solutions at scale</li>
-          <li>Designed monthly asset resource allocation system using Excel Power Query and Power Pivot</li>
-          <li>Built data models and automated reporting pipelines supporting enterprise decision-making</li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills">
-  <div class="container">
-    <div class="section-header fade-in">
-      <h2 class="section-title">Technical <span>Skills</span></h2>
-      <div class="divider"></div>
-    </div>
-    <div class="skills-container">
-      <div class="skill-group fade-in">
-        <h3><span class="dot"></span>ERP & Business Systems</h3>
-        <div class="skill-tags">
-          <span class="skill-tag">Dynamics 365 Business Central</span>
-          <span class="skill-tag">ERP Configuration</span>
-          <span class="skill-tag">REST API Integrations</span>
-          <span class="skill-tag">BC Web Services</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <h3><span class="dot" style="background:var(--accent2)"></span>Data & Analytics</h3>
-        <div class="skill-tags">
-          <span class="skill-tag purple">Power BI</span>
-          <span class="skill-tag purple">DAX</span>
-          <span class="skill-tag purple">Power Query</span>
-          <span class="skill-tag purple">Tableau</span>
-          <span class="skill-tag purple">SQL</span>
-          <span class="skill-tag purple">Excel (Advanced)</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <h3><span class="dot" style="background:var(--accent3)"></span>Cloud & Automation</h3>
-        <div class="skill-tags">
-          <span class="skill-tag green">Azure</span>
-          <span class="skill-tag green">Power Automate</span>
-          <span class="skill-tag green">Python</span>
-          <span class="skill-tag green">SharePoint</span>
-          <span class="skill-tag green">OneDrive</span>
-        </div>
-      </div>
-      <div class="skill-group fade-in">
-        <h3><span class="dot" style="background:#f472b6"></span>Operations & Methodology</h3>
-        <div class="skill-tags">
-          <span class="skill-tag" style="background:rgba(244,114,182,.08);color:#f472b6;border-color:rgba(244,114,182,.15)">Data Governance</span>
-          <span class="skill-tag" style="background:rgba(244,114,182,.08);color:#f472b6;border-color:rgba(244,114,182,.15)">Master Data Management</span>
-          <span class="skill-tag" style="background:rgba(244,114,182,.08);color:#f472b6;border-color:rgba(244,114,182,.15)">ITIL v4</span>
-          <span class="skill-tag" style="background:rgba(244,114,182,.08);color:#f472b6;border-color:rgba(244,114,182,.15)">UAT & Training</span>
-          <span class="skill-tag" style="background:rgba(244,114,182,.08);color:#f472b6;border-color:rgba(244,114,182,.15)">Agile</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ACHIEVEMENTS -->
-<section id="achievements" style="background:var(--surface2)">
-  <div class="container">
-    <div class="section-header fade-in">
-      <h2 class="section-title">Key <span>Achievements</span></h2>
-      <div class="divider"></div>
-    </div>
-    <div class="achieve-grid">
-      <div class="achieve-card fade-in">
-        <div class="metric">40%</div>
-        <h3>Faster Data Sync</h3>
-        <p>Streamlined Business Central integrations with SQL and Elevated Signals, cutting data synchronization time significantly.</p>
-      </div>
-      <div class="achieve-card fade-in">
-        <div class="metric">35%</div>
-        <h3>User Adoption Boost</h3>
-        <p>Designed structured ERP training programs that accelerated onboarding and system adoption across the organization.</p>
-      </div>
-      <div class="achieve-card fade-in">
-        <div class="metric">25%</div>
-        <h3>Data Accuracy Improved</h3>
-        <p>Built master data governance frameworks and validation workflows, reducing repeat data incidents by 30%.</p>
-      </div>
-      <div class="achieve-card fade-in">
-        <div class="metric">100%</div>
-        <h3>Automated Reporting</h3>
-        <p>Migrated manual Excel reporting to dynamic Power BI dashboards delivering real-time supply chain and production KPIs.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- EDUCATION -->
-<section id="education">
-  <div class="container">
-    <div class="section-header fade-in">
-      <h2 class="section-title">Education & <span>Certifications</span></h2>
-      <div class="divider"></div>
-    </div>
-    <div class="edu-grid">
-      <div class="edu-card fade-in">
-        <h3>MBA — Data Analysis & Project Management</h3>
-        <p class="school">University Canada West, Vancouver</p>
-        <p class="year">2023</p>
-      </div>
-      <div class="edu-card fade-in">
-        <h3>B.E. — Electronics & Telecommunication</h3>
-        <p class="school">Amravati University, India</p>
-        <p class="year">2012</p>
-      </div>
-      <div class="edu-card fade-in">
-        <h3>ITIL v4 Foundation</h3>
-        <p class="school">Credential ID: GR671097346MD</p>
-        <p class="year">2019</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- CONTACT -->
-<section id="contact" style="background:var(--surface2)">
-  <div class="container">
-    <div class="section-header fade-in">
-      <h2 class="section-title">Get In <span>Touch</span></h2>
-      <div class="divider"></div>
-    </div>
-    <div class="contact-grid">
-      <div class="fade-in">
-        <p class="contact-info">I'm open to discussing new opportunities, digital transformation initiatives, or just connecting. Feel free to reach out!</p>
-        <div class="contact-links">
-          <a href="mailto:manish.mani27@outlook.com" class="contact-link"><span class="cl-icon">📧</span> manish.mani27@outlook.com</a>
-          <a href="tel:+17788379715" class="contact-link"><span class="cl-icon">📱</span> +1 (778) 837-9715</a>
-          <a href="https://linkedin.com/in/md7788379715" target="_blank" class="contact-link"><span class="cl-icon">💼</span> linkedin.com/in/md7788379715</a>
-          <a href="https://github.com/manishdadhwal" target="_blank" class="contact-link"><span class="cl-icon">🐙</span> GitHub</a>
-        </div>
-      </div>
-      <form class="fade-in" action="https://formspree.io/f/your-form-id" method="POST">
-        <input type="text" name="name" placeholder="Your Name" required>
-        <input type="email" name="email" placeholder="Your Email" required>
         <input type="text" name="subject" placeholder="Subject">
         <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;text-align:center">Send Message</button>
+        <button type="submit" class="btn btn-primary form-btn">Send Message</button>
       </form>
     </div>
   </div>
 </section>
 
 <footer>
-  <p>&copy; 2026 Manish Dadhwal. All rights reserved.</p>
+  <div class="container">
+    <div class="footer-inner">
+      <p>&copy; 2026 Manish Dadhwal. Built with purpose.</p>
+      <div class="footer-links">
+        <a href="https://linkedin.com/in/md7788379715" target="_blank">LinkedIn</a>
+        <a href="https://github.com/Manish120889" target="_blank">GitHub</a>
+        <a href="mailto:manish.mani27@outlook.com">Email</a>
+      </div>
+    </div>
+  </div>
 </footer>
 
 <script>
-const obs=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting)el.target.classList.add('visible')})},{threshold:.1});
-document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+// Nav scroll effect
+const nav=document.getElementById('nav');
+window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+
+// Reveal on scroll
+const ro=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');ro.unobserve(el.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+
+// Mobile menu close
 document.querySelectorAll('nav ul a').forEach(a=>a.addEventListener('click',()=>document.querySelector('nav ul').classList.remove('open')));
+
+// Smooth anchor offset
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+
+// Blog posts data
+const posts=[
+{title:"One Line of Python Saved Our Team 6 Hours a Week",cat:"Automation",content:`One line of Python saved our team 6 hours a week.
+
+At Rubicon Organics, we had analysts manually copying data from Excel into Dynamics 365 Business Central. Every batch upload was a risk — wrong formats, missed fields, failed imports.
+
+So I built a Python pipeline that ingests raw Excel, validates every row, transforms it into ERP-ready templates, and uploads in one click. Upload failures dropped to near zero.
+
+The lesson: automation isn't about replacing people. It's about freeing them to do work that actually matters.
+
+#ERP #Python #Dynamics365 #Automation #DataEngineering`},
+{title:"Why Most ERP Implementations Fail (It's Not the Technology)",cat:"Data Governance",content:`Most ERP implementations fail not because of technology — but because of data governance.
+
+I've seen it repeatedly: teams invest months configuring Dynamics 365, only to have users lose trust because the data is wrong. Duplicate records, stale master data, no validation rules.
+
+At Rubicon Organics, we flipped the approach. We built governance frameworks FIRST — validation workflows, master data standards, ownership rules. Then we configured the system around them.
+
+Result: 25% improvement in data accuracy and 30% fewer repeat incidents.
+
+If your ERP data isn't trusted, your ERP isn't useful.
+
+#DataGovernance #ERP #Dynamics365 #BusinessCentral #DigitalTransformation`},
+{title:"From Electronics Engineer to Digital Solutions Lead",cat:"Career",content:`10 years ago I was an electronics engineer in India. Today I lead digital solutions across ERP, cloud, and data platforms in Vancouver.
+
+The path wasn't linear: 7 years at TCS building enterprise dashboards, an MBA at University Canada West, a contract at Lululemon's warehouse, and now architecting end-to-end solutions at Rubicon Organics.
+
+What connected it all: a stubborn belief that technology should make people's jobs easier, not harder.
+
+Currently exploring new opportunities in the Greater Vancouver area — Data Analyst, ERP Analyst, or Digital Solutions roles. If you know someone hiring, I'd appreciate the connection.
+
+#OpenToWork #DataAnalyst #ERP #PowerBI #Vancouver`},
+{title:"5 Power BI Mistakes I See in Every Organization",cat:"Power BI",content:`5 Power BI mistakes I see in every organization:
+
+1. Building dashboards before defining KPIs. If you can't explain what "good" looks like, don't build a chart.
+
+2. Using Import mode for everything. DirectQuery exists for a reason.
+
+3. Skipping Power Query transformations. If you're doing VLOOKUP gymnastics in Excel first, you're doing it wrong.
+
+4. No row-level security. Everyone sees everything. That's not transparency, it's a compliance risk.
+
+5. No documentation. When the dashboard creator leaves, the dashboard dies.
+
+I've built Power BI solutions serving 150+ users across supply chain, production, and finance. These patterns show up everywhere.
+
+What would you add to this list?
+
+#PowerBI #DAX #DataAnalytics #BusinessIntelligence #SQL`},
+{title:"Looking for My Next Challenge in Vancouver",cat:"Open to Work",content:`I'm actively looking for my next role in the Greater Vancouver area.
+
+What I bring: 10+ years in enterprise digital solutions — Dynamics 365 Business Central, Power BI, Power Automate, Python automation, SQL, and Azure. I've served 150+ users, cut data sync times by 40%, and built pipelines that eliminated entire categories of manual work.
+
+Roles I'm targeting: Data Analyst, ERP Data Analyst, BI Analyst, Business Systems Analyst, Digital Solutions Manager.
+
+If your team needs someone who can bridge the gap between business needs and technical execution, let's talk.
+
+Resume and portfolio: https://manish120889.github.io/my-resume/
+
+#OpenToWork #Hiring #DataAnalyst #ERP #PowerBI #Vancouver #Surrey`}
+];
+
+let currentPostIdx=0;
+function openPost(i){currentPostIdx=i;const p=posts[i];document.getElementById('modalTitle').textContent=p.title;document.getElementById('modalCat').textContent=p.cat;document.getElementById('modalContent').textContent=p.content;document.getElementById('postModal').classList.add('active');document.body.style.overflow='hidden'}
+function closePost(){document.getElementById('postModal').classList.remove('active');document.body.style.overflow=''}
+function copyPost(i){navigator.clipboard.writeText(posts[i].content).then(()=>{const btns=document.querySelectorAll('.copy-post');btns[i].textContent='Copied!';setTimeout(()=>btns[i].textContent='Copy for LinkedIn',2000)})}
+function copyCurrentPost(){navigator.clipboard.writeText(posts[currentPostIdx].content).then(()=>{const btn=document.querySelector('.btn-copy');btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy to Clipboard',2000)})}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closePost()});
 </script>
 </body>
 </html>
