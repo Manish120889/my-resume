@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Email Intelligence Platform — Manish Dadhwal</title>
+<meta name="description" content="AI-powered inbox analytics platform. Sender scoring, relationship graphs, heatmaps, and unsubscribe intelligence — built by Manish Dadhwal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050a14;--bg2:#0a1628;--surface:#0f1d32;--surface2:#142740;--surface3:#1a3050;
+  --border:#1e3a5f;--border2:#264a72;
+  --text:#e8edf5;--text2:#c8d6e5;--muted:#7a8da6;
+  --accent:#60a5fa;--accent-bright:#93c5fd;--accent-dim:#3b82f6;
+  --purple:#a78bfa;--purple-dim:#7c3aed;
+  --green:#34d399;--green-dim:#059669;
+  --amber:#fbbf24;--pink:#f472b6;
+  --grad1:linear-gradient(135deg,var(--accent),var(--purple));
+  --grad2:linear-gradient(135deg,var(--green),var(--accent));
+  --grad3:linear-gradient(135deg,var(--purple),var(--pink));
+  --shadow-md:0 8px 32px rgba(0,0,0,.4);
+  --shadow-glow:0 0 40px rgba(96,165,250,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:.25s}
+a:hover{color:var(--accent-bright)}
+.container{max-width:1000px;margin:auto;padding:0 2rem}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(5,10,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav .inner{max-width:1000px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem}
+nav .logo{font-weight:800;font-size:1rem;letter-spacing:-.3px}
+nav .logo span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.back-link{color:var(--muted);font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:.4rem;transition:.2s}
+.back-link:hover{color:var(--accent)}
+
+/* HERO */
+.project-hero{padding:8rem 0 5rem;border-bottom:1px solid var(--border)}
+.project-breadcrumb{display:flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.78rem;margin-bottom:2rem}
+.project-breadcrumb span{color:var(--muted)}
+.project-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:#a78bfa;font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px;margin-bottom:1.5rem}
+.project-badge .dot{width:6px;height:6px;background:#a78bfa;border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(167,139,250,.4)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(167,139,250,0)}}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-bottom:1.2rem}
+h1 span{background:var(--grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.project-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin:2rem 0}
+.meta-item{display:flex;flex-direction:column;gap:.2rem}
+.meta-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.meta-value{font-size:.9rem;font-weight:600;color:var(--text)}
+.tag-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.tag{background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.72rem;font-weight:600;padding:.3rem .75rem;border-radius:6px;font-family:'JetBrains Mono',monospace}
+
+/* SECTION */
+section{padding:4rem 0;border-bottom:1px solid var(--border)}
+.section-label{display:inline-block;color:var(--accent);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.75rem}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.3px;margin-bottom:.75rem}
+h2 span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.lead{color:var(--text2);font-size:1rem;line-height:1.75;max-width:680px}
+
+/* METRICS */
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.4rem;text-align:center;transition:.3s}
+.metric:hover{border-color:var(--accent);box-shadow:var(--shadow-glow)}
+.metric .num{font-size:2rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.metric .lbl{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;margin-top:.4rem}
+
+/* FEATURE CARDS */
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-top:2rem}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.6rem;transition:.3s;position:relative;overflow:hidden}
+.feature-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%}
+.feature-card:nth-child(1)::before{background:var(--grad1)}
+.feature-card:nth-child(2)::before{background:var(--grad3)}
+.feature-card:nth-child(3)::before{background:var(--grad2)}
+.feature-card:nth-child(4)::before{background:linear-gradient(135deg,var(--amber),var(--pink))}
+.feature-card:nth-child(5)::before{background:var(--grad1)}
+.feature-card:nth-child(6)::before{background:var(--grad3)}
+.feature-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow-glow)}
+.feature-icon{font-size:1.6rem;margin-bottom:.75rem}
+.feature-card h3{font-size:.95rem;font-weight:700;margin-bottom:.4rem}
+.feature-card p{color:var(--muted);font-size:.82rem;line-height:1.6}
+
+/* DASHBOARD PREVIEW */
+.dashboard-preview{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;margin-top:2rem}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1.2rem;padding-bottom:1rem;border-bottom:1px solid var(--border)}
+.dash-title{font-size:.75rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.live-badge{display:flex;align-items:center;gap:.4rem;font-size:.68rem;color:var(--green);font-weight:600}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:.75rem;margin-bottom:1rem}
+.kpi{background:var(--surface2);border:1px solid var(--border);border-radius:.6rem;padding:.8rem}
+.kpi-label{font-size:.58rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.25rem}
+.kpi-val{font-size:1.1rem;font-weight:800;color:var(--text)}
+.kpi-change{font-size:.6rem;margin-top:.2rem}
+.kpi-change.up{color:var(--green)}
+.kpi-change.warn{color:var(--amber)}
+.sender-list{display:flex;flex-direction:column;gap:.5rem}
+.sender-row{display:flex;align-items:center;gap:.75rem;padding:.6rem;background:var(--surface2);border-radius:.5rem;border:1px solid var(--border)}
+.sender-avatar{width:28px;height:28px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:.6rem;font-weight:800;color:#050a14;flex-shrink:0}
+.sender-info{flex:1;min-width:0}
+.sender-name{font-size:.78rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sender-email{font-size:.62rem;color:var(--muted)}
+.sender-badge{font-size:.6rem;padding:.15rem .5rem;border-radius:4px;font-weight:700;white-space:nowrap}
+.badge-client{background:rgba(52,211,153,.1);color:var(--green);border:1px solid rgba(52,211,153,.25)}
+.badge-vendor{background:rgba(96,165,250,.1);color:var(--accent);border:1px solid rgba(96,165,250,.25)}
+.badge-news{background:rgba(251,191,36,.1);color:var(--amber);border:1px solid rgba(251,191,36,.25)}
+
+/* TECH STACK */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:.75rem;margin-top:1.5rem}
+.stack-item{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1rem;display:flex;align-items:center;gap:.7rem;transition:.25s}
+.stack-item:hover{border-color:var(--accent);transform:translateY(-1px)}
+.stack-icon{font-size:1.3rem}
+.stack-name{font-size:.8rem;font-weight:600}
+
+/* OUTCOME */
+.outcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.outcome-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem}
+.outcome-card h4{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.outcome-card p{font-size:.9rem;color:var(--text2);line-height:1.6}
+
+/* CTA */
+.cta-section{padding:4rem 0 6rem;text-align:center}
+.cta-card{background:var(--surface);border:1px solid var(--border);border-radius:1.5rem;padding:3rem;max-width:620px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:10px;font-weight:700;font-size:.88rem;transition:.25s}
+.btn-primary{background:var(--grad3);color:#050a14;box-shadow:0 4px 20px rgba(167,139,250,.25)}
+.btn-primary:hover{transform:translateY(-2px);color:#050a14}
+.btn-ghost{border:1px solid var(--border);color:var(--text2);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+
+/* FOOTER */
+footer{padding:2rem 0;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:.8rem}
+
+@media(max-width:640px){
+  .kpi-row{grid-template-columns:1fr 1fr}
+  .outcome-grid{grid-template-columns:1fr}
+  .project-meta{gap:1rem}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="logo"><span>Manish Dadhwal</span></div>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </div>
+</nav>
+
+<div class="project-hero">
+  <div class="container">
+    <div class="project-breadcrumb">
+      <a href="index.html">Portfolio</a>
+      <span>/</span>
+      <span>Email Intelligence Platform</span>
+    </div>
+    <div class="project-badge"><span class="dot"></span> Built & Production-Deployed</div>
+    <h1>Email <span>Intelligence</span> Platform</h1>
+    <p class="lead">An AI-powered inbox analytics platform that transforms a business email account into a strategic intelligence tool — surfacing sender patterns, relationship graphs, and noise signals in real time. Built with zero backend storage; all processing happens client-side via OAuth.</p>
+
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-label">Type</span>
+        <span class="meta-value">SaaS Feature / Analytics Platform</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Built for</span>
+        <span class="meta-value">Surrey AI Automation</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Timeline</span>
+        <span class="meta-value">2025–2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Status</span>
+        <span class="meta-value">Archived — Strategic Pivot</span>
+      </div>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">Vanilla JS</span>
+      <span class="tag">Gmail OAuth</span>
+      <span class="tag">Outlook OAuth</span>
+      <span class="tag">HTML5 Canvas</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">AI Classification</span>
+      <span class="tag">Client-side Processing</span>
+      <span class="tag">Zero Data Storage</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-label">Impact Metrics</div>
+    <h2>What It <span>Delivered</span></h2>
+    <div class="metrics-grid">
+      <div class="metric"><div class="num">60s</div><div class="lbl">Inbox Connected</div></div>
+      <div class="metric"><div class="num">5</div><div class="lbl">Intelligence Modules</div></div>
+      <div class="metric"><div class="num">0</div><div class="lbl">Data Stored Server-Side</div></div>
+      <div class="metric"><div class="num">3</div><div class="lbl">Industries Targeted</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Live Preview</div>
+    <h2>Dashboard <span>Interface</span></h2>
+    <p class="lead" style="margin-bottom:0">Sample data showing what a connected inbox looks like inside the platform.</p>
+
+    <div class="dashboard-preview">
+      <div class="dash-header">
+        <span class="dash-title">Email AI — Inbox Intelligence</span>
+        <span class="live-badge"><span class="live-dot"></span> Gmail Connected</span>
+      </div>
+      <div class="kpi-row">
+        <div class="kpi">
+          <div class="kpi-label">Total Emails</div>
+          <div class="kpi-val">4,821</div>
+          <div class="kpi-change up">↑ 12% this week</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Unique Senders</div>
+          <div class="kpi-val">312</div>
+          <div class="kpi-change up">47 new this month</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Noise Score</div>
+          <div class="kpi-val">68%</div>
+          <div class="kpi-change warn">↑ needs cleanup</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Response Rate</div>
+          <div class="kpi-val">84%</div>
+          <div class="kpi-change up">above avg</div>
+        </div>
+      </div>
+      <div style="margin-top:.75rem;font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:.5rem">Top Senders by Volume</div>
+      <div class="sender-list">
+        <div class="sender-row">
+          <div class="sender-avatar">JR</div>
+          <div class="sender-info"><div class="sender-name">James Robertson</div><div class="sender-email">james@buildcorp.ca</div></div>
+          <span class="sender-badge badge-client">Client</span>
+        </div>
+        <div class="sender-row">
+          <div class="sender-avatar">AM</div>
+          <div class="sender-info"><div class="sender-name">Amrit Manhas</div><div class="sender-email">amrit@supplyone.ca</div></div>
+          <span class="sender-badge badge-vendor">Vendor</span>
+        </div>
+        <div class="sender-row">
+          <div class="sender-avatar">MC</div>
+          <div class="sender-info"><div class="sender-name">Mailchimp Digest</div><div class="sender-email">mc@mailchimp.com</div></div>
+          <span class="sender-badge badge-news">Newsletter</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Feature Set</div>
+    <h2>What Was <span>Built</span></h2>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📊</div>
+        <h3>Inbox KPI Dashboard</h3>
+        <p>Total emails, unique senders, peak hours, and response rate — updated live as new mail arrives via OAuth stream.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🗂️</div>
+        <h3>AI Sender Categorisation</h3>
+        <p>Every sender scored and labelled: Client, Vendor, Newsletter, Internal, or Noise — using LLM-assisted classification on sender metadata.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🕸️</div>
+        <h3>Email Relationship Graph</h3>
+        <p>Interactive node graph showing every contact and communication frequency. Filter by time window. Reveals hidden network patterns.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌡️</div>
+        <h3>Send-Time Heatmap</h3>
+        <p>24-hour activity heatmap reveals when inbox is busiest. Used to optimise send timing, staff coverage, and SLA windows.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔕</div>
+        <h3>Unsubscribe Intelligence</h3>
+        <p>Surfaces every newsletter and promo list ranked by volume. One-click audit of what's clogging the inbox with actionable cleanup.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>Zero Data Architecture</h3>
+        <p>Connects via OAuth read-only access. No emails stored on any server. All processing happens in the browser session only.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Tech Stack</div>
+    <h2>Built <span>With</span></h2>
+    <div class="stack-grid">
+      <div class="stack-item"><span class="stack-icon">📧</span><span class="stack-name">Gmail API</span></div>
+      <div class="stack-item"><span class="stack-icon">📮</span><span class="stack-name">Outlook API</span></div>
+      <div class="stack-item"><span class="stack-icon">🔐</span><span class="stack-name">OAuth 2.0</span></div>
+      <div class="stack-item"><span class="stack-icon">🌐</span><span class="stack-name">Vanilla JS</span></div>
+      <div class="stack-item"><span class="stack-icon">🎨</span><span class="stack-name">HTML5 Canvas</span></div>
+      <div class="stack-item"><span class="stack-icon">🤖</span><span class="stack-name">AI Classification</span></div>
+      <div class="stack-item"><span class="stack-icon">☁️</span><span class="stack-name">Cloudflare Pages</span></div>
+      <div class="stack-item"><span class="stack-icon">📊</span><span class="stack-name">REST APIs</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Industry Applications</div>
+    <h2>Target <span>Markets</span></h2>
+    <div class="outcome-grid">
+      <div class="outcome-card">
+        <h4>🍽️ Restaurant &amp; Hospitality</h4>
+        <p>Track supplier quotes, booking requests, and staff communications in one dashboard. Know at a glance which emails need action today.</p>
+      </div>
+      <div class="outcome-card">
+        <h4>🏗️ Trades &amp; Construction</h4>
+        <p>Never miss a quote request. Categorise inbound emails by type — client enquiry, subcontractor, materials supplier — with automatic scoring.</p>
+      </div>
+      <div class="outcome-card">
+        <h4>🏘️ Real Estate &amp; Property</h4>
+        <p>See which leads are cold, which are hot, and which agents email most. The sender graph reveals relationship strength at a glance.</p>
+      </div>
+      <div class="outcome-card">
+        <h4>💼 Professional Services</h4>
+        <p>Response rate analytics and SLA monitoring. Know if client emails are being replied to within acceptable windows — automatically.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Strategic Decision</div>
+    <h2>Why It Was <span>Archived</span></h2>
+    <p class="lead">Email Intelligence was production-deployed on Surrey AI Automation as a bundled feature with Power BI packages. After market testing, the decision was made to sharpen the site's focus exclusively on data analytics and Power BI — the strongest conversion driver. The Email Intelligence platform was archived to preserve it as a standalone product option for future deployment or licensing. All code, UI, and logic is retained in the project archive.</p>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <div class="section-label">Get in Touch</div>
+      <h2 style="margin-bottom:.6rem">Interested in this <span>Platform?</span></h2>
+      <p style="color:var(--muted);font-size:.9rem">Email Intelligence can be licensed, white-labelled, or rebuilt for your specific industry use case.</p>
+      <div class="btn-row">
+        <a href="mailto:manish.mani27@outlook.com" class="btn btn-primary">📧 Contact Manish</a>
+        <a href="index.html" class="btn btn-ghost">← Back to Portfolio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Manish Dadhwal · <a href="https://surreyaiautomation.online">Surrey AI Automation</a> · <a href="index.html">Portfolio</a></p>
+  </div>
+</footer>
+
+<script>
+// Scroll-triggered nav
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').classList.toggle('scrolled',window.scrollY>40)
+})
+</script>
+</body>
+</html>

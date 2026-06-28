@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Neural Intelligence Platform — Manish Dadhwal</title>
+<meta name="description" content="AI-powered business intelligence command centre. Real-time KPIs, automated decision workflows, data mesh, anomaly alerts, and predictive forecasting — built by Manish Dadhwal.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#050a14;--bg2:#0a1628;--surface:#0f1d32;--surface2:#142740;--surface3:#1a3050;
+  --border:#1e3a5f;--border2:#264a72;
+  --text:#e8edf5;--text2:#c8d6e5;--muted:#7a8da6;
+  --accent:#60a5fa;--accent-bright:#93c5fd;--accent-dim:#3b82f6;
+  --purple:#a78bfa;--purple-dim:#7c3aed;
+  --green:#34d399;--green-dim:#059669;
+  --amber:#fbbf24;--pink:#f472b6;
+  --grad1:linear-gradient(135deg,var(--accent),var(--purple));
+  --grad2:linear-gradient(135deg,var(--green),var(--accent));
+  --grad3:linear-gradient(135deg,var(--purple),var(--pink));
+  --shadow-md:0 8px 32px rgba(0,0,0,.4);
+  --shadow-glow:0 0 40px rgba(96,165,250,.08);
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+a{color:var(--accent);text-decoration:none;transition:.25s}
+a:hover{color:var(--accent-bright)}
+.container{max-width:1000px;margin:auto;padding:0 2rem}
+
+nav{position:fixed;top:0;width:100%;z-index:100;background:rgba(5,10,20,.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav .inner{max-width:1000px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:.9rem 2rem}
+nav .logo{font-weight:800;font-size:1rem}
+nav .logo span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.back-link{color:var(--muted);font-size:.82rem;font-weight:500;display:flex;align-items:center;gap:.4rem;transition:.2s}
+.back-link:hover{color:var(--accent)}
+
+.project-hero{padding:8rem 0 5rem;border-bottom:1px solid var(--border)}
+.project-breadcrumb{display:flex;align-items:center;gap:.5rem;color:var(--muted);font-size:.78rem;margin-bottom:2rem}
+.project-breadcrumb span{color:var(--muted)}
+.project-badge{display:inline-flex;align-items:center;gap:.5rem;background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:var(--accent);font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.4rem 1rem;border-radius:999px;margin-bottom:1.5rem}
+.project-badge .dot{width:6px;height:6px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(96,165,250,.4)}50%{opacity:.7;box-shadow:0 0 0 5px rgba(96,165,250,0)}}
+h1{font-size:clamp(2rem,4vw,3.2rem);font-weight:800;letter-spacing:-.5px;line-height:1.1;margin-bottom:1.2rem}
+h1 span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.project-meta{display:flex;flex-wrap:wrap;gap:1.5rem;margin:2rem 0}
+.meta-item{display:flex;flex-direction:column;gap:.2rem}
+.meta-label{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;color:var(--muted)}
+.meta-value{font-size:.9rem;font-weight:600;color:var(--text)}
+.tag-row{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.5rem}
+.tag{background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.72rem;font-weight:600;padding:.3rem .75rem;border-radius:6px;font-family:'JetBrains Mono',monospace}
+.lead{color:var(--text2);font-size:1rem;line-height:1.75;max-width:680px}
+
+section{padding:4rem 0;border-bottom:1px solid var(--border)}
+.section-label{display:inline-block;color:var(--accent);font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.75rem}
+h2{font-size:1.6rem;font-weight:800;letter-spacing:-.3px;margin-bottom:.75rem}
+h2 span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+
+.metrics-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1rem;margin-top:2rem}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.4rem;text-align:center;transition:.3s}
+.metric:hover{border-color:var(--accent);box-shadow:var(--shadow-glow)}
+.metric .num{font-size:2rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1}
+.metric .lbl{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;margin-top:.4rem}
+
+/* MODULE CARDS */
+.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-top:2rem}
+.module-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;transition:.3s;position:relative;overflow:hidden}
+.module-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.module-card:nth-child(1)::after{background:var(--grad1)}
+.module-card:nth-child(2)::after{background:var(--grad3)}
+.module-card:nth-child(3)::after{background:var(--grad2)}
+.module-card:nth-child(4)::after{background:linear-gradient(135deg,var(--amber),var(--pink))}
+.module-card:nth-child(5)::after{background:var(--grad1)}
+.module-card:hover{border-color:var(--border2);transform:translateY(-2px);box-shadow:var(--shadow-glow)}
+.module-icon{font-size:1.8rem;margin-bottom:1rem}
+.module-card h3{font-size:1rem;font-weight:700;margin-bottom:.5rem}
+.module-card p{color:var(--muted);font-size:.82rem;line-height:1.65;margin-bottom:1rem}
+.module-list{list-style:none;display:flex;flex-direction:column;gap:.35rem}
+.module-list li{font-size:.78rem;color:var(--text2);display:flex;align-items:flex-start;gap:.5rem}
+.module-list li::before{content:'→';color:var(--accent);flex-shrink:0;margin-top:.05rem}
+
+/* LIVE FEED PREVIEW */
+.live-panel{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;margin-top:2rem}
+.panel-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;padding-bottom:.75rem;border-bottom:1px solid var(--border)}
+.panel-title{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.live-badge{display:flex;align-items:center;gap:.35rem;font-size:.65rem;color:var(--green);font-weight:600}
+.live-dot{width:5px;height:5px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+.alert-feed{display:flex;flex-direction:column;gap:.5rem}
+.alert-row{display:flex;align-items:center;gap:.75rem;padding:.65rem .75rem;background:var(--surface2);border-radius:.5rem;border:1px solid var(--border)}
+.alert-row .alert-icon{font-size:.9rem;flex-shrink:0}
+.alert-text{flex:1;font-size:.78rem;color:var(--text2)}
+.alert-time{font-size:.65rem;color:var(--muted);white-space:nowrap}
+
+/* AUTOMATION ENGINE */
+.engine-panel{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem;margin-top:1rem}
+.engine-log{display:flex;flex-direction:column;gap:.4rem;font-family:'JetBrains Mono',monospace;font-size:.72rem}
+.log-line{display:flex;align-items:center;gap:.75rem;padding:.4rem .6rem;border-radius:.4rem}
+.log-line.success{background:rgba(52,211,153,.05);border:1px solid rgba(52,211,153,.12)}
+.log-line.active{background:rgba(251,191,36,.05);border:1px solid rgba(251,191,36,.12)}
+.log-line.pending{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06)}
+.log-icon{flex-shrink:0}
+.log-text{flex:1;color:var(--text2)}
+.log-time{color:var(--muted);font-size:.65rem}
+
+/* CONNECTORS */
+.connectors-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin-top:1.5rem}
+.connector{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1rem;display:flex;align-items:center;gap:.65rem;transition:.25s}
+.connector:hover{border-color:var(--accent);transform:translateY(-1px)}
+.connector-icon{font-size:1.2rem}
+.connector-name{font-size:.78rem;font-weight:600}
+.connector-status{font-size:.6rem;color:var(--green);margin-top:.1rem}
+
+/* OUTCOME */
+.outcome-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2rem}
+.outcome-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.5rem}
+.outcome-card h4{font-size:.82rem;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.5rem}
+.outcome-card p{font-size:.88rem;color:var(--text2);line-height:1.6}
+
+/* STACK */
+.stack-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:.75rem;margin-top:1.5rem}
+.stack-item{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1rem;display:flex;align-items:center;gap:.65rem;transition:.25s}
+.stack-item:hover{border-color:var(--accent);transform:translateY(-1px)}
+.stack-icon{font-size:1.2rem}
+.stack-name{font-size:.78rem;font-weight:600}
+
+/* CTA */
+.cta-section{padding:4rem 0 6rem;text-align:center}
+.cta-card{background:var(--surface);border:1px solid var(--border);border-radius:1.5rem;padding:3rem;max-width:620px;margin:0 auto}
+.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.85rem 1.8rem;border-radius:10px;font-weight:700;font-size:.88rem;transition:.25s}
+.btn-primary{background:var(--grad1);color:#050a14;box-shadow:0 4px 20px rgba(96,165,250,.25)}
+.btn-primary:hover{transform:translateY(-2px);color:#050a14}
+.btn-ghost{border:1px solid var(--border);color:var(--text2);background:transparent}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent)}
+.btn-row{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap;margin-top:1.5rem}
+
+footer{padding:2rem 0;border-top:1px solid var(--border);text-align:center;color:var(--muted);font-size:.8rem}
+
+@media(max-width:640px){
+  .modules-grid{grid-template-columns:1fr}
+  .outcome-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="inner">
+    <div class="logo"><span>Manish Dadhwal</span></div>
+    <a href="index.html" class="back-link">← Back to Portfolio</a>
+  </div>
+</nav>
+
+<div class="project-hero">
+  <div class="container">
+    <div class="project-breadcrumb">
+      <a href="index.html">Portfolio</a>
+      <span>/</span>
+      <span>Neural Intelligence Platform</span>
+    </div>
+    <div class="project-badge"><span class="dot"></span> Built & Production-Deployed</div>
+    <h1>Neural <span>Intelligence</span> Platform</h1>
+    <p class="lead">An AI-powered business command centre that unifies every data source a small business runs on — delivering real-time KPI dashboards, automated decision workflows, anomaly alerts, and 30/60/90-day revenue forecasts. Built to give Surrey SMBs enterprise-grade intelligence at zero complexity cost.</p>
+
+    <div class="project-meta">
+      <div class="meta-item">
+        <span class="meta-label">Type</span>
+        <span class="meta-value">Business Intelligence Platform</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Built for</span>
+        <span class="meta-value">Surrey AI Automation</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Timeline</span>
+        <span class="meta-value">2025–2026</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Status</span>
+        <span class="meta-value">Archived — Strategic Pivot</span>
+      </div>
+    </div>
+
+    <div class="tag-row">
+      <span class="tag">Power BI</span>
+      <span class="tag">Python</span>
+      <span class="tag">SQL Server</span>
+      <span class="tag">REST APIs</span>
+      <span class="tag">ETL Pipelines</span>
+      <span class="tag">AI Forecasting</span>
+      <span class="tag">Real-time Dashboards</span>
+      <span class="tag">Cloudflare Pages</span>
+      <span class="tag">Vanilla JS</span>
+    </div>
+  </div>
+</div>
+
+<section>
+  <div class="container">
+    <div class="section-label">Platform Scale</div>
+    <h2>By the <span>Numbers</span></h2>
+    <div class="metrics-grid">
+      <div class="metric"><div class="num">5</div><div class="lbl">Intelligence Modules</div></div>
+      <div class="metric"><div class="num">50+</div><div class="lbl">Native Connectors</div></div>
+      <div class="metric"><div class="num">60s</div><div class="lbl">KPI Refresh Rate</div></div>
+      <div class="metric"><div class="num">94%</div><div class="lbl">Forecast Accuracy</div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Platform Modules</div>
+    <h2>Five <span>Intelligence Layers</span></h2>
+    <div class="modules-grid">
+      <div class="module-card">
+        <div class="module-icon">📊</div>
+        <h3>Real-Time Business Intelligence</h3>
+        <p>Every metric that matters — revenue, leads, operations, inventory — unified into a single live dashboard.</p>
+        <ul class="module-list">
+          <li>KPIs refresh every 60 seconds</li>
+          <li>Drill from summary to transaction in 2 clicks</li>
+          <li>Works across 50+ data sources</li>
+          <li>Mobile-ready — check numbers from anywhere</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🤖</div>
+        <h3>Automated Decision Workflows</h3>
+        <p>Stop making the same decisions manually every week. Neural Intelligence learns business rules and acts on them.</p>
+        <ul class="module-list">
+          <li>Auto-reorder inventory at threshold</li>
+          <li>Trigger follow-up emails on lead activity</li>
+          <li>Escalate tickets at SLA deadlines</li>
+          <li>Generate weekly reports automatically</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🔗</div>
+        <h3>Connected Data Mesh</h3>
+        <p>Break data silos. Connects every tool the business runs on with bi-directional sync and data quality checks.</p>
+        <ul class="module-list">
+          <li>QuickBooks, Shopify, Square, Salesforce</li>
+          <li>REST API + ETL for custom systems</li>
+          <li>Bi-directional sync — changes flow both ways</li>
+          <li>Data quality checks before every report</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">⚡</div>
+        <h3>Instant Anomaly Alerts</h3>
+        <p>Know the moment something is wrong — before customers do. Monitors every data stream and fires alerts in real time.</p>
+        <ul class="module-list">
+          <li>Revenue drops 15% below forecast → Slack alert</li>
+          <li>Inventory hits zero → SMS to manager</li>
+          <li>Unusual charge detected → email + dashboard flag</li>
+          <li>Custom thresholds — you decide what matters</li>
+        </ul>
+      </div>
+      <div class="module-card">
+        <div class="module-icon">🧠</div>
+        <h3>AI-Powered Predictions</h3>
+        <p>Don't just see what happened — see what's coming. Uses historical data to forecast revenue, demand, and churn.</p>
+        <ul class="module-list">
+          <li>30/60/90-day revenue forecasts weekly</li>
+          <li>Demand forecasting reduces over-ordering 30%+</li>
+          <li>Churn risk scored on every customer weekly</li>
+          <li>Cash flow projection updated daily</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Live Previews</div>
+    <h2>Platform in <span>Action</span></h2>
+
+    <div class="live-panel">
+      <div class="panel-header">
+        <span class="panel-title">Alert Feed</span>
+        <span class="live-badge"><span class="live-dot"></span> WATCHING</span>
+      </div>
+      <div class="alert-feed">
+        <div class="alert-row"><span class="alert-icon">🔴</span><span class="alert-text">Revenue down 18% vs forecast</span><span class="alert-time">Now</span></div>
+        <div class="alert-row"><span class="alert-icon">🟡</span><span class="alert-text">Stock: Item #204 at 3 units left</span><span class="alert-time">2m ago</span></div>
+        <div class="alert-row"><span class="alert-icon">🟢</span><span class="alert-text">Daily target hit: $4,200</span><span class="alert-time">14m ago</span></div>
+        <div class="alert-row"><span class="alert-icon">🟢</span><span class="alert-text">Automation: 23 reports sent</span><span class="alert-time">1h ago</span></div>
+        <div class="alert-row"><span class="alert-icon">🟡</span><span class="alert-text">New lead inactive 48h</span><span class="alert-time">2h ago</span></div>
+      </div>
+    </div>
+
+    <div class="engine-panel">
+      <div class="panel-header">
+        <span class="panel-title">Automation Engine</span>
+        <span class="live-badge"><span class="live-dot"></span> RUNNING</span>
+      </div>
+      <div class="engine-log">
+        <div class="log-line success"><span class="log-icon">✓</span><span class="log-text">Low stock detected → PO triggered</span><span class="log-time">2m ago</span></div>
+        <div class="log-line success"><span class="log-icon">✓</span><span class="log-text">Lead opened email → Follow-up queued</span><span class="log-time">5m ago</span></div>
+        <div class="log-line active"><span class="log-icon">⚡</span><span class="log-text">SLA at 80% → Escalating now...</span><span class="log-time">now</span></div>
+        <div class="log-line pending"><span class="log-icon">○</span><span class="log-text">Weekly report → Scheduled 08:00</span><span class="log-time">—</span></div>
+        <div class="log-line pending"><span class="log-icon">○</span><span class="log-text">Invoice reminder → Pending send</span><span class="log-time">12h</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Data Connectors</div>
+    <h2>50+ Native <span>Integrations</span></h2>
+    <div class="connectors-grid">
+      <div class="connector"><span class="connector-icon">📦</span><div><div class="connector-name">Shopify</div><div class="connector-status">✓ Live sync</div></div></div>
+      <div class="connector"><span class="connector-icon">💰</span><div><div class="connector-name">QuickBooks</div><div class="connector-status">✓ Live sync</div></div></div>
+      <div class="connector"><span class="connector-icon">📧</span><div><div class="connector-name">Mailchimp</div><div class="connector-status">✓ Live sync</div></div></div>
+      <div class="connector"><span class="connector-icon">🏪</span><div><div class="connector-name">Square POS</div><div class="connector-status">✓ Live sync</div></div></div>
+      <div class="connector"><span class="connector-icon">👥</span><div><div class="connector-name">Salesforce</div><div class="connector-status">✓ Live sync</div></div></div>
+      <div class="connector"><span class="connector-icon">🗄️</span><div><div class="connector-name">SQL Server</div><div class="connector-status">✓ ETL pipeline</div></div></div>
+      <div class="connector"><span class="connector-icon">🐍</span><div><div class="connector-name">Python ETL</div><div class="connector-status">✓ Custom pipes</div></div></div>
+      <div class="connector"><span class="connector-icon">🔌</span><div><div class="connector-name">REST APIs</div><div class="connector-status">✓ Any endpoint</div></div></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Tech Stack</div>
+    <h2>Built <span>With</span></h2>
+    <div class="stack-grid">
+      <div class="stack-item"><span class="stack-icon">📊</span><span class="stack-name">Power BI</span></div>
+      <div class="stack-item"><span class="stack-icon">🐍</span><span class="stack-name">Python</span></div>
+      <div class="stack-item"><span class="stack-icon">🗄️</span><span class="stack-name">SQL Server</span></div>
+      <div class="stack-item"><span class="stack-icon">🔌</span><span class="stack-name">REST APIs</span></div>
+      <div class="stack-item"><span class="stack-icon">⚡</span><span class="stack-name">Power Automate</span></div>
+      <div class="stack-item"><span class="stack-icon">🤖</span><span class="stack-name">AI / LLM</span></div>
+      <div class="stack-item"><span class="stack-icon">🌐</span><span class="stack-name">Vanilla JS</span></div>
+      <div class="stack-item"><span class="stack-icon">☁️</span><span class="stack-name">Cloudflare</span></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="section-label">Strategic Decision</div>
+    <h2>Why It Was <span>Archived</span></h2>
+    <p class="lead">Neural Intelligence was built as the premium tier showcase for Surrey AI Automation — demonstrating the full capability ceiling of what the agency could deliver. After market testing with local Surrey businesses, the conversion data showed that prospects needed a simpler, more concrete entry point (Power BI dashboards, fixed-price, 2-week delivery) rather than a broad platform pitch. Neural Intelligence was archived as a future upsell product — fully functional, documented, and ready to reactivate as a retainer offering once the base client roster is established.</p>
+  </div>
+</section>
+
+<div class="cta-section">
+  <div class="container">
+    <div class="cta-card">
+      <div class="section-label">Get in Touch</div>
+      <h2 style="margin-bottom:.6rem">Want a <span>Custom BI Platform?</span></h2>
+      <p style="color:var(--muted);font-size:.9rem">Neural Intelligence modules can be scoped, customised, and deployed for your specific business use case.</p>
+      <div class="btn-row">
+        <a href="mailto:manish.mani27@outlook.com" class="btn btn-primary">📊 Discuss Your Project</a>
+        <a href="index.html" class="btn btn-ghost">← Back to Portfolio</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <p>© 2026 Manish Dadhwal · <a href="https://surreyaiautomation.online">Surrey AI Automation</a> · <a href="index.html">Portfolio</a></p>
+  </div>
+</footer>
+
+<script>
+window.addEventListener('scroll',()=>{
+  document.querySelector('nav').classList.toggle('scrolled',window.scrollY>40)
+})
+</script>
+</body>
+</html>
