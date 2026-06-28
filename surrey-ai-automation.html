@@ -1,0 +1,307 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Surrey AI Automation — Business Website | Manish Dadhwal</title>
+<meta name="description" content="Built a full production business website for Surrey AI Automation — Power BI & data automation consulting for Metro Vancouver small businesses.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#050a14;
+  --surface:#0d1829;
+  --surface2:#111f38;
+  --border:#1e3254;
+  --teal:#00d4c8;
+  --teal-dim:#007a74;
+  --gold:#f0c040;
+  --blue:#3b82f6;
+  --purple:#a78bfa;
+  --text:#e2e8f0;
+  --text-dim:#8fabc7;
+  --radius:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Plus Jakarta Sans',sans-serif;line-height:1.65}
+a{color:var(--teal);text-decoration:none}
+a:hover{text-decoration:underline}
+.wrap{max-width:900px;margin:0 auto;padding:0 24px}
+
+/* HEADER */
+.back-bar{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 0}
+.back-bar .wrap{display:flex;align-items:center;gap:16px}
+.back-bar a{color:var(--text-dim);font-size:0.85rem;display:flex;align-items:center;gap:6px}
+.back-bar a:hover{color:var(--teal);text-decoration:none}
+
+/* HERO */
+.hero{padding:64px 0 48px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,212,200,0.1);border:1px solid rgba(0,212,200,0.3);border-radius:100px;padding:6px 16px;font-size:0.8rem;color:var(--teal);font-weight:600;margin-bottom:24px;letter-spacing:0.04em;text-transform:uppercase}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.hero h1{font-size:clamp(2rem,5vw,3rem);font-weight:800;line-height:1.15;margin-bottom:20px;color:#fff}
+.hero h1 span{color:var(--teal)}
+.hero-sub{font-size:1.05rem;color:var(--text-dim);max-width:620px;margin-bottom:32px;line-height:1.7}
+.hero-tags{display:flex;flex-wrap:wrap;gap:8px}
+.tag{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:5px 12px;font-size:0.78rem;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
+
+/* METRICS */
+.metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:48px 0}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;text-align:center}
+.metric-val{font-size:2rem;font-weight:800;color:var(--teal);font-family:'JetBrains Mono',monospace;line-height:1}
+.metric-label{margin-top:8px;font-size:0.8rem;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.05em}
+
+/* SECTIONS */
+section{margin:56px 0}
+.section-head{display:flex;align-items:center;gap:12px;margin-bottom:32px}
+.section-head h2{font-size:1.4rem;font-weight:700;color:#fff}
+.section-head .line{flex:1;height:1px;background:var(--border)}
+
+/* FEATURE GRID */
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px}
+.feature-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px;transition:border-color .2s,transform .2s}
+.feature-card:hover{border-color:var(--teal-dim);transform:translateY(-2px)}
+.feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:14px}
+.feature-card h3{font-size:0.95rem;font-weight:700;color:#fff;margin-bottom:8px}
+.feature-card p{font-size:0.85rem;color:var(--text-dim);line-height:1.6}
+
+/* SITE PREVIEW */
+.site-preview{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+.preview-bar{background:var(--surface2);border-bottom:1px solid var(--border);padding:12px 16px;display:flex;align-items:center;gap:8px}
+.preview-dots{display:flex;gap:6px}
+.preview-dot{width:10px;height:10px;border-radius:50%}
+.preview-url{flex:1;background:rgba(0,0,0,0.3);border-radius:6px;padding:4px 12px;font-family:'JetBrains Mono',monospace;font-size:0.75rem;color:var(--text-dim);margin:0 12px}
+.preview-body{padding:32px;min-height:240px;display:flex;flex-direction:column;justify-content:center;gap:16px}
+.preview-nav{display:flex;gap:16px;padding-bottom:16px;border-bottom:1px solid var(--border);flex-wrap:wrap}
+.preview-nav span{font-size:0.75rem;color:var(--text-dim)}
+.preview-nav span.active{color:var(--teal)}
+.preview-h1{font-size:1.6rem;font-weight:800;color:#fff;line-height:1.2}
+.preview-h1 span{color:var(--teal)}
+.preview-sub{font-size:0.85rem;color:var(--text-dim);max-width:380px}
+.preview-cta{display:inline-flex;align-items:center;gap:8px;background:var(--teal);color:#050a14;font-weight:700;font-size:0.85rem;border-radius:8px;padding:10px 20px;width:fit-content;margin-top:4px}
+
+/* PAGES GRID */
+.pages-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px}
+.page-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px}
+.page-card h4{font-size:0.85rem;font-weight:700;color:#fff;margin-bottom:4px}
+.page-card p{font-size:0.78rem;color:var(--text-dim)}
+
+/* TECH STACK */
+.tech-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:8px}
+.tech-item{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:10px 14px;font-size:0.8rem;font-family:'JetBrains Mono',monospace;color:var(--text-dim);text-align:center}
+
+/* TIMELINE */
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:20px;padding-bottom:24px;position:relative}
+.tl-item:not(:last-child):before{content:'';position:absolute;left:11px;top:24px;bottom:0;width:1px;background:var(--border)}
+.tl-dot{width:24px;height:24px;border-radius:50%;border:2px solid var(--teal);background:var(--bg);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center}
+.tl-dot-inner{width:8px;height:8px;border-radius:50%;background:var(--teal)}
+.tl-content h4{font-size:0.9rem;font-weight:700;color:#fff;margin-bottom:4px}
+.tl-content p{font-size:0.83rem;color:var(--text-dim);line-height:1.6}
+.tl-phase{font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--teal);font-weight:600;margin-bottom:2px;text-transform:uppercase;letter-spacing:0.06em}
+
+/* LIVE BADGE */
+.live-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(0,212,200,0.08);border:1px solid rgba(0,212,200,0.25);border-radius:6px;padding:4px 10px;font-size:0.75rem;color:var(--teal);font-weight:600}
+.live-pulse{width:7px;height:7px;border-radius:50%;background:var(--teal);animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.3}}
+
+/* CTA FOOTER */
+.cta-footer{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:40px;text-align:center;margin:56px 0}
+.cta-footer h2{font-size:1.5rem;font-weight:800;color:#fff;margin-bottom:12px}
+.cta-footer p{color:var(--text-dim);margin-bottom:28px;max-width:440px;margin-left:auto;margin-right:auto}
+.cta-buttons{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:var(--teal);color:#050a14;font-weight:700;font-size:0.9rem;border-radius:8px;padding:12px 24px;transition:opacity .2s}
+.btn-primary:hover{opacity:0.85;text-decoration:none}
+.btn-secondary{background:transparent;color:var(--teal);font-weight:600;font-size:0.9rem;border-radius:8px;padding:12px 24px;border:1px solid var(--teal-dim);transition:border-color .2s}
+.btn-secondary:hover{border-color:var(--teal);text-decoration:none}
+
+footer{text-align:center;padding:32px 0;color:var(--text-dim);font-size:0.82rem;border-top:1px solid var(--border)}
+</style>
+</head>
+<body>
+
+<div class="back-bar">
+  <div class="wrap">
+    <a href="index.html">← Back to Portfolio</a>
+    <span style="color:var(--border)">|</span>
+    <span class="live-badge"><span class="live-pulse"></span>Live Production Site</span>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <div class="hero">
+    <div class="hero-badge"><span class="dot"></span>Business Website</div>
+    <h1>Surrey AI <span>Automation</span><br>— Business Website</h1>
+    <p class="hero-sub">Full production website for a Power BI &amp; data automation consultancy serving Metro Vancouver small businesses. Built from scratch — niche research, copywriting, conversion architecture, space-theme design, and Cloudflare edge deployment.</p>
+    <div class="hero-tags">
+      <span class="tag">Vanilla HTML/CSS/JS</span>
+      <span class="tag">Cloudflare Pages</span>
+      <span class="tag">Power BI</span>
+      <span class="tag">Data Automation</span>
+      <span class="tag">Metro Vancouver</span>
+      <span class="tag">Conversion Optimised</span>
+      <span class="tag">Space Theme</span>
+      <span class="tag">Zero Framework</span>
+    </div>
+  </div>
+
+  <div class="metrics">
+    <div class="metric"><div class="metric-val">3</div><div class="metric-label">Core Services</div></div>
+    <div class="metric"><div class="metric-val">7</div><div class="metric-label">Nav Sections</div></div>
+    <div class="metric"><div class="metric-val">10+</div><div class="metric-label">Years ERP/BI XP</div></div>
+    <div class="metric"><div class="metric-val">0</div><div class="metric-label">Frameworks Used</div></div>
+  </div>
+
+  <!-- SITE PREVIEW -->
+  <section>
+    <div class="section-head"><h2>Live Site Preview</h2><div class="line"></div></div>
+    <div class="site-preview">
+      <div class="preview-bar">
+        <div class="preview-dots">
+          <div class="preview-dot" style="background:#ff5f57"></div>
+          <div class="preview-dot" style="background:#febc2e"></div>
+          <div class="preview-dot" style="background:#28c840"></div>
+        </div>
+        <div class="preview-url">surreyaiautomation.online</div>
+        <span class="live-badge"><span class="live-pulse"></span>Live</span>
+      </div>
+      <div class="preview-body">
+        <div class="preview-nav">
+          <span class="active">Services</span><span>Process</span><span>Pricing</span>
+          <span>Work</span><span>Demo</span><span>About</span><span>Get Free Audit</span>
+        </div>
+        <div class="preview-h1">Stop Losing Deals to<br><span>Slow Data</span></div>
+        <p class="preview-sub">Power BI dashboards &amp; workflow automation for Surrey &amp; Metro Vancouver businesses — built by someone who's lived inside your ERP for 10 years.</p>
+        <div class="preview-cta">Get My Free Audit →</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHAT WAS BUILT -->
+  <section>
+    <div class="section-head"><h2>What Was Built</h2><div class="line"></div></div>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(0,212,200,0.1)">📊</div>
+        <h3>Services Architecture</h3>
+        <p>Three production-grade service pages: Power BI Dashboards, Process Automation, and System Integration — each with benefit-led copy targeting Surrey SMBs.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(167,139,250,0.1)">🎯</div>
+        <h3>Conversion Copy</h3>
+        <p>Wrote all headline copy and CTAs from scratch based on niche research — Power BI &amp; data automation for 10–200 employee Metro Vancouver companies.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(240,192,64,0.1)">💰</div>
+        <h3>Transparent Pricing</h3>
+        <p>Three-tier pricing table (Starter / Growth / Enterprise) with clear deliverables and a "Get Free Audit" CTA on every tier. No hidden packages.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(59,130,246,0.1)">🌌</div>
+        <h3>Space Theme UI</h3>
+        <p>Black hole video background (bh-background.js) with calibrated brightness 0.32 and dark overlay gradient so text remains readable without losing brand identity.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(0,212,200,0.1)">📱</div>
+        <h3>Full Responsive</h3>
+        <p>Mobile-first layout with dedicated hamburger nav. Works flawlessly from 320px to 1440px without JS frameworks — pure CSS grid and flex.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon" style="background:rgba(167,139,250,0.1)">⚡</div>
+        <h3>Edge Deployment</h3>
+        <p>Deployed on Cloudflare Pages for global CDN, automatic HTTPS, sub-100ms TTFB from Canada. Zero server maintenance required.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- PAGES BUILT -->
+  <section>
+    <div class="section-head"><h2>Pages &amp; Sections</h2><div class="line"></div></div>
+    <div class="pages-grid">
+      <div class="page-card"><h4>index.html</h4><p>Hero, Services overview, Process, Pricing, Work samples, Demo, About, Contact</p></div>
+      <div class="page-card"><h4>service-powerbi.html</h4><p>Power BI Dashboards — benefits, deliverables, pricing, CTA</p></div>
+      <div class="page-card"><h4>service-automation.html</h4><p>Process Automation — workflow triggers, integration, ROI calculator</p></div>
+      <div class="page-card"><h4>service-integration.html</h4><p>System Integration — ERP connectors, data mesh, live sync</p></div>
+      <div class="page-card"><h4>demo-restaurant.html</h4><p>Live Power BI dashboard demo — restaurant KPIs, revenue tracking</p></div>
+      <div class="page-card"><h4>demo-realestate.html</h4><p>Real Estate dashboard — pipeline, deal velocity, agent performance</p></div>
+      <div class="page-card"><h4>demo-trades.html</h4><p>Trades / construction dashboard — job costing, crew utilisation</p></div>
+      <div class="page-card"><h4>about.html</h4><p>Founder story — 10+ years ERP/BI experience, Surrey-based, mission</p></div>
+    </div>
+  </section>
+
+  <!-- BUILD PHASES -->
+  <section>
+    <div class="section-head"><h2>Build Phases</h2><div class="line"></div></div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 1 — Cleanup</div>
+          <h4>Remove non-core features, fix contact info, clean navigation</h4>
+          <p>Archived and removed the Email Intelligence and Neural Intelligence sections that diluted the Power BI niche. Fixed phone number in JSON-LD and hero. Reduced nav from 9 items to 7 focused items.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 2 — Readability</div>
+          <h4>Background calibration and text-shadow system</h4>
+          <p>Reduced video brightness from 0.55 → 0.32, max opacity from 1.0 → 0.38, added a 72% dark gradient overlay anchored to the hero section, and added text-shadow on all headlines for legibility against the space background.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 3 — Content</div>
+          <h4>Rewrite service pages for conversion</h4>
+          <p>Coming — benefit-led rewrites of all three service pages, real social proof section, stronger About/Founder section with LinkedIn authority signals.</p>
+        </div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-content">
+          <div class="tl-phase">Phase 4 — Growth</div>
+          <h4>Outreach scripts + LinkedIn content calendar</h4>
+          <p>Coming — LinkedIn DM sequences for Surrey SMB owners, monthly content calendar, monitoring setup for uptime and form submissions.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECH STACK -->
+  <section>
+    <div class="section-head"><h2>Tech Stack</h2><div class="line"></div></div>
+    <div class="tech-grid">
+      <div class="tech-item">HTML5</div>
+      <div class="tech-item">CSS3</div>
+      <div class="tech-item">Vanilla JS</div>
+      <div class="tech-item">Cloudflare Pages</div>
+      <div class="tech-item">Wrangler CLI</div>
+      <div class="tech-item">JSON-LD SEO</div>
+      <div class="tech-item">CSS Custom Props</div>
+      <div class="tech-item">CSS Grid</div>
+      <div class="tech-item">Video BG</div>
+      <div class="tech-item">_headers CSP</div>
+      <div class="tech-item">Google Fonts</div>
+      <div class="tech-item">Responsive Nav</div>
+    </div>
+  </section>
+
+  <div class="cta-footer">
+    <h2>Want Results Like This?</h2>
+    <p>I build production-quality Power BI dashboards and automation workflows for Metro Vancouver businesses. Let's talk.</p>
+    <div class="cta-buttons">
+      <a href="https://surreyaiautomation.online" target="_blank" rel="noopener" class="btn-primary">View Live Site</a>
+      <a href="mailto:manishmba9909@gmail.com" class="btn-secondary">Get in Touch</a>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <p>Built by Manish Dadhwal · <a href="index.html">Back to Portfolio</a> · <a href="https://surreyaiautomation.online" target="_blank" rel="noopener">surreyaiautomation.online</a></p>
+</footer>
+
+</body>
+</html>
