@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Reporting Audit Checklist — Surrey AI Automation</title>
+  <style>
+    /* ── Print-optimised — works as PDF too ── */
+    @page {
+      size: A4;
+      margin: 20mm 18mm;
+    }
+    @media print {
+      .no-print { display: none !important; }
+      body { background: white; }
+      .page { box-shadow: none; max-width: 100%; }
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: #F0F4F8;
+      color: #2D3748;
+      padding: 32px 16px;
+    }
+
+    .no-print {
+      max-width: 680px;
+      margin: 0 auto 20px;
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 10px 22px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .btn-blue  { background: #1F4E79; color: white; }
+    .btn-grey  { background: #E2E8F0; color: #2D3748; }
+
+    .page {
+      max-width: 680px;
+      margin: 0 auto;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 4px 24px rgba(0,0,0,.10);
+      overflow: hidden;
+    }
+
+    /* Header */
+    .header {
+      background: #1F4E79;
+      color: white;
+      padding: 32px 36px 24px;
+    }
+    .eyebrow {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 8px;
+    }
+    .header h1 {
+      font-size: 1.65rem;
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+    .header p {
+      font-size: 0.9rem;
+      opacity: 0.85;
+      line-height: 1.5;
+      max-width: 480px;
+    }
+    .header-meta {
+      display: flex;
+      gap: 20px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .meta-pill {
+      background: rgba(255,255,255,0.15);
+      border-radius: 99px;
+      padding: 4px 14px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    /* Body */
+    .body { padding: 28px 36px 32px; }
+
+    .intro {
+      font-size: 0.88rem;
+      color: #4A5568;
+      line-height: 1.65;
+      margin-bottom: 24px;
+      padding: 14px 16px;
+      background: #EBF4FF;
+      border-left: 4px solid #1F4E79;
+      border-radius: 0 8px 8px 0;
+    }
+
+    /* Checklist */
+    .section-label {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #718096;
+      margin: 22px 0 10px;
+    }
+
+    .check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 12px 0;
+      border-bottom: 1px solid #EDF2F7;
+      cursor: pointer;
+    }
+    .check-item:last-child { border-bottom: none; }
+
+    .box {
+      width: 22px;
+      height: 22px;
+      border: 2px solid #CBD5E0;
+      border-radius: 5px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      transition: all 0.15s;
+      margin-top: 1px;
+    }
+    .check-item.yes .box  { background: #1E8449; border-color: #1E8449; color: white; }
+    .check-item.no  .box  { background: #CC3300; border-color: #CC3300; color: white; }
+
+    .item-text { flex: 1; }
+    .item-q    { font-size: 0.92rem; font-weight: 600; line-height: 1.4; color: #2D3748; }
+    .item-why  { font-size: 0.78rem; color: #718096; margin-top: 3px; line-height: 1.4; }
+
+    .item-num {
+      width: 24px;
+      height: 24px;
+      background: #EBF4FF;
+      color: #1F4E79;
+      border-radius: 99px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Score panel */
+    .score-panel {
+      margin-top: 28px;
+      padding: 20px;
+      border-radius: 10px;
+      border: 2px solid #E2E8F0;
+      background: #FAFAFA;
+    }
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .score-label { font-size: 0.85rem; color: #4A5568; }
+    .score-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      color: #1F4E79;
+    }
+    .score-bar-wrap { margin-top: 12px; }
+    .score-bar {
+      height: 12px;
+      background: #E2E8F0;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+    .score-fill {
+      height: 100%;
+      border-radius: 99px;
+      transition: width 0.4s;
+      background: #1E8449;
+    }
+    .result-msg {
+      margin-top: 14px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.88rem;
+      line-height: 1.55;
+      display: none;
+    }
+    .result-msg.show { display: block; }
+    .result-high { background: #FDECEA; border-left: 4px solid #CC3300; color: #7B1A1A; }
+    .result-mid  { background: #FEF9E7; border-left: 4px solid #F39C12; color: #7D5A00; }
+    .result-low  { background: #EBF9F1; border-left: 4px solid #1E8449; color: #1A5235; }
+
+    /* CTA */
+    .cta {
+      margin-top: 28px;
+      background: #1F4E79;
+      color: white;
+      border-radius: 10px;
+      padding: 22px 24px;
+      text-align: center;
+    }
+    .cta h3 { font-size: 1.1rem; margin-bottom: 6px; }
+    .cta p  { font-size: 0.85rem; opacity: 0.85; margin-bottom: 16px; line-height: 1.5; }
+    .cta-btn {
+      display: inline-block;
+      background: white;
+      color: #1F4E79;
+      font-weight: 700;
+      font-size: 0.9rem;
+      padding: 12px 28px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+    }
+    .cta-sub {
+      font-size: 0.75rem;
+      opacity: 0.65;
+      margin-top: 10px;
+    }
+
+    /* Footer */
+    .footer {
+      border-top: 1px solid #EDF2F7;
+      padding: 16px 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .footer-brand { font-size: 0.82rem; font-weight: 700; color: #1F4E79; }
+    .footer-url   { font-size: 0.78rem; color: #718096; }
+
+    /* Yes/No toggle buttons */
+    .toggle-btns { display: flex; gap: 6px; margin-top: 8px; }
+    .yn-btn {
+      padding: 4px 14px;
+      border-radius: 6px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      border: 2px solid #CBD5E0;
+      background: white;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .yn-btn.yes-active { background: #1E8449; border-color: #1E8449; color: white; }
+    .yn-btn.no-active  { background: #CC3300; border-color: #CC3300; color: white; }
+  </style>
+</head>
+<body>
+
+<!-- Print / PDF controls -->
+<div class="no-print">
+  <button class="btn btn-blue" onclick="window.print()">🖨 Print / Save as PDF</button>
+  <button class="btn btn-grey" onclick="resetAll()">↺ Reset answers</button>
+  <span style="font-size:0.82rem; color:#718096; align-self:center;">
+    Send this link to prospects, or print and bring to meetings
+  </span>
+</div>
+
+<div class="page">
+
+  <!-- Header -->
+  <div class="header">
+    <div class="eyebrow">Free Self-Assessment</div>
+    <h1>The Construction &amp; Logistics<br>Reporting Audit Checklist</h1>
+    <p>Answer 10 yes/no questions to find out how many hours your business is losing to manual reporting — and what automated reporting could look like for you.</p>
+    <div class="header-meta">
+      <span class="meta-pill">⏱ Takes 3 minutes</span>
+      <span class="meta-pill">✓ 10 questions</span>
+      <span class="meta-pill">Free — no email required</span>
+    </div>
+  </div>
+
+  <!-- Body -->
+  <div class="body">
+
+    <div class="intro">
+      <strong>How to use this:</strong> Answer each question honestly. If you're unsure, answer based on how things work today — not how they should work.
+      Five or more "No" answers usually means your business is spending 3–8 hours per week on tasks that could run automatically.
+    </div>
+
+    <!-- Section 1 -->
+    <div class="section-label">Section 1 — Data Collection</div>
+
+    <div class="check-item" id="q1">
+      <div class="item-num">1</div>
+      <div class="box" id="box1"></div>
+      <div class="item-text">
+        <div class="item-q">Do you compile reports manually from QuickBooks, Excel, or separate systems?</div>
+        <div class="item-why">Manual compilation = the #1 time sink we see in construction and logistics businesses</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(1,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(1,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-item" id="q2">
+      <div class="item-num">2</div>
+      <div class="box" id="box2"></div>
+      <div class="item-text">
+        <div class="item-q">Does your weekly or monthly reporting take more than 2 hours to produce?</div>
+        <div class="item-why">Industry average for manual reporting: 4–6 hrs/week for a 10–30 person company</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(2,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(2,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-item" id="q3">
+      <div class="item-num">3</div>
+      <div class="box" id="box3"></div>
+      <div class="item-text">
+        <div class="item-q">Do you see your job costs or delivery metrics updated in real time — or only after someone compiles the data?</div>
+        <div class="item-why">Real-time = automated. After compilation = manual and always slightly stale</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(3,'yes')">Yes (real time)</button>
+          <button class="yn-btn" onclick="answer(3,'no')">No (after compilation)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2 -->
+    <div class="section-label">Section 2 — Visibility &amp; Access</div>
+
+    <div class="check-item" id="q4">
+      <div class="item-num">4</div>
+      <div class="box" id="box4"></div>
+      <div class="item-text">
+        <div class="item-q">Does your team have to ask you (or someone else) for the numbers they need?</div>
+        <div class="item-why">If people ask for data, reporting isn't self-serve — it's a bottleneck</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(4,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(4,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-item" id="q5">
+      <div class="item-num">5</div>
+      <div class="box" id="box5"></div>
+      <div class="item-text">
+        <div class="item-q">Can you pull a report for any date range in under 2 minutes — without manual work?</div>
+        <div class="item-why">Ad-hoc reporting speed reveals how much your data is structured vs. scattered</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(5,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(5,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-item" id="q6">
+      <div class="item-num">6</div>
+      <div class="box" id="box6"></div>
+      <div class="item-text">
+        <div class="item-q">Do you track margins per project or route automatically — or do you calculate them manually?</div>
+        <div class="item-why">Manual margin tracking often catches problems weeks after they happened</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(6,'yes')">Yes (automatically)</button>
+          <button class="yn-btn" onclick="answer(6,'no')">No (manually)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 3 -->
+    <div class="section-label">Section 3 — Automation &amp; Alerts</div>
+
+    <div class="check-item" id="q7">
+      <div class="item-num">7</div>
+      <div class="box" id="box7"></div>
+      <div class="item-text">
+        <div class="item-q">Do you get an automatic alert if a job goes over budget or a delivery is delayed?</div>
+        <div class="item-why">Without alerts, you find out about problems after they've already cost you money</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(7,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(7,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-item" id="q8">
+      <div class="item-num">8</div>
+      <div class="box" id="box8"></div>
+      <div class="item-text">
+        <div class="item-q">Does your weekly summary report arrive without anyone compiling it?</div>
+        <div class="item-why">If someone has to build the report — that time is a fixed weekly tax on your team</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(8,'yes')">Yes (automated)</button>
+          <button class="yn-btn" onclick="answer(8,'no')">No (someone builds it)</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 4 -->
+    <div class="section-label">Section 4 — Accounting &amp; Finance</div>
+
+    <div class="check-item" id="q9">
+      <div class="item-num">9</div>
+      <div class="box" id="box9"></div>
+      <div class="item-text">
+        <div class="item-q">Can your accountant or bookkeeper access the data they need without calling you?</div>
+        <div class="item-why">Each accountant call-back for data typically costs 20–45 minutes of your time</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(9,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(9,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="check-item" id="q10">
+      <div class="item-num">10</div>
+      <div class="box" id="box10"></div>
+      <div class="item-text">
+        <div class="item-q">Can you name your 3 most profitable jobs or routes right now — without opening a spreadsheet?</div>
+        <div class="item-why">If the answer requires checking, your most important business insights aren't visible</div>
+        <div class="toggle-btns">
+          <button class="yn-btn" onclick="answer(10,'yes')">Yes</button>
+          <button class="yn-btn" onclick="answer(10,'no')">No</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Score Panel -->
+    <div class="score-panel">
+      <div class="score-row">
+        <div>
+          <div class="score-label">Questions answered</div>
+          <div style="font-size:0.88rem; color:#718096;" id="answered-count">0 of 10</div>
+        </div>
+        <div>
+          <div class="score-label">Automation gaps identified</div>
+          <div class="score-num" id="no-count">—</div>
+        </div>
+      </div>
+      <div class="score-bar-wrap">
+        <div class="score-bar">
+          <div class="score-fill" id="score-fill" style="width:0%"></div>
+        </div>
+      </div>
+
+      <div class="result-msg result-high" id="result-high">
+        <strong>🔴 High impact opportunity (5+ gaps)</strong><br>
+        Your business is likely spending 4–8 hours per week on manual reporting tasks.
+        A well-built automated dashboard could recover most of that time within 2 weeks.
+        The free 30-min Data Audit will show you exactly what's possible for your setup.
+      </div>
+      <div class="result-msg result-mid" id="result-mid">
+        <strong>🟡 Moderate opportunity (3–4 gaps)</strong><br>
+        You've automated some of your reporting but there are 3–4 areas still running manually.
+        Closing those gaps could save 2–4 hours per week and give you better visibility into margins and alerts.
+        Worth a 30-minute conversation.
+      </div>
+      <div class="result-msg result-low" id="result-low">
+        <strong>🟢 Well optimised (0–2 gaps)</strong><br>
+        Your reporting setup is already working well. If you're looking to add more advanced
+        dashboards, multi-source integrations, or Power BI reporting for your team,
+        we'd still be happy to explore what's possible.
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="cta">
+      <h3>Book Your Free 30-Min Data Audit</h3>
+      <p>
+        No cost. No commitment. I'll look at your current setup and show you exactly what
+        an automated dashboard would look like for your business — including which gaps
+        are easiest to close first.
+      </p>
+      <a class="cta-btn" href="https://calendly.com" target="_blank">Book the Free Audit →</a>
+      <div class="cta-sub">Surrey AI Automation · Surrey, BC · surreyaiautomation.online</div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer">
+    <div>
+      <div class="footer-brand">Surrey AI Automation</div>
+      <div class="footer-url">surreyaiautomation.online · manish@surreyaiautomation.online</div>
+    </div>
+    <div style="font-size:0.75rem; color:#A0AEC0; text-align:right;">
+      Power BI · Automated Reporting · Data Integration<br>
+      Surrey, BC, Canada
+    </div>
+  </div>
+
+</div>
+
+<script>
+  // Scoring: "No" = gap = bad for questions 1,2,4,7,8,9,10
+  // "Yes" = gap for questions 3,5,6 (real time, fast pull, automatic margin)
+  // We count gaps (the problematic answer for each question)
+  const gapAnswer = {
+    1:'yes', 2:'yes', 3:'no', 4:'yes', 5:'no', 6:'no', 7:'no', 8:'no', 9:'no', 10:'no'
+  };
+
+  const answers = {};
+
+  function answer(q, val) {
+    answers[q] = val;
+
+    // Update box
+    const item = document.getElementById('q' + q);
+    const box  = document.getElementById('box' + q);
+    item.classList.remove('yes','no');
+    item.classList.add(val);
+    box.textContent = val === 'yes' ? '✓' : '✗';
+
+    // Update button styles
+    const btns = item.querySelectorAll('.yn-btn');
+    btns.forEach(b => {
+      b.classList.remove('yes-active','no-active');
+      if (b.textContent.toLowerCase().startsWith(val)) {
+        b.classList.add(val + '-active');
+      }
+    });
+
+    updateScore();
+  }
+
+  function updateScore() {
+    const total    = Object.keys(answers).length;
+    const gaps     = Object.entries(answers).filter(([q, v]) => v === gapAnswer[parseInt(q)]).length;
+    const pct      = total > 0 ? Math.round((gaps / 10) * 100) : 0;
+
+    document.getElementById('answered-count').textContent = `${total} of 10`;
+    document.getElementById('no-count').textContent = total > 0 ? gaps : '—';
+    document.getElementById('score-fill').style.width = pct + '%';
+
+    // Color the fill based on severity
+    const fill = document.getElementById('score-fill');
+    fill.style.background = gaps >= 5 ? '#CC3300' : gaps >= 3 ? '#F39C12' : '#1E8449';
+
+    // Show result message only when 5+ answered
+    document.querySelectorAll('.result-msg').forEach(m => m.classList.remove('show'));
+    if (total >= 5) {
+      if      (gaps >= 5) document.getElementById('result-high').classList.add('show');
+      else if (gaps >= 3) document.getElementById('result-mid').classList.add('show');
+      else                document.getElementById('result-low').classList.add('show');
+    }
+  }
+
+  function resetAll() {
+    Object.keys(answers).forEach(k => delete answers[k]);
+    for (let i = 1; i <= 10; i++) {
+      const item = document.getElementById('q' + i);
+      const box  = document.getElementById('box' + i);
+      item.classList.remove('yes','no');
+      box.textContent = '';
+      item.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('yes-active','no-active'));
+    }
+    document.getElementById('no-count').textContent = '—';
+    document.getElementById('answered-count').textContent = '0 of 10';
+    document.getElementById('score-fill').style.width = '0%';
+    document.querySelectorAll('.result-msg').forEach(m => m.classList.remove('show'));
+  }
+</script>
+</body>
+</html>
