@@ -265,6 +265,70 @@
     }
     .yn-btn.yes-active { background: #1E8449; border-color: #1E8449; color: white; }
     .yn-btn.no-active  { background: #CC3300; border-color: #CC3300; color: white; }
+
+    /* Lead capture form inside CTA */
+    .cap-form { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .cap-form input {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: none;
+      font-size: 0.88rem;
+      background: rgba(255,255,255,0.12);
+      color: white;
+      outline: none;
+    }
+    .cap-form input::placeholder { color: rgba(255,255,255,0.45); }
+    .cap-form input:focus { background: rgba(255,255,255,0.18); }
+    .cap-submit {
+      padding: 11px 0;
+      border-radius: 8px;
+      border: none;
+      background: white;
+      color: #1F4E79;
+      font-weight: 700;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: opacity 0.15s;
+      width: 100%;
+    }
+    .cap-submit:hover { opacity: 0.88; }
+    .cap-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+    .cap-success {
+      background: rgba(255,255,255,0.12);
+      border-radius: 8px;
+      padding: 14px;
+      font-size: 0.88rem;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+    .booking-btn-wrap { margin-bottom: 18px; }
+    .booking-btn {
+      display: inline-block;
+      background: white;
+      color: #1F4E79;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 13px 30px;
+      border-radius: 8px;
+      text-decoration: none;
+      transition: opacity 0.15s;
+    }
+    .booking-btn:hover { opacity: 0.88; }
+    .divider-or {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 14px 0;
+      font-size: 0.78rem;
+      opacity: 0.5;
+    }
+    .divider-or::before, .divider-or::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(255,255,255,0.3);
+    }
   </style>
 </head>
 <body>
@@ -480,16 +544,46 @@
       </div>
     </div>
 
-    <!-- CTA -->
-    <div class="cta">
-      <h3>Book Your Free 30-Min Data Audit</h3>
-      <p>
-        No cost. No commitment. I'll look at your current setup and show you exactly what
-        an automated dashboard would look like for your business — including which gaps
-        are easiest to close first.
-      </p>
-      <a class="cta-btn" href="https://calendly.com" target="_blank">Book the Free Audit →</a>
-      <div class="cta-sub">Surrey AI Automation · Surrey, BC · surreyaiautomation.online</div>
+    <!-- Dynamic CTA — shown after all 10 questions answered -->
+    <div class="cta" id="dynamic-cta" style="display:none">
+
+      <!-- HIGH: 5+ gaps → booking button first, email capture below -->
+      <div id="cta-high" style="display:none">
+        <h3 style="margin-bottom:8px">You have <span id="gap-count-high"></span> reporting gaps</h3>
+        <p>That's typically 4–8 hours per week lost to manual work. The fastest way to close them: a free 30-minute Data Audit. I'll review your setup and show you exactly what automation looks like for your business.</p>
+        <div class="booking-btn-wrap" style="margin-top:16px">
+          <!-- Replace href with your Calendly URL once set up. Fallback: main site contact form -->
+          <a class="booking-btn" id="booking-link" href="https://surreyaiautomation.online/#contact" target="_blank">Book the Free Audit →</a>
+        </div>
+        <div class="divider-or">or get your results emailed</div>
+      </div>
+
+      <!-- MID: 3–4 gaps → email capture, softer booking nudge -->
+      <div id="cta-mid" style="display:none">
+        <h3 style="margin-bottom:8px">You have <span id="gap-count-mid"></span> gaps to close</h3>
+        <p>You've automated some areas but 3–4 manual processes are still costing you time. Enter your details and I'll send a personalised plan showing which gaps are easiest to fix first.</p>
+      </div>
+
+      <!-- LOW: 0–2 gaps → curiosity hook -->
+      <div id="cta-low" style="display:none">
+        <h3 style="margin-bottom:8px">Your reporting is mostly automated</h3>
+        <p>You're ahead of most businesses. If you're exploring advanced Power BI dashboards or multi-source integration for your team, enter your details and I'll share what's possible.</p>
+      </div>
+
+      <!-- Email capture form (shown for all tiers) -->
+      <div id="cap-wrap">
+        <form class="cap-form" id="cap-form" onsubmit="submitCapture(event)">
+          <input type="text"  id="cap-name"    placeholder="Your name"      required />
+          <input type="email" id="cap-email"   placeholder="Business email" required />
+          <input type="text"  id="cap-company" placeholder="Company name (optional)" />
+          <button type="submit" class="cap-submit" id="cap-btn">Send My Results →</button>
+        </form>
+        <div class="cap-success" id="cap-success" style="display:none">
+          ✅ Sent! I'll follow up within 1 business day with next steps specific to your gaps.
+        </div>
+      </div>
+
+      <div class="cta-sub" style="margin-top:16px">Surrey AI Automation · Surrey, BC · surreyaiautomation.online</div>
     </div>
 
   </div>
@@ -509,9 +603,7 @@
 </div>
 
 <script>
-  // Scoring: "No" = gap = bad for questions 1,2,4,7,8,9,10
-  // "Yes" = gap for questions 3,5,6 (real time, fast pull, automatic margin)
-  // We count gaps (the problematic answer for each question)
+  // gap = the "bad" answer for each question (the answer indicating a reporting gap)
   const gapAnswer = {
     1:'yes', 2:'yes', 3:'no', 4:'yes', 5:'no', 6:'no', 7:'no', 8:'no', 9:'no', 10:'no'
   };
@@ -521,44 +613,106 @@
   function answer(q, val) {
     answers[q] = val;
 
-    // Update box
     const item = document.getElementById('q' + q);
     const box  = document.getElementById('box' + q);
-    item.classList.remove('yes','no');
+    item.classList.remove('yes', 'no');
     item.classList.add(val);
     box.textContent = val === 'yes' ? '✓' : '✗';
 
-    // Update button styles
-    const btns = item.querySelectorAll('.yn-btn');
-    btns.forEach(b => {
-      b.classList.remove('yes-active','no-active');
-      if (b.textContent.toLowerCase().startsWith(val)) {
-        b.classList.add(val + '-active');
-      }
+    item.querySelectorAll('.yn-btn').forEach(b => {
+      b.classList.remove('yes-active', 'no-active');
+      if (b.textContent.toLowerCase().startsWith(val)) b.classList.add(val + '-active');
     });
 
     updateScore();
   }
 
   function updateScore() {
-    const total    = Object.keys(answers).length;
-    const gaps     = Object.entries(answers).filter(([q, v]) => v === gapAnswer[parseInt(q)]).length;
-    const pct      = total > 0 ? Math.round((gaps / 10) * 100) : 0;
+    const total = Object.keys(answers).length;
+    const gaps  = Object.entries(answers).filter(([q, v]) => v === gapAnswer[parseInt(q)]).length;
+    const pct   = total > 0 ? Math.round((gaps / 10) * 100) : 0;
 
     document.getElementById('answered-count').textContent = `${total} of 10`;
     document.getElementById('no-count').textContent = total > 0 ? gaps : '—';
     document.getElementById('score-fill').style.width = pct + '%';
+    document.getElementById('score-fill').style.background =
+      gaps >= 5 ? '#CC3300' : gaps >= 3 ? '#F39C12' : '#1E8449';
 
-    // Color the fill based on severity
-    const fill = document.getElementById('score-fill');
-    fill.style.background = gaps >= 5 ? '#CC3300' : gaps >= 3 ? '#F39C12' : '#1E8449';
-
-    // Show result message only when 5+ answered
+    // Result message — show after 5+ answered
     document.querySelectorAll('.result-msg').forEach(m => m.classList.remove('show'));
     if (total >= 5) {
       if      (gaps >= 5) document.getElementById('result-high').classList.add('show');
       else if (gaps >= 3) document.getElementById('result-mid').classList.add('show');
       else                document.getElementById('result-low').classList.add('show');
+    }
+
+    // Dynamic CTA — show after all 10 answered
+    if (total === 10) showCTA(gaps);
+  }
+
+  function showCTA(gaps) {
+    const cta = document.getElementById('dynamic-cta');
+    cta.style.display = 'block';
+
+    // Hide all tier blocks first
+    ['cta-high', 'cta-mid', 'cta-low'].forEach(id => {
+      document.getElementById(id).style.display = 'none';
+    });
+
+    if (gaps >= 5) {
+      const block = document.getElementById('cta-high');
+      block.style.display = 'block';
+      document.getElementById('gap-count-high').textContent = gaps;
+    } else if (gaps >= 3) {
+      const block = document.getElementById('cta-mid');
+      block.style.display = 'block';
+      document.getElementById('gap-count-mid').textContent = gaps;
+    } else {
+      document.getElementById('cta-low').style.display = 'block';
+    }
+
+    // Scroll CTA into view smoothly
+    setTimeout(() => cta.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+  }
+
+  async function submitCapture(e) {
+    e.preventDefault();
+    const btn  = document.getElementById('cap-btn');
+    const name = document.getElementById('cap-name').value.trim();
+    const email= document.getElementById('cap-email').value.trim();
+    const company = document.getElementById('cap-company').value.trim();
+    const total = Object.keys(answers).length;
+    const gaps  = Object.entries(answers).filter(([q, v]) => v === gapAnswer[parseInt(q)]).length;
+    const tier  = gaps >= 5 ? 'High (5+ gaps)' : gaps >= 3 ? 'Moderate (3-4 gaps)' : 'Low (0-2 gaps)';
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch('https://formsubmit.co/ajax/hello@surreyaiautomation.online', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({
+          _subject: `Checklist lead — ${tier} — ${name}`,
+          name,
+          email,
+          company: company || '(not provided)',
+          gap_score: `${gaps} / 10 gaps — ${tier}`,
+          answers_summary: Object.entries(answers).map(([q, v]) => `Q${q}:${v}`).join(', '),
+          _template: 'table'
+        })
+      });
+      const data = await res.json();
+      if (data.success === 'true' || data.success === true) {
+        document.getElementById('cap-form').style.display = 'none';
+        document.getElementById('cap-success').style.display = 'block';
+      } else {
+        btn.textContent = 'Try again →';
+        btn.disabled = false;
+      }
+    } catch {
+      btn.textContent = 'Try again →';
+      btn.disabled = false;
     }
   }
 
@@ -566,15 +720,19 @@
     Object.keys(answers).forEach(k => delete answers[k]);
     for (let i = 1; i <= 10; i++) {
       const item = document.getElementById('q' + i);
-      const box  = document.getElementById('box' + i);
-      item.classList.remove('yes','no');
-      box.textContent = '';
-      item.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('yes-active','no-active'));
+      item.classList.remove('yes', 'no');
+      document.getElementById('box' + i).textContent = '';
+      item.querySelectorAll('.yn-btn').forEach(b => b.classList.remove('yes-active', 'no-active'));
     }
     document.getElementById('no-count').textContent = '—';
     document.getElementById('answered-count').textContent = '0 of 10';
     document.getElementById('score-fill').style.width = '0%';
     document.querySelectorAll('.result-msg').forEach(m => m.classList.remove('show'));
+    document.getElementById('dynamic-cta').style.display = 'none';
+    document.getElementById('cap-form').style.display = 'flex';
+    document.getElementById('cap-success').style.display = 'none';
+    document.getElementById('cap-btn').textContent = 'Send My Results →';
+    document.getElementById('cap-btn').disabled = false;
   }
 </script>
 </body>
