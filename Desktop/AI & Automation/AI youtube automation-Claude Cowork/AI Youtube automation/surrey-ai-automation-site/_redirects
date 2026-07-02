@@ -1,0 +1,25 @@
+# ============================================================
+# Surrey AI Automation — Cloudflare Pages Redirects
+# NOTE: Do NOT add /page → /page.html rules — Cloudflare Pages
+# already strips .html automatically (clean URLs built-in).
+# Only add shortcuts to paths that DON'T match a filename.
+# ============================================================
+
+# ============================================================
+# Canonical domain enforcement (QA-002)
+# ============================================================
+https://www.surreyaiautomation.online/*  https://surreyaiautomation.online/:splat  301
+
+# Real project shortcuts
+/beauty-bar       /hair-salon/index.html        301
+/salon            /hair-salon/index.html        301
+/rana             /ranas-restaurant/index.html  301
+/indian           /ranas-restaurant/index.html  301
+/kidtoon          /kidtoon/deploy/index.html    301
+/rubicon          /rubicon/index.html           301
+/bharat           /bharat-talent-grid.html      301
+
+# Portfolio aliases
+/work             /samples.html                 301
+/portfolio        /samples.html                 301
+/demos            /samples.html                 301
