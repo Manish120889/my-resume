@@ -336,9 +336,9 @@ details.exp .body{padding:0 16px 16px}
         <div class="card">
           <h3>Plans</h3>
           <div style="font-size:.83rem;color:var(--muted);line-height:1.7;margin-top:8px">
-            <b style="color:var(--txt)">Free, $0</b> · 15 actions/day, 10 MB files<br>
-            <b style="color:var(--txt)">Pro, $29/mo</b> · unlimited actions, all modules, 50 MB<br>
-            <b style="color:var(--txt)">Business, $79/mo</b> · 200 MB, priority support
+            <b style="color:var(--txt)">Free, $0</b> · 15 actions/day, 10 MB files, 5,000 rows<br>
+            <b style="color:var(--txt)">Pro, $29/mo</b> · unlimited actions, all modules, 50 MB, 100,000 rows<br>
+            <b style="color:var(--txt)">Business, $79/mo</b> · 200 MB, 1,048,576 rows (Excel maximum), priority support
           </div>
           <p style="font-size:.8rem;color:var(--muted);margin-top:12px">To upgrade, email <a href="mailto:manishmba9909@gmail.com" style="color:var(--blue2)">manishmba9909@gmail.com</a>. Activated within 24 hours.</p>
         </div>
@@ -533,6 +533,8 @@ dropZone.ondrop=e=>{e.preventDefault();dropZone.classList.remove("over");if(e.da
 fileInput.onchange=()=>{if(fileInput.files[0])tfLoadFile(fileInput.files[0]);};
 secondaryUpload.onclick=()=>secondaryFile.click();
 secondaryFile.onchange=()=>{if(secondaryFile.files[0])tfLoadSecondary(secondaryFile.files[0]);};
+const ROW_LIMITS={Free:5000,Pro:100000,Business:1048576};
+function rowCap(){return ROW_LIMITS[S.profile?.tier||"Free"]||ROW_LIMITS.Free;}
 function tfLoadFile(f){
   if(f.size>10*1024*1024&&(S.profile?.tier||"Free")==="Free")return tfErr("Free tier limit is 10 MB. Upgrade for larger files.");
   const rd=new FileReader();
@@ -542,6 +544,7 @@ function tfLoadFile(f){
       const ws=wb.Sheets[wb.SheetNames[0]];
       const arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false});
       if(!arr.length)return tfErr("File is empty.");
+      if(arr.length-1>rowCap())return tfErr(`Your plan allows up to ${rowCap().toLocaleString()} rows. This file has ${(arr.length-1).toLocaleString()}. Upgrade for up to 1,048,576 rows (the Excel maximum).`);
       const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
       CSEngine.init(table);
       tfCurrentTable=table;
@@ -559,6 +562,7 @@ function tfLoadSecondary(f){
       const ws=wb.Sheets[wb.SheetNames[0]];
       const arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false});
       if(!arr.length)return tfErr("File is empty.");
+      if(arr.length-1>rowCap())return tfErr(`Your plan allows up to ${rowCap().toLocaleString()} rows per file.`);
       const name=f.name.split(".")[0];
       const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
       CSEngine.addSecondaryTable(name,table);
