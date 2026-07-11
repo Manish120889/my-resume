@@ -1,0 +1,15 @@
+# Oversized files excluded from Cloudflare Pages (26 MB limit)
+blackhole_final.mp4
+blackhole_god_30s.mp4
+bh_god_sweep.mp4
+
+# Old backups
+index_live.html
+index_local_backup.html
+index_rewrite_backup.html
+blackhole_final_old.mp4
+bh_test.mp4
+
+# Dev/archive directories
+Archive/
+_archive/
