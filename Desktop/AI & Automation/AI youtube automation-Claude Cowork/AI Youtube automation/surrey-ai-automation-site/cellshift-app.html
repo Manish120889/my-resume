@@ -11,6 +11,7 @@
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous" defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" crossorigin="anonymous" defer></script>
 <script src="https://cdn.jsdelivr.net/npm/@formulajs/formulajs@4.4.0/lib/browser/formula.min.js" integrity="sha384-M3wxuanXbeH4qLbr3DDjrEo/r9Mzs7sMrUe9hoY2TmougSENPkSDVhbh6Ik21D9G" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/exceljs@4.4.0/dist/exceljs.min.js" integrity="sha384-Pqp51FUN2/qzfxZxBCtF0stpc9ONI6MYZpVqmo8m20SoaQCzf+arZvACkLkirlPz" crossorigin="anonymous" defer></script>
 <script src="cellshift-engine.v2.js" defer></script>
 <script src="cellshift-formulas.v2.js" defer></script>
 <style>
@@ -858,10 +859,50 @@ function tfCustomColumn(){
 function ts(){return new Date().toISOString().slice(0,19).replace(/[:T]/g,"").slice(0,14);}
 function tfExportXlsx(){
   const t=CSEngine.getAll();
+  if(window.ExcelJS)return tfExportXlsxStyled(t);
   const wb=XLSX.utils.book_new();
   XLSX.utils.book_append_sheet(wb,XLSX.utils.aoa_to_sheet([t.headers,...t.rows]),"Data");
   XLSX.writeFile(wb,`cellshift_${ts()}.xlsx`);
   logAction("Exported Excel");
+}
+async function tfExportXlsxStyled(t){
+  const NAVY="FF1E3A5F",TEAL="FF14B8A6",LIGHT="FFF0F5FA",BORDER="FFD5DEE8";
+  const wb=new ExcelJS.Workbook();
+  wb.creator="CellShift";
+  const ws=wb.addWorksheet("Data",{views:[{state:"frozen",ySplit:1}]});
+  const isNum=v=>v!==""&&v!==null&&!isNaN(v)&&String(v).trim()!=="";
+  const widths=t.headers.map((h,c)=>{
+    let w=String(h).length;
+    for(let r=0;r<Math.min(t.rows.length,200);r++)w=Math.max(w,String(t.rows[r][c]??"").length);
+    return Math.min(Math.max(w+2,10),50);
+  });
+  ws.columns=t.headers.map((h,i)=>({width:widths[i]}));
+  const hr=ws.addRow(t.headers.map(String));
+  hr.height=22;
+  hr.eachCell(c=>{
+    c.fill={type:"pattern",pattern:"solid",fgColor:{argb:NAVY}};
+    c.font={name:"Calibri",bold:true,color:{argb:"FFFFFFFF"},size:11};
+    c.alignment={vertical:"middle",horizontal:"left"};
+    c.border={bottom:{style:"medium",color:{argb:TEAL}}};
+  });
+  t.rows.forEach((row,ri)=>{
+    const r=ws.addRow(row.map(v=>isNum(v)?Number(v):(v??"")));
+    r.eachCell({includeEmpty:true},c=>{
+      if(ri%2===1)c.fill={type:"pattern",pattern:"solid",fgColor:{argb:LIGHT}};
+      c.font={name:"Calibri",size:10.5,color:{argb:"FF1F2937"}};
+      c.border={bottom:{style:"thin",color:{argb:BORDER}}};
+      if(typeof c.value==="number"){c.alignment={horizontal:"right"};if(!Number.isInteger(c.value))c.numFmt="#,##0.00";}
+    });
+  });
+  ws.autoFilter={from:{row:1,column:1},to:{row:1,column:t.headers.length}};
+  const buf=await wb.xlsx.writeBuffer();
+  const b=new Blob([buf],{type:"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(b);
+  a.download=`cellshift_${ts()}.xlsx`;
+  a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),3000);
+  logAction("Exported styled Excel");
 }
 function tfExportCsv(){
   const t=CSEngine.getAll();
