@@ -8,9 +8,9 @@
 <meta name="description" content="CellShift web app: clean spreadsheets, generate invoices, track BC compliance. Built for Surrey, BC businesses.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js" defer></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-<script src="https://cdn.jsdelivr.net/npm/@formulajs/formulajs@4.4.0/lib/browser/formula.min.js" defer></script>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js" integrity="sha384-EnyY0/GSHQGSxSgMwaIPzSESbqoOLSexfnSMN2AP+39Ckmn92stwABZynq1JyzdT" crossorigin="anonymous" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" integrity="sha384-JcnsjUPPylna1s1fvi1u12X5qjY5OL56iySh75FdtrwhO/SWXgMjoVqcKyIIWOLk" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/@formulajs/formulajs@4.4.0/lib/browser/formula.min.js" integrity="sha384-M3wxuanXbeH4qLbr3DDjrEo/r9Mzs7sMrUe9hoY2TmougSENPkSDVhbh6Ik21D9G" crossorigin="anonymous" defer></script>
 <script src="cellshift-engine.v2.js" defer></script>
 <script src="cellshift-formulas.v2.js" defer></script>
 <style>
@@ -558,7 +558,7 @@ function renderHome(){
     [hist.length,"Total actions"],[inv.length,"Invoices created"],
     ["$"+rev.toFixed(2),"Invoiced (CAD)"],[S.data.compliance_items.filter(c=>!c.done).length,"Open compliance items"]
   ].map(([v,l])=>`<div class="stat"><div class="v">${v}</div><div class="l">${l}</div></div>`).join("");
-  homeRecent.innerHTML=hist.slice(0,5).map(h=>`<div style="padding:4px 0">${h.time.slice(0,16).replace("T"," ")} · ${h.action}</div>`).join("")||"No activity yet.";
+  homeRecent.innerHTML=hist.slice(0,5).map(h=>`<div style="padding:4px 0">${h.time.slice(0,16).replace("T"," ")} · ${esc(h.action)}</div>`).join("")||"No activity yet.";
 }
 
 /* ================= TRANSFORM ================= */
@@ -576,43 +576,61 @@ secondaryUpload.onclick=()=>secondaryFile.click();
 secondaryFile.onchange=()=>{if(secondaryFile.files[0])tfLoadSecondary(secondaryFile.files[0]);};
 const ROW_LIMITS={Free:5000,Pro:100000,Business:1048576};
 function rowCap(){return ROW_LIMITS[S.profile?.tier||"Free"]||ROW_LIMITS.Free;}
-function tfLoadFile(f){
-  if(f.size>10*1024*1024&&(S.profile?.tier||"Free")==="Free")return tfErr("Free tier limit is 10 MB. Upgrade for larger files.");
+/* Spreadsheet parsing runs in a Web Worker so large files never freeze the UI.
+   Falls back to main-thread parsing if worker creation or importScripts fails (e.g. CSP). */
+const XLSX_CDN="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js";
+let csParseWorker=null;
+function getParseWorker(){
+  if(csParseWorker!==null)return csParseWorker;
+  try{
+    const src=`importScripts(${JSON.stringify(XLSX_CDN)});onmessage=function(e){try{var wb=XLSX.read(e.data,{type:"array",cellDates:true});var ws=wb.Sheets[wb.SheetNames[0]];var arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false});postMessage({ok:true,arr:arr});}catch(err){postMessage({ok:false,msg:err.message});}};`;
+    csParseWorker=new Worker(URL.createObjectURL(new Blob([src],{type:"application/javascript"})));
+  }catch(_){ csParseWorker=false; }
+  return csParseWorker;
+}
+function parseMain(buf,cb){
+  try{
+    const wb=XLSX.read(buf,{type:"array",cellDates:true});
+    const ws=wb.Sheets[wb.SheetNames[0]];
+    cb(null,XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false}));
+  }catch(err){ cb(err.message); }
+}
+function parseSheet(f,cb){
   const rd=new FileReader();
   rd.onload=e=>{
-    try{
-      const wb=XLSX.read(e.target.result,{type:"array",cellDates:true});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false});
-      if(!arr.length)return tfErr("File is empty.");
-      if(arr.length-1>rowCap())return tfErr(`Your plan allows up to ${rowCap().toLocaleString()} rows. This file has ${(arr.length-1).toLocaleString()}. Upgrade for up to 1,048,576 rows (the Excel maximum).`);
-      const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
-      CSEngine.init(table);
-      tfCurrentTable=table;
-      tfOriginal=JSON.parse(JSON.stringify(table));
-      tfWork.style.display=""; tfRefresh(); logAction("Loaded file: "+f.name);
-    }catch(err){ tfErr("Could not read file: "+err.message); }
+    const buf=e.target.result, w=getParseWorker();
+    if(!w)return parseMain(buf,cb);
+    w.onmessage=ev=>ev.data.ok?cb(null,ev.data.arr):cb(ev.data.msg);
+    w.onerror=()=>{try{w.terminate();}catch(_){}csParseWorker=false;parseMain(buf,cb);};
+    w.postMessage(buf); // no transfer list: buffer must stay usable for the fallback path
   };
   rd.readAsArrayBuffer(f);
 }
+function tfLoadFile(f){
+  if(f.size>10*1024*1024&&(S.profile?.tier||"Free")==="Free")return tfErr("Free tier limit is 10 MB. Upgrade for larger files.");
+  parseSheet(f,(err,arr)=>{
+    if(err)return tfErr("Could not read file: "+err);
+    if(!arr.length)return tfErr("File is empty.");
+    if(arr.length-1>rowCap())return tfErr(`Your plan allows up to ${rowCap().toLocaleString()} rows. This file has ${(arr.length-1).toLocaleString()}. Upgrade for up to 1,048,576 rows (the Excel maximum).`);
+    const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
+    CSEngine.init(table);
+    tfCurrentTable=table;
+    tfOriginal=JSON.parse(JSON.stringify(table));
+    tfWork.style.display=""; tfRefresh(); logAction("Loaded file: "+f.name);
+  });
+}
 function tfLoadSecondary(f){
-  const rd=new FileReader();
-  rd.onload=e=>{
-    try{
-      const wb=XLSX.read(e.target.result,{type:"array",cellDates:true});
-      const ws=wb.Sheets[wb.SheetNames[0]];
-      const arr=XLSX.utils.sheet_to_json(ws,{header:1,defval:"",raw:false});
-      if(!arr.length)return tfErr("File is empty.");
-      if(arr.length-1>rowCap())return tfErr(`Your plan allows up to ${rowCap().toLocaleString()} rows per file.`);
-      const name=f.name.split(".")[0];
-      const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
-      CSEngine.addSecondaryTable(name,table);
-      tfErr(`Added "${name}" for lookups`,true);
-      secondaryList.innerHTML+=`<div>${esc(name)} (${table.rows.length} rows) <button class="btn2 btn-sm danger" onclick="CSEngine.TABLES.delete('${name}');tfRefresh()">Remove</button></div>`;
-      secondaryFile.value="";
-    }catch(err){ tfErr("Could not read file: "+err.message); }
-  };
-  rd.readAsArrayBuffer(f);
+  parseSheet(f,(err,arr)=>{
+    if(err)return tfErr("Could not read file: "+err);
+    if(!arr.length)return tfErr("File is empty.");
+    if(arr.length-1>rowCap())return tfErr(`Your plan allows up to ${rowCap().toLocaleString()} rows per file.`);
+    const name=f.name.split(".")[0];
+    const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
+    CSEngine.addSecondaryTable(name,table);
+    tfErr(`Added "${name}" for lookups`,true);
+    secondaryList.innerHTML+=`<div>${esc(name)} (${table.rows.length} rows) <button class="btn2 btn-sm danger" onclick="CSEngine.TABLES.delete('${name}');tfRefresh()">Remove</button></div>`;
+    secondaryFile.value="";
+  });
 }
 function tfRefresh(){
   const curr=CSEngine.getAll();
@@ -962,7 +980,7 @@ function genInvoice(){
 function renderInvHist(){
   const inv=S.data.invoices;
   invHist.innerHTML=`<thead><tr><th>#</th><th>To</th><th>Company</th><th>Total</th><th>Date</th><th>Due</th></tr></thead><tbody>${
-    inv.length?inv.map(i=>`<tr><td>${i.number}</td><td>${i.client||""}</td><td>${i.company||""}</td><td>$${(i.total||0).toFixed(2)}</td><td>${i.date}</td><td>${i.due}</td></tr>`).join("")
+    inv.length?inv.map(i=>`<tr><td>${esc(i.number)}</td><td>${esc(i.client||"")}</td><td>${esc(i.company||"")}</td><td>$${(i.total||0).toFixed(2)}</td><td>${esc(i.date)}</td><td>${esc(i.due)}</td></tr>`).join("")
     :`<tr><td colspan="6" style="color:var(--muted)">No invoices yet.</td></tr>`}</tbody>`;
 }
 
