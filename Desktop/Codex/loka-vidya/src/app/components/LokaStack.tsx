@@ -86,13 +86,13 @@ export default function LokaStack({ activeSlug, onSelect }: LokaStackProps) {
             context, and the discs' mix-blend-mode can only reach a backdrop within it. */}
         {reducedMotion ? (
           // eslint-disable-next-line @next/next/no-img-element
-          <img className="ambient-poster" src="/media/cosmic-map.png" alt="" aria-hidden="true" />
+          <img className="ambient-poster" src="/loka-vidya/media/cosmic-map.png" alt="" aria-hidden="true" />
         ) : (
           <video
             ref={videoRef}
             className="ambient-video"
-            src="/media/oblivion-journey.mp4"
-            poster="/media/cosmic-map.png"
+            src="/loka-vidya/media/oblivion-journey.mp4"
+            poster="/loka-vidya/media/cosmic-map.png"
             muted
             loop
             playsInline
@@ -121,7 +121,7 @@ export default function LokaStack({ activeSlug, onSelect }: LokaStackProps) {
             aria-label={`Open ${slug}`}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src={`/media/${slug}.png`} alt="" aria-hidden="true" />
+            <img src={`/loka-vidya/media/${slug}.png`} alt="" aria-hidden="true" />
           </button>
         ))}
       </div>
