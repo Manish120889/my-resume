@@ -77,27 +77,29 @@ export default function LokaStack({ activeSlug, onSelect }: LokaStackProps) {
 
   return (
     <div className="cosmic-backdrop" aria-hidden={false}>
-      {reducedMotion ? (
-        // eslint-disable-next-line @next/next/no-img-element
-        <img className="ambient-poster" src="/media/cosmic-map.png" alt="" aria-hidden="true" />
-      ) : (
-        <video
-          ref={videoRef}
-          className="ambient-video"
-          src="/media/oblivion-journey.mp4"
-          poster="/media/cosmic-map.png"
-          muted
-          loop
-          playsInline
-          autoPlay
-          aria-hidden="true"
-        />
-      )}
       <div
         ref={stackRef}
         className="live-loka-stack"
         data-active={activeSlug ?? undefined}
       >
+        {/* Video lives INSIDE the stack: the parallax transform creates a stacking
+            context, and the discs' mix-blend-mode can only reach a backdrop within it. */}
+        {reducedMotion ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img className="ambient-poster" src="/media/cosmic-map.png" alt="" aria-hidden="true" />
+        ) : (
+          <video
+            ref={videoRef}
+            className="ambient-video"
+            src="/media/oblivion-journey.mp4"
+            poster="/media/cosmic-map.png"
+            muted
+            loop
+            playsInline
+            autoPlay
+            aria-hidden="true"
+          />
+        )}
         {LOKA_SLUGS.map((slug, index) => (
           <button
             key={slug}
