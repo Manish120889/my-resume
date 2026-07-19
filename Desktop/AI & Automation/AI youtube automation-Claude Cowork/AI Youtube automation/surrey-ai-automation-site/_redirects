@@ -10,16 +10,19 @@
 # ============================================================
 https://www.surreyaiautomation.online/*  https://surreyaiautomation.online/:splat  301
 
-# Real project shortcuts
-/beauty-bar       /hair-salon/index.html        301
-/salon            /hair-salon/index.html        301
-/rana             /ranas-restaurant/index.html  301
-/indian           /ranas-restaurant/index.html  301
-/kidtoon          /kidtoon/deploy/index.html    301
-/rubicon          /rubicon/index.html           301
-/bharat           /bharat-talent-grid.html      301
+# Website samples removed 2026-07-05 (ETL/reporting focus) — old links go to dashboard demos
+/beauty-bar       /samples.html   301
+/salon            /samples.html   301
+/rana             /samples.html   301
+/indian           /samples.html   301
+/kidtoon/*        /samples.html   301
+/kidtoon          /samples.html   301
+/rubicon/*        /samples.html   301
+/rubicon          /samples.html   301
+/bharat           /samples.html   301
+/hair-salon/*     /samples.html   301
+/ranas-restaurant/* /samples.html 301
 
 # Portfolio aliases
-/work             /samples.html                 301
-/portfolio        /samples.html                 301
+/portfolio        /showcase                     301
 /demos            /samples.html                 301

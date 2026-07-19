@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Surrey AI Automation · Connecting Intelligence · Power BI & Reporting · Surrey BC</title>
-  <meta name="description" content="Connecting Intelligence — Surrey AI Automation builds Power BI dashboards and automated reporting pipelines for Surrey BC small businesses. Real-time insights. Fixed price. 2-week delivery." />
+  <meta name="description" content="Connecting Intelligence. Surrey AI Automation builds Power BI dashboards and automated reporting pipelines for Surrey BC small businesses. Real-time insights. Fixed price. 2-week delivery." />
 
   <!-- ── SEO Open Graph ── -->
   <meta property="og:type"        content="website" />
@@ -87,7 +87,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
-  <!-- Static, render-blocking Tailwind CSS (compiled) — applies before first paint in every browser/mode. No runtime JIT race. -->
+  <!-- Static, render-blocking Tailwind CSS (compiled) - applies before first paint in every browser/mode. No runtime JIT race. -->
   <link rel="stylesheet" href="tailwind.css" />
   <link rel="stylesheet" href="assets/theme.css?v=1" />
   <!-- Prevent flash of unstyled/misaligned content in incognito (no cache) -->
@@ -113,7 +113,7 @@
 
     .hero-dots { position:absolute; inset:0; z-index:0; background-image:radial-gradient(rgba(255,255,255,.04) 1px,transparent 1px); background-size:28px 28px; mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent 100%); }
 
-    /* Dedicated darkening layer behind the headline so bright video flares (the accretion-disk flashes) never wash out the text — independent of the global bgOverlay */
+    /* Dedicated darkening layer behind the headline so bright video flares (the accretion-disk flashes) never wash out the text - independent of the global bgOverlay */
     .hero-text-shield { position:absolute; inset:0; z-index:1; pointer-events:none; background:linear-gradient(180deg,rgba(6,12,24,.35) 0%,rgba(6,12,24,.6) 45%,rgba(6,12,24,.4) 100%); }
     @media (min-width:769px) {
       .hero-text-shield { background:linear-gradient(90deg,rgba(6,12,24,.65) 0%,rgba(6,12,24,.5) 32%,rgba(6,12,24,.2) 58%,transparent 80%); }
@@ -134,7 +134,7 @@
 
     .hero-btns { display:flex; gap:var(--space-sm); flex-wrap:wrap; }
 
-    /* Hero center – cursor-tracked */
+    /* Hero center - cursor-tracked */
     .hero-visual-wrap { display:flex; align-items:center; justify-content:center; position:relative; transform-style:preserve-3d; will-change:transform; }
     .hero-visual-glow { position:absolute; width:420px; height:420px; background:radial-gradient(circle,rgba(67,97,238,.22) 0%,rgba(123,225,236,.08) 40%,transparent 70%); top:50%; left:50%; transform:translate(-50%,-50%); pointer-events:none; animation:vpulse 4s ease-in-out infinite; }
     @keyframes vpulse { 0%,100%{opacity:.6;transform:translate(-50%,-50%) scale(1)} 50%{opacity:1;transform:translate(-50%,-50%) scale(1.08)} }
@@ -166,7 +166,7 @@
     .hdb-line  { width:10px; height:1px; background:rgba(107,140,255,.28); }
     .hdb-time  { font-size:.55rem; color:rgba(255,255,255,.2); }
 
-    /* Hero right – insights card */
+    /* Hero right - insights card */
     .hero-insights { background:rgba(6,12,24,.85); backdrop-filter:blur(16px); border:1px solid rgba(123,225,236,.18); border-radius:20px; padding:var(--space-md); min-width:260px; }
     .roi-mini-title { font-size:.6rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-bottom:14px; }
     .roi-mini-slider-group { margin-bottom:10px; }
@@ -252,7 +252,7 @@
       display: block;
       width: 340px;
       height: auto;
-      /* PNG background removed — no mask needed */
+      /* PNG background removed - no mask needed */
       filter: drop-shadow(0 0 28px rgba(123,225,236,.38)) drop-shadow(0 10px 36px rgba(0,0,0,.55));
       transform-origin: 50% 50%;
       /* Wing flutter on img: scaleY only, doesn't conflict with wrapper float */
@@ -281,7 +281,7 @@
       .code-line, .terminal-shine { opacity:1 !important; transform:none !important; }
     }
 
-    /* ── TAILWIND FALLBACK — critical layouts hardcoded so CDN cache misses don't break grid ── */
+    /* ── TAILWIND FALLBACK - critical layouts hardcoded so CDN cache misses don't break grid ── */
     #stats-grid { display:grid; grid-template-columns:repeat(2,1fr); }
     @media(min-width:768px){ #stats-grid { grid-template-columns:repeat(4,1fr); } }
     .grid { display:grid; }
@@ -350,7 +350,7 @@
     }
   </style>
   <script>
-    // Reveal page only after fonts are loaded — fixes misalignment & flash in incognito
+    // Reveal page only after fonts are loaded - fixes misalignment & flash in incognito
     function revealPage() {
       document.documentElement.style.visibility = 'visible';
       document.documentElement.style.opacity = '1';
@@ -416,7 +416,7 @@
     <a href="#services" class="nav-pill">Services</a>
     <a href="#process" class="nav-pill">Process</a>
     <a href="#pricing" class="nav-pill">Pricing</a>
-    <a href="samples.html" class="nav-pill">Work</a>
+    <a href="showcase.html" class="nav-pill">Work</a>
     <a href="dashboard.html" class="nav-pill">Demo</a>
     <a href="cellshift.html" class="nav-pill">CellShift</a>
     <a href="#founder" class="nav-pill">About</a>
@@ -452,7 +452,7 @@
     <a href="#services" onclick="closeMobileMenu()">Services</a>
     <a href="#process" onclick="closeMobileMenu()">Process</a>
     <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
-    <a href="samples.html">Work</a>
+    <a href="showcase.html">Work</a>
     <a href="dashboard.html">Demo</a>
     <a href="cellshift.html">CellShift</a>
     <a href="#founder" onclick="closeMobileMenu()">About</a>
@@ -480,7 +480,7 @@
       <h1 class="hero-headline">Stop Wasting<br/>Hours on<br/>Reports.</h1>
       <div class="hero-accent">
         <span class="hero-accent-dot"></span>
-        <span class="hero-accent-text">Live dashboards &amp; automated<br/>reporting — delivered in 2 weeks.</span>
+        <span class="hero-accent-text">Live dashboards &amp; automated<br/>reporting, delivered in 2 weeks.</span>
       </div>
       <p style="color:rgba(255,255,255,.5);font-size:.95rem;max-width:420px;line-height:1.65;margin-bottom:18px"><span style="text-shadow:0 1px 8px rgba(6,12,24,0.9)">Replace spreadsheet chaos with Power BI dashboards that update themselves. Fixed price, 2-week delivery, no hourly billing.</p>
       <div class="hero-btns">
@@ -579,7 +579,7 @@
   <!-- Social -->
   <div class="hero-social">
     <a href="https://linkedin.com/in/manish-dadhwal" target="_blank" title="LinkedIn">in</a>
-    <a href="samples.html" title="Work samples">↗</a>
+    <a href="showcase.html" title="Work samples">↗</a>
     <a href="/cdn-cgi/l/email-protection#543c3138383b1427212626312d353d3521203b3935203d3b3a7a3b3a383d3a31" title="Email">✉</a>
   </div>
   <a href="#stats" class="hero-scroll">↓</a>
@@ -593,25 +593,25 @@
         <div style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:3rem;font-weight:700;letter-spacing:-.045em;line-height:1;margin-bottom:10px">
           2<span style="font-size:1.6rem;color:rgba(255,255,255,.4)"> wks</span>
         </div>
-        <div class="text-sm text-white/68 leading-relaxed">First call to live dashboard — no delays, no surprises</div>
+        <div class="text-sm text-white/68 leading-relaxed">First call to live dashboard, no delays, no surprises</div>
       </div>
       <div class="stat-item px-10 py-9 border-r border-white/[0.07]">
         <div style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:3rem;font-weight:700;letter-spacing:-.045em;line-height:1;margin-bottom:10px">
           100<span style="color:var(--blue2)">%</span>
         </div>
-        <div class="text-sm text-white/68 leading-relaxed">Fixed-price projects — no billing surprises, ever</div>
+        <div class="text-sm text-white/68 leading-relaxed">Fixed-price projects, no billing surprises, ever</div>
       </div>
       <div class="stat-item px-10 py-9 border-r border-white/[0.07]">
         <div style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:3rem;font-weight:700;letter-spacing:-.045em;line-height:1;margin-bottom:10px">
           $0
         </div>
-        <div class="text-sm text-white/68 leading-relaxed">Free discovery call — see the full plan before you pay a cent</div>
+        <div class="text-sm text-white/68 leading-relaxed">Free discovery call, see the full plan before you pay a cent</div>
       </div>
       <div class="stat-item px-10 py-9">
         <div style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:3rem;font-weight:700;letter-spacing:-.045em;line-height:1;margin-bottom:10px">
           10<span style="color:var(--blue2)">+</span><span style="font-size:1.6rem;color:rgba(255,255,255,.4)"> yr</span>
         </div>
-        <div class="text-sm text-white/68 leading-relaxed">Enterprise data &amp; ERP experience — Surrey &amp; Metro Vancouver</div>
+        <div class="text-sm text-white/68 leading-relaxed">Enterprise data &amp; ERP experience, Surrey &amp; Metro Vancouver</div>
       </div>
     </div>
   </div>
@@ -652,7 +652,7 @@
         <article class="pain-item rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
           <div class="text-xs font-bold" style="color:var(--teal);margin-bottom:8px">02</div>
           <h3 class="text-lg font-semibold text-white mb-2">Data spread across tools</h3>
-          <p class="text-white/68 text-sm leading-relaxed">QuickBooks says one thing, your spreadsheet another, your gut something else — and none of them agree.</p>
+          <p class="text-white/68 text-sm leading-relaxed">QuickBooks says one thing, your spreadsheet another, your gut something else, and none of them agree.</p>
         </article>
         <article class="pain-item rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
           <div class="text-xs font-bold" style="color:var(--teal);margin-bottom:8px">03</div>
@@ -662,7 +662,7 @@
         <article class="pain-item rounded-2xl border border-white/[0.08] bg-white/[0.03] p-6">
           <div class="text-xs font-bold" style="color:var(--teal);margin-bottom:8px">04</div>
           <h3 class="text-lg font-semibold text-white mb-2">Enterprise tools out of reach</h3>
-          <p class="text-white/68 text-sm leading-relaxed">Big companies have full data teams. You don't — but your decisions are just as important as theirs.</p>
+          <p class="text-white/68 text-sm leading-relaxed">Big companies have full data teams. You don't, but your decisions are just as important as theirs.</p>
         </article>
       </div>
     </div>
@@ -706,7 +706,7 @@
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="18" cy="18" r="3"/><path d="M8.5 7.5 15.5 16.5M6 9v6a3 3 0 0 0 3 3h3"/></svg>
         </div>
         <h3 class="text-base font-semibold text-white mb-2" style="font-family:'Space Grotesk',sans-serif">My data lives in too many places</h3>
-        <p class="text-sm text-white/65 leading-relaxed mb-5">QuickBooks, spreadsheets, POS — nothing talks to each other. I need one source of truth.</p>
+        <p class="text-sm text-white/65 leading-relaxed mb-5">QuickBooks, spreadsheets, POS, nothing talks to each other. I need one source of truth.</p>
         <span class="qp-cta" style="color:var(--green);border-color:rgba(34,197,94,.28)">Data Integration <span class="qp-arrow">→</span></span>
       </a>
     </div>
@@ -721,7 +721,7 @@
         <div class="section-eyebrow"><div class="ey-line"></div><div class="ey-text">How we solve reporting</div></div>
         <h2 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:clamp(2rem,3.8vw,3rem);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#fff">From spreadsheets to<br/><span style="color:var(--blue2)">live dashboards</span></h2>
       </div>
-      <a href="samples.html" class="btn-ghost hidden md:inline-flex" style="padding:11px 22px">See Sample Work →</a>
+      <a href="showcase.html" class="btn-ghost hidden md:inline-flex" style="padding:11px 22px">See Sample Work →</a>
     </div>
     <div class="grid md:grid-cols-3 gap-px bg-white/[0.07] rounded-2xl overflow-hidden border border-white/[0.07]">
       <a href="service-powerbi.html" class="service-card group relative bg-white/[0.03] transition-all duration-300 hover:bg-white/[0.06] overflow-hidden" style="text-decoration:none;display:block">
@@ -749,7 +749,7 @@
         </div>
         <div class="p-7 pt-4">
           <h3 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:-.01em;color:#fff;margin-bottom:8px">Reporting Automation</h3>
-          <p class="text-sm text-white/68 leading-relaxed mb-5">Automated export, transformation, distribution, and scheduled reporting workflows — so reports just arrive.</p>
+          <p class="text-sm text-white/68 leading-relaxed mb-5">Automated export, transformation, distribution, and scheduled reporting workflows, so reports just arrive.</p>
           <div class="flex flex-wrap gap-1.5">
             <span class="text-xs px-2.5 py-1 rounded-full border" style="color:var(--blue2);border-color:rgba(107,140,255,.22);background:rgba(67,97,238,.08)">Power Automate</span>
             <span class="text-xs px-2.5 py-1 rounded-full border" style="color:var(--blue2);border-color:rgba(107,140,255,.22);background:rgba(67,97,238,.08)">Python</span>
@@ -909,7 +909,7 @@
 
     </div>
 
-    <!-- Email Intelligence — sample preview (app requires login, so show a static mock) — HIDDEN: parked product -->
+    <!-- Email Intelligence - sample preview (app requires login, so show a static mock) - HIDDEN: parked product -->
     <div style="margin-top:48px;border-radius:20px;border:1px solid rgba(139,92,246,.22);background:rgba(139,92,246,.04);padding:32px;display:none;">
       <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:22px;">
         <div>
@@ -1007,15 +1007,15 @@
               <div style="display:flex;flex-direction:column;gap:8px;">
                 <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:3px solid #a78bfa;border-radius:8px;padding:10px 12px;">
                   <div style="display:flex;justify-content:space-between;font-size:.74rem;"><span style="color:#fff;font-weight:600;">North View Construction</span><span style="color:rgba(255,255,255,.3);">9:14 AM</span></div>
-                  <div style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;">Invoice #4471 — payment confirmation needed</div>
+                  <div style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;">Invoice #4471: payment confirmation needed</div>
                 </div>
                 <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:3px solid #fbbf24;border-radius:8px;padding:10px 12px;">
                   <div style="display:flex;justify-content:space-between;font-size:.74rem;"><span style="color:#fff;font-weight:600;">Fraser Restaurant Supply</span><span style="color:rgba(255,255,255,.3);">8:52 AM</span></div>
-                  <div style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;">Weekly order confirmed — delivery Thursday</div>
+                  <div style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;">Weekly order confirmed: delivery Thursday</div>
                 </div>
                 <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:3px solid #34d399;border-radius:8px;padding:10px 12px;">
                   <div style="display:flex;justify-content:space-between;font-size:.74rem;"><span style="color:#fff;font-weight:600;">Sarah K. (Client)</span><span style="color:rgba(255,255,255,.3);">7:30 AM</span></div>
-                  <div style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;">Re: Q3 dashboard — looks great, one question</div>
+                  <div style="font-size:.7rem;color:rgba(255,255,255,.45);margin-top:2px;">Re: Q3 dashboard, looks great, one question</div>
                 </div>
                 <div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:3px solid #f87171;border-radius:8px;padding:10px 12px;opacity:.6;">
                   <div style="display:flex;justify-content:space-between;font-size:.74rem;"><span style="color:#fff;font-weight:600;">Real Estate Weekly</span><span style="color:rgba(255,255,255,.3);">6:05 AM</span></div>
@@ -1030,7 +1030,7 @@
               <div style="display:flex;flex-direction:column;gap:10px;">
                 <div style="background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.22);border-radius:10px;padding:12px;">
                   <div style="font-size:.74rem;color:#a78bfa;font-weight:700;margin-bottom:3px;">⚡ Unanswered for 3+ days</div>
-                  <div style="font-size:.72rem;color:rgba(255,255,255,.5);">4 client emails are waiting on a reply — average response time is slipping.</div>
+                  <div style="font-size:.72rem;color:rgba(255,255,255,.5);">4 client emails are waiting on a reply, average response time is slipping.</div>
                 </div>
                 <div style="background:rgba(34,211,238,.08);border:1px solid rgba(34,211,238,.22);border-radius:10px;padding:12px;">
                   <div style="font-size:.74rem;color:#22d3ee;font-weight:700;margin-bottom:3px;">📈 Vendor cost mentions up 18%</div>
@@ -1081,10 +1081,10 @@
         </div>
       </div>
 
-      <p style="font-size:.74rem;color:rgba(255,255,255,.35);margin-top:12px;text-align:center;display:none;">This is a sample mockup with illustrative data — click the tabs above to explore. Log in with your connected inbox to see your own dashboard.</p>
+      <p style="font-size:.74rem;color:rgba(255,255,255,.35);margin-top:12px;text-align:center;display:none;">This is a sample mockup with illustrative data, click the tabs above to explore. Log in with your connected inbox to see your own dashboard.</p>
     </div>
 
-    <!-- Try the app CTA — HIDDEN: parked product -->
+    <!-- Try the app CTA - HIDDEN: parked product -->
     <div style="margin-top:24px;text-align:center;padding:24px;border-radius:16px;background:rgba(139,92,246,.07);border:1px solid rgba(139,92,246,.2);display:none;">
       <span style="font-size:.9rem;color:rgba(200,215,235,.7);">Already a client? Your Email Intelligence platform is ready.</span>
       <a href="/app" style="display:inline-flex;align-items:center;gap:8px;margin-left:18px;padding:10px 24px;background:linear-gradient(135deg,#8b5cf6,#22d3ee);color:#fff;border-radius:999px;font-weight:700;font-size:.85rem;text-decoration:none;transition:opacity .2s;" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">Open Email Intelligence →</a>
@@ -1152,7 +1152,7 @@
     }
   }
 
-  // Mobile: init — show only Growth on load
+  // Mobile: init - show only Growth on load
   function initPricingMobile() {
     if (window.innerWidth < 768) {
       ['starter','enterprise'].forEach(p => {
@@ -1178,7 +1178,7 @@
   <div class="mx-auto max-w-6xl px-14">
     <div class="section-eyebrow"><div class="ey-line"></div><div class="ey-text">Our work</div></div>
     <h2 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#fff;margin-bottom:16px">Built to prove our <span style="color:var(--blue2)">capabilities</span></h2>
-    <p class="text-white/68 leading-relaxed mb-10" style="max-width:520px">Interactive demos, live dashboards, and client projects — explore what we build.</p>
+    <p class="text-white/68 leading-relaxed mb-10" style="max-width:520px">Interactive demos, live dashboards, and client projects, explore what we build.</p>
     <div class="grid md:grid-cols-3 gap-5">
       <a href="dashboard.html" class="group rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.18]" style="text-decoration:none;display:block">
         <div class="text-2xl mb-3">📊</div>
@@ -1189,10 +1189,10 @@
       <a href="audit-checklist.html" class="group rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.18]" style="text-decoration:none;display:block">
         <div class="text-2xl mb-3">✅</div>
         <h3 class="text-base font-semibold text-white mb-2" style="font-family:'Space Grotesk',sans-serif">Reporting Self-Assessment</h3>
-        <p class="text-sm text-white/65 leading-relaxed mb-4">10 yes/no questions to see how many hours your business loses to manual reporting — free, 3 minutes.</p>
+        <p class="text-sm text-white/65 leading-relaxed mb-4">10 yes/no questions to see how many hours your business loses to manual reporting, free, 3 minutes.</p>
         <span class="text-xs font-bold" style="color:var(--blue2)">Take the assessment →</span>
       </a>
-      <a href="samples.html" class="group rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.18]" style="text-decoration:none;display:block">
+      <a href="showcase.html" class="group rounded-2xl border border-white/[0.09] bg-white/[0.03] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/[0.18]" style="text-decoration:none;display:block">
         <div class="text-2xl mb-3">🗂️</div>
         <h3 class="text-base font-semibold text-white mb-2" style="font-family:'Space Grotesk',sans-serif">All Work Samples</h3>
         <p class="text-sm text-white/65 leading-relaxed mb-4">Restaurant, real estate, trades, and marketing dashboards. Each built for a specific industry.</p>
@@ -1210,14 +1210,14 @@
     <div class="rounded-2xl border border-white/[0.09] bg-white/[0.03] p-10 relative overflow-hidden">
       <div class="absolute top-0 left-0 right-0 h-px" style="background:linear-gradient(90deg,transparent,var(--blue),var(--blue2),transparent)"></div>
       <div class="grid md:grid-cols-[180px_1fr] gap-10 items-center">
-        <div style="width:176px;height:176px;border-radius:1rem;overflow:hidden;border:1px solid rgba(123,225,236,.2);flex-shrink:0"><img src="founder.jpg" alt="Manish Dadhwal — Founder, Surrey AI Automation" loading="lazy" style="width:216px;height:258px;object-fit:cover;object-position:center 5%;display:block;margin-left:-20px"/></div>
+        <div style="width:176px;height:176px;border-radius:1rem;overflow:hidden;border:1px solid rgba(123,225,236,.2);flex-shrink:0"><img src="founder.jpg" alt="Manish Dadhwal, Founder, Surrey AI Automation" loading="lazy" style="width:216px;height:258px;object-fit:cover;object-position:center 5%;display:block;margin-left:-20px"/></div>
         <div>
           <div class="text-xs font-bold tracking-widest uppercase mb-3" style="color:var(--teal)">Founder & Data Analyst</div>
           <h3 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:1.8rem;font-weight:700;letter-spacing:-.03em;color:#fff;margin-bottom:12px">Manish Dadhwal</h3>
-          <p class="text-white/68 leading-relaxed mb-6">10+ years ERP data analyst with Dynamics 365 BC and Power BI. Built reporting systems at Rubicon Organics, managed multi-million-dollar data pipelines, and hold an MBA in Data Analytics. I founded Surrey AI Automation to give Surrey BC small businesses access to the same data visibility that enterprise companies have — without the enterprise price tag.</p>
+          <p class="text-white/68 leading-relaxed mb-6">10+ years ERP data analyst with Dynamics 365 BC and Power BI. Built reporting systems at Rubicon Organics, managed multi-million-dollar data pipelines, and hold an MBA in Data Analytics. I founded Surrey AI Automation to give Surrey BC small businesses access to the same data visibility that enterprise companies have, without the enterprise price tag.</p>
           <div class="flex gap-3">
             <a href="https://linkedin.com/in/manish-dadhwal" target="_blank" class="btn-white" style="padding:9px 18px;font-size:.8rem">LinkedIn</a>
-            <a href="samples.html" class="btn-ghost" style="padding:9px 18px;font-size:.8rem">View Work</a>
+            <a href="showcase.html" class="btn-ghost" style="padding:9px 18px;font-size:.8rem">View Work</a>
             <a href="#contact" class="btn-ghost" style="padding:9px 18px;font-size:.8rem">Book a Call</a>
           </div>
         </div>
@@ -1234,7 +1234,7 @@
     <div class="grid md:grid-cols-2 gap-5">
       <div class="rounded-2xl border border-white/[0.09] bg-white/[0.05] p-7" style="backdrop-filter:blur(8px)">
         <h3 class="text-base font-semibold text-white mb-3" style="font-family:'Space Grotesk',sans-serif">Do I need a big system overhaul first?</h3>
-        <p class="text-sm text-white/68 leading-relaxed">No. We start with one focused reporting fix — not a full rebuild. Most clients see value within 2 weeks. No need to change existing tools.</p>
+        <p class="text-sm text-white/68 leading-relaxed">No. We start with one focused reporting fix, not a full rebuild. Most clients see value within 2 weeks. No need to change existing tools.</p>
       </div>
       <div class="rounded-2xl border border-white/[0.09] bg-white/[0.05] p-7" style="backdrop-filter:blur(8px)">
         <h3 class="text-base font-semibold text-white mb-3" style="font-family:'Space Grotesk',sans-serif">What if I do not know which service I need?</h3>
@@ -1242,11 +1242,11 @@
       </div>
       <div class="rounded-2xl border border-white/[0.09] bg-white/[0.05] p-7" style="backdrop-filter:blur(8px)">
         <h3 class="text-base font-semibold text-white mb-3" style="font-family:'Space Grotesk',sans-serif">Can this work with my existing spreadsheets?</h3>
-        <p class="text-sm text-white/68 leading-relaxed">Yes. We improve your current workflows — Excel, Google Sheets, QuickBooks, whatever you use. No forced platform changes. We work with what you have.</p>
+        <p class="text-sm text-white/68 leading-relaxed">Yes. We improve your current workflows: Excel, Google Sheets, QuickBooks, whatever you use. No forced platform changes. We work with what you have.</p>
       </div>
       <div class="rounded-2xl border border-white/[0.09] bg-white/[0.05] p-7" style="backdrop-filter:blur(8px)">
         <h3 class="text-base font-semibold text-white mb-3" style="font-family:'Space Grotesk',sans-serif">What if the issue is not a dashboard problem?</h3>
-        <p class="text-sm text-white/68 leading-relaxed">Then we will tell you. If there is no practical improvement to recommend, you do not proceed — and the audit costs you nothing.</p>
+        <p class="text-sm text-white/68 leading-relaxed">Then we will tell you. If there is no practical improvement to recommend, you do not proceed, and the audit costs you nothing.</p>
       </div>
       <div class="rounded-2xl border border-white/[0.09] bg-white/[0.05] p-7" style="backdrop-filter:blur(8px)">
         <h3 class="text-base font-semibold text-white mb-3" style="font-family:'Space Grotesk',sans-serif">How fast can I see value?</h3>
@@ -1265,7 +1265,7 @@
   <div class="mx-auto max-w-6xl px-14">
     <div class="section-eyebrow"><div class="ey-line"></div><div class="ey-text">Proven outcomes</div></div>
     <h2 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:clamp(1.8rem,3vw,2.5rem);font-weight:700;letter-spacing:-.035em;line-height:1.1;color:#fff;margin-bottom:10px">What businesses in Surrey get <span style="color:var(--blue2)">in the first 30 days</span></h2>
-    <p class="text-white/65 text-sm mb-10" style="max-width:520px">Real results from live dashboards we've built — across restaurant, real estate, trades, and service businesses.</p>
+    <p class="text-white/65 text-sm mb-10" style="max-width:520px">Real results from live dashboards we've built, across restaurant, real estate, trades, and service businesses.</p>
     <div class="grid md:grid-cols-3 gap-5">
       <div class="result-card">
         <div class="rc-industry">🍽️ Restaurant &amp; Food Service</div>
@@ -1298,7 +1298,7 @@
         </ul>
       </div>
     </div>
-    <p class="text-center text-xs text-white/55 mt-8">Results are typical for clients using our Power BI dashboard + automation packages. See live samples at <a href="samples.html" style="color:var(--blue2)">samples page →</a></p>
+    <p class="text-center text-xs text-white/55 mt-8">Results are typical for clients using our Power BI dashboard + automation packages. See live samples at <a href="showcase.html" style="color:var(--blue2)">work page →</a></p>
   </div>
 </section>
 
@@ -1309,7 +1309,7 @@
       <div style="max-width:520px">
         <div class="text-xs font-bold uppercase tracking-widest mb-2" style="color:var(--blue2)">Not ready for a call?</div>
         <h3 style="font-family:'Space Grotesk',system-ui,sans-serif;font-size:1.45rem;font-weight:700;color:#fff;line-height:1.2;margin-bottom:8px">Find out in 3 minutes how many hours<br>your business is losing to manual reporting</h3>
-        <p class="text-sm" style="color:rgba(255,255,255,.45);line-height:1.6">10 yes/no questions. Instant gap score. No email required. Self-assess before booking — or send it to a prospect.</p>
+        <p class="text-sm" style="color:rgba(255,255,255,.45);line-height:1.6">10 yes/no questions. Instant gap score. No email required. Self-assess before booking, or send it to a prospect.</p>
       </div>
       <div style="flex-shrink:0;text-align:center">
         <a href="audit-checklist.html" target="_blank" style="display:inline-flex;align-items:center;gap:9px;background:var(--blue2);color:#060C18;font-family:'Space Grotesk',system-ui,sans-serif;font-weight:700;font-size:.88rem;padding:14px 28px;border-radius:12px;text-decoration:none;transition:opacity .2s;white-space:nowrap" onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
@@ -1328,7 +1328,7 @@
       <div>
         <div class="section-eyebrow"><div class="ey-line"></div><div class="ey-text">Get in touch</div></div>
         <h2 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#fff;margin-bottom:16px">Start with a<br/><span style="color:var(--blue2)">free 30-min call</span></h2>
-        <p class="text-white/68 leading-relaxed mb-10" style="max-width:400px">No commitment, no pressure. We'll talk through your data challenges and tell you exactly what we can build — and what it'll cost.</p>
+        <p class="text-white/68 leading-relaxed mb-10" style="max-width:400px">No commitment, no pressure. We'll talk through your data challenges and tell you exactly what we can build, and what it'll cost.</p>
         <ul class="space-y-5">
           <li class="flex items-start gap-4 pb-5 border-b border-white/[0.07]">
             <div class="w-9 h-9 flex-shrink-0 border border-white/[0.09] rounded-lg flex items-center justify-center text-base">📍</div>
@@ -1366,7 +1366,7 @@
             <div class="mb-3"><label class="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-1.5">Business name</label><input type="text" name="business" placeholder="Your Business Inc." autocomplete="off"/></div>
             <div class="mb-3">
               <label class="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-1.5">What do you need?</label>
-              <select name="service"><option value="">Select a service...</option><option>Power BI Dashboard</option><option>Reporting Automation</option><option>Data Integration</option><option>Not sure — let's talk</option></select>
+              <select name="service"><option value="">Select a service...</option><option>Power BI Dashboard</option><option>Reporting Automation</option><option>Data Integration</option><option>Not sure, let's talk</option></select>
             </div>
             <div class="mb-5"><label class="block text-xs font-semibold uppercase tracking-wider text-white/55 mb-1.5">Tell us more (optional)</label><textarea name="message" placeholder="Describe your current reporting pain or what you'd like to track..."></textarea></div>
             <p style="font-size:.72rem;color:rgba(255,255,255,.4);margin-bottom:12px;line-height:1.5;">By submitting, you agree to be contacted about your enquiry. See our <a href="privacy-policy.html" style="color:var(--blue2);text-decoration:underline;">Privacy Policy</a> for how we handle your information.</p>
@@ -1392,7 +1392,7 @@
       <ul class="flex gap-7 list-none">
         <li><a href="#services" class="text-sm text-white/62 hover:text-white transition-colors">Services</a></li>
         <li><a href="#pricing" class="text-sm text-white/62 hover:text-white transition-colors">Pricing</a></li>
-        <li><a href="samples.html" class="text-sm text-white/62 hover:text-white transition-colors">Work</a></li>
+        <li><a href="showcase.html" class="text-sm text-white/62 hover:text-white transition-colors">Work</a></li>
         <li></li>
         <li><a href="dashboard.html" class="text-sm text-white/62 hover:text-white transition-colors">Demo</a></li>
         <li><a href="cellshift.html" class="text-sm text-white/62 hover:text-white transition-colors">CellShift</a></li>
@@ -1416,7 +1416,7 @@
 
 
   /* ── AMBIENT AUDIO now in bh-background.js ── */
-  void 0; /* old audio removed — start marker */
+  void 0; /* old audio removed - start marker */
   (function(){ var _skip=true; if(_skip) return;
     var audioCtx=null, masterGain=null, audioOn=false;
     var saved=localStorage.getItem('cosmicAudio');
@@ -1427,7 +1427,7 @@
       masterGain.gain.value=0;
       masterGain.connect(audioCtx.destination);
 
-      // Deep drone — two detuned oscillators
+      // Deep drone - two detuned oscillators
       var drone1=audioCtx.createOscillator();
       drone1.type='sine'; drone1.frequency.value=55;
       var drone1G=audioCtx.createGain(); drone1G.gain.value=0.12;
@@ -1450,7 +1450,7 @@
       var lfoG=audioCtx.createGain(); lfoG.gain.value=0.04;
       lfo.connect(lfoG); lfoG.connect(drone1G.gain); lfo.start();
 
-      // Filtered noise — cosmic wind
+      // Filtered noise - cosmic wind
       var bufSize=audioCtx.sampleRate*4;
       var noiseBuf=audioCtx.createBuffer(1,bufSize,audioCtx.sampleRate);
       var data=noiseBuf.getChannelData(0);
@@ -1463,7 +1463,7 @@
       noiseNode.connect(bandpass); bandpass.connect(noiseGain); noiseGain.connect(masterGain);
       noiseNode.start();
 
-      // High shimmer — distant star sparkle
+      // High shimmer - distant star sparkle
       var shimmer=audioCtx.createOscillator();
       shimmer.type='sine'; shimmer.frequency.value=2200;
       var shimG=audioCtx.createGain(); shimG.gain.value=0.008;
@@ -1661,7 +1661,7 @@
 
 
 
-<!-- ═══ COSMIC BACKGROUND v4 — HIGH VISIBILITY ═══ -->
+<!-- ═══ COSMIC BACKGROUND v4 - HIGH VISIBILITY ═══ -->
 <script>
 (function(){
 'use strict';
@@ -1669,7 +1669,7 @@ const canvas = document.getElementById('cosmicBg');
 const ctx = canvas.getContext('2d');
 let W, H, scrollY=0, t=0;
 
-// ── Mobile detection — lightweight mode on touch/small screens ──
+// ── Mobile detection - lightweight mode on touch/small screens ──
 const isMobile = window.matchMedia('(max-width:768px)').matches || ('ontouchstart' in window && window.innerWidth < 900);
 const STAR_COUNT = isMobile ? 80 : 500;
 
@@ -1832,7 +1832,7 @@ function render(){
 
   } // end !isMobile solar system
 
-  // ═══ BLACK HOLE — VIDEO BACKGROUND (canvas overlay is stars + solar system only) ═══
+  // ═══ BLACK HOLE - VIDEO BACKGROUND (canvas overlay is stars + solar system only) ═══
 }
 
 window.addEventListener('scroll',()=>{ scrollY=window.pageYOffset; },{passive:true});
@@ -1868,7 +1868,7 @@ resize(); render();
   document.addEventListener('copy', function(e){
     const sel = window.getSelection();
     if(!sel || sel.toString().length < 10) return;
-    const watermark = '\n\n— Source: Surrey AI Automation (surreyaiautomation.online) © 2026. All rights reserved. Unauthorised reproduction prohibited.';
+    const watermark = '\n\nSource: Surrey AI Automation (surreyaiautomation.online) © 2026. All rights reserved. Unauthorised reproduction prohibited.';
     e.clipboardData.setData('text/plain', sel.toString() + watermark);
     e.preventDefault();
   });
@@ -1876,7 +1876,7 @@ resize(); render();
 </script>
 
 <script>
-// ─── CONTACT FORM — Formsubmit.co AJAX ───
+// ─── CONTACT FORM - Formsubmit.co AJAX ───
 async function handleSubmit(e) {
   e.preventDefault();
   const form   = document.getElementById('contactForm');
@@ -1903,7 +1903,7 @@ async function handleSubmit(e) {
     business   : form.querySelector('input[name="business"]').value.trim(),
     service    : form.querySelector('select[name="service"]').value,
     message    : form.querySelector('textarea[name="message"]').value.trim(),
-    _subject   : 'New Lead — Surrey AI Automation'
+    _subject   : 'New Lead: Surrey AI Automation'
   };
 
   try {

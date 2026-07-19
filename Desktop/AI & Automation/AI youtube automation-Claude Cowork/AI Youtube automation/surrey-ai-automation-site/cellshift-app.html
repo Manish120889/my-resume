@@ -138,6 +138,13 @@ details.exp .body{padding:14px 16px 16px}
   <div class="authCard">
     <h1>Cell<span style="color:var(--teal)">Shift</span></h1>
     <div class="sub">Spreadsheet cleanup, invoices &amp; BC compliance for Surrey businesses.</div>
+    <button class="btn" style="width:100%;margin-top:14px;font-size:1rem" onclick="doGuest()">Start Now, No Account Needed</button>
+    <div style="font-size:.72rem;color:var(--faint);margin-top:8px">Free. Your data stays in this browser.</div>
+    <div style="display:flex;align-items:center;gap:10px;margin:18px 0 10px;color:var(--faint);font-size:.72rem">
+      <span style="flex:1;height:1px;background:var(--line)"></span>Optional: cloud account to sync across devices<span style="flex:1;height:1px;background:var(--line)"></span>
+    </div>
+    <button id="cloudToggle" class="btn2" style="width:100%" onclick="cloudArea.style.display='block';this.style.display='none'">Log in or create a cloud account</button>
+    <div id="cloudArea" style="display:none">
     <div class="tabRow">
       <button id="tabLogin" class="on" onclick="authTab('login')">Log In</button>
       <button id="tabReg" onclick="authTab('reg')">Register</button>
@@ -157,8 +164,7 @@ details.exp .body{padding:14px 16px 16px}
       <div class="chk" style="margin-top:8px"><input type="checkbox" id="rgTerms"><span>I agree to the <a href="privacy-policy.html" target="_blank" style="color:var(--blue2)">privacy policy</a></span></div>
       <button class="btn" style="width:100%;margin-top:12px" onclick="doRegister()">Create Account</button>
     </div>
-    <button class="btn2" style="width:100%;margin-top:10px" onclick="doGuest()">Continue as Guest</button>
-    <div style="font-size:.72rem;color:var(--faint);margin-top:12px">Guest mode stores data in this browser only.</div>
+    </div>
   </div>
 </div>
 
@@ -567,6 +573,7 @@ const isBlank=v=>v===null||v===undefined||String(v).trim()==="";
 const isNum=v=>!isBlank(v)&&!isNaN(parseFloat(String(v).replace(/[$,%]/g,"")))&&isFinite(String(v).replace(/[$,%]/g,""));
 function tfErr(m,ok){const e=document.getElementById("tfMsg");e.className="msg "+(ok?"ok":"err");e.textContent=m;setTimeout(()=>e.className="msg",4000);}
 function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function dl(blob,name){const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),60000);}
 let tfCurrentTable=null, tfOriginal=null;
 dropZone.onclick=()=>fileInput.click();
 dropZone.ondragover=e=>{e.preventDefault();dropZone.classList.add("over")};

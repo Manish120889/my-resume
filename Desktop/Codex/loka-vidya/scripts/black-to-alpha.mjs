@@ -1,7 +1,6 @@
 // One-shot: convert the 14 loka PNGs' black backgrounds to true alpha.
 // alpha = max(r,g,b) combined with any existing alpha; rgb unpremultiplied.
 import sharp from "sharp";
-import { readdir } from "node:fs/promises";
 import { join } from "node:path";
 
 const dir = join(import.meta.dirname, "..", "public", "media");
