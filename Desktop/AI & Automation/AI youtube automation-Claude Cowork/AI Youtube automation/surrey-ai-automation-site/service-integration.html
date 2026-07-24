@@ -86,6 +86,16 @@ nav{position:fixed;top:0;left:0;right:0;z-index:1000;backdrop-filter:blur(20px);
 .cta-strip h2{font-family:'Space Grotesk',sans-serif;font-size:1.8rem;font-weight:700;color:#fff;margin-bottom:.75rem;}
 .cta-strip p{color:rgba(255,255,255,.5);font-size:1rem;margin-bottom:2rem;}
 
+/* ── RELATED SERVICES ── */
+.related{max-width:900px;margin:3rem auto 0;padding:0 2rem;}
+.related h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:600;color:rgba(255,255,255,.45);text-transform:uppercase;letter-spacing:.08em;margin-bottom:1.25rem;text-align:center;}
+.related-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+.related-card{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:.875rem;padding:1.25rem 1.5rem;text-decoration:none;transition:border-color .2s,background .2s;}
+.related-card:hover{border-color:rgba(107,140,255,.4);background:rgba(67,97,238,.08);}
+.related-card .rc-label{font-size:.75rem;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.06em;margin-bottom:.35rem;}
+.related-card .rc-title{font-size:1rem;font-weight:600;color:#e2e8f0;}
+.related-card .rc-desc{font-size:.85rem;color:rgba(255,255,255,.45);margin-top:.3rem;}
+
 /* ── FOOTER ── */
 footer{border-top:1px solid rgba(255,255,255,.07);padding:2rem;text-align:center;font-size:.8rem;color:rgba(255,255,255,.25);}
 footer a{color:rgba(255,255,255,.4);text-decoration:none;margin:0 .75rem;}
@@ -217,6 +227,22 @@ body.nav-open .mob-overlay{display:block;}
     <h2>Ready to get started?</h2>
     <p>Book a free 30-minute discovery call — no pitch, just a conversation about your data.</p>
     <a href="index.html#contact" class="btn-primary">Schedule Free Call →</a>
+  </div>
+</div>
+
+<div class="related">
+  <h3>More Surrey AI Automation Services</h3>
+  <div class="related-grid">
+    <a href="service-powerbi" class="related-card">
+      <div class="rc-label">Also available</div>
+      <div class="rc-title">Power BI Dashboards</div>
+      <div class="rc-desc">Custom dashboards with real-time KPIs for Surrey BC restaurants, trades, and real estate.</div>
+    </a>
+    <a href="service-automation" class="related-card">
+      <div class="rc-label">Also available</div>
+      <div class="rc-title">Automated Reporting</div>
+      <div class="rc-desc">Reports delivered on schedule — no manual exports, no spreadsheet wrangling.</div>
+    </a>
   </div>
 </div>
 
