@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Surrey AI Automation · Connecting Intelligence · Power BI & Reporting · Surrey BC</title>
-  <meta name="description" content="Connecting Intelligence. Surrey AI Automation builds Power BI dashboards and automated reporting pipelines for Surrey BC small businesses. Real-time insights. Fixed price. 2-week delivery." />
+  <title>Surrey AI Automation | AI & Business Automation Surrey BC</title>
+  <meta name="description" content="Surrey BC's AI automation and reporting experts. Power BI dashboards, workflow automation, and data integration for small businesses in Surrey, Langley, and Metro Vancouver. Fixed price. 2-week delivery." />
 
   <!-- ── SEO Open Graph ── -->
   <meta property="og:type"        content="website" />
@@ -25,8 +25,10 @@
   <meta name="geo.position"  content="49.1913;-122.8490" />
   <meta name="ICBM"          content="49.1913, -122.8490" />
 
-  <!-- ── AI training opt-out & content protection ── -->
-  <meta name="robots" content="noai, noimageai, noimageindex" />
+  <!-- ── Crawl policy ── -->
+  <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+  <!-- AI training opt-out (separate from indexing directives) -->
+  <meta name="robots" content="noai, noimageai" />
   <meta name="CCBot" content="noindex, nofollow" />
   <meta name="GPTBot" content="noindex, nofollow" />
   <meta name="Google-Extended" content="noindex, nofollow" />
@@ -45,9 +47,9 @@
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
+    "@type": ["LocalBusiness", "ProfessionalService"],
     "name": "Surrey AI Automation",
-    "description": "Power BI dashboards and reporting automation for Surrey BC small businesses. Real-time insights, fixed price, 2-week delivery.",
+    "description": "AI automation, Power BI dashboards, and workflow automation for Surrey BC small businesses. Real-time insights, fixed price, 2-week delivery.",
     "url": "https://surreyaiautomation.online",
     "logo": "https://surreyaiautomation.online/og-image.png",
     "image": "https://surreyaiautomation.online/og-image.png",
@@ -55,8 +57,10 @@
     "email": "hello@surreyaiautomation.online",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Surrey",
       "addressLocality": "Surrey",
       "addressRegion": "BC",
+      "postalCode": "V3W",
       "addressCountry": "CA"
     },
     "geo": {
@@ -84,6 +88,46 @@
   }
   </script>
 
+  <!-- ── FAQPage Schema ── -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Do I need a big system overhaul first?",
+        "acceptedAnswer": { "@type": "Answer", "text": "No. We start with one focused reporting fix, not a full rebuild. Most clients see value within 2 weeks. No need to change existing tools." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if I do not know which service I need?",
+        "acceptedAnswer": { "@type": "Answer", "text": "That is exactly what the free audit is for. We review your current workflow and recommend the clearest, most practical starting point." }
+      },
+      {
+        "@type": "Question",
+        "name": "Can this work with my existing spreadsheets?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Yes. We improve your current workflows: Excel, Google Sheets, QuickBooks, whatever you use. No forced platform changes." }
+      },
+      {
+        "@type": "Question",
+        "name": "What if the issue is not a dashboard problem?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Then we will tell you. If there is no practical improvement to recommend, you do not proceed, and the audit costs you nothing." }
+      },
+      {
+        "@type": "Question",
+        "name": "How fast can I see value?",
+        "acceptedAnswer": { "@type": "Answer", "text": "Typical first release is 2 weeks. Most clients see measurable time savings in the first month after delivery." }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there a risk-free way to start?",
+        "acceptedAnswer": { "@type": "Answer", "text": "The audit is free. The discovery call is free. Every project is fixed-price with clear scope. You know exactly what you are paying for before any work begins." }
+      }
+    ]
+  }
+  </script>
+
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
@@ -92,13 +136,13 @@
   <link rel="stylesheet" href="assets/theme.css?v=1" />
   <!-- Prevent flash of unstyled/misaligned content in incognito (no cache) -->
   <style>
-    html{visibility:hidden;opacity:0;transition:opacity .35s ease}
+    html{transition:opacity .35s ease}
     html:not(.js-ready) .hero-headline,
     html:not(.js-ready) .hero-accent-text,
     html:not(.js-ready) .hero-btns { opacity:0; }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body { overflow-x: hidden; }
@@ -379,7 +423,7 @@
 <body class="antialiased grid-bg">
 <div id="bgBase" style="position:fixed;inset:0;background:#060C18;z-index:-2;pointer-events:none;"></div>
 <div id="bgOverlay" style="position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(to bottom,rgba(6,12,24,0.72) 0%,rgba(6,12,24,0.55) 50%,rgba(6,12,24,0.78) 100%);"></div>
-<video id="bhVideo" autoplay muted loop playsinline style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;object-fit:cover;pointer-events:none;opacity:0;transition:opacity 1.5s ease-in;filter:brightness(0.5) contrast(1.1);" src="bh_god_pullin.mp4"></video>
+<video id="bhVideo" autoplay muted loop playsinline preload="none" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;object-fit:cover;pointer-events:none;opacity:0;transition:opacity 1.5s ease-in;filter:brightness(0.5) contrast(1.1);" src="bh_god_pullin.mp4"></video>
 <canvas id="cosmicBg" style="position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;"></canvas>
 
 
@@ -477,7 +521,7 @@
         <span class="hero-dot"></span>
         Data Analytics &amp; Reporting Automation &nbsp;·&nbsp; Surrey &amp; Metro Vancouver
       </div>
-      <h1 class="hero-headline">Stop Wasting<br/>Hours on<br/>Reports.</h1>
+      <h1 class="hero-headline">Surrey's AI<br/>Automation<br/>Experts.</h1>
       <div class="hero-accent">
         <span class="hero-accent-dot"></span>
         <span class="hero-accent-text">Live dashboards &amp; automated<br/>reporting, delivered in 2 weeks.</span>
@@ -726,7 +770,7 @@
     <div class="grid md:grid-cols-3 gap-px bg-white/[0.07] rounded-2xl overflow-hidden border border-white/[0.07]">
       <a href="service-powerbi.html" class="service-card group relative bg-white/[0.03] transition-all duration-300 hover:bg-white/[0.06] overflow-hidden" style="text-decoration:none;display:block">
         <div class="relative h-44 overflow-hidden">
-          <img src="svc-powerbi.png" alt="Power BI Dashboards" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;filter:brightness(.88) saturate(1.1)"/>
+          <img src="svc-powerbi.png" alt="Power BI Dashboards" width="400" height="176" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;filter:brightness(.88) saturate(1.1)"/>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,12,24,1) 100%);pointer-events:none"></div>
           <div class="absolute top-4 left-4 text-xs font-bold text-white/58 tracking-widest">01</div>
         </div>
@@ -743,7 +787,7 @@
       </a>
       <a href="service-automation.html" class="service-card group relative bg-white/[0.03] transition-all duration-300 hover:bg-white/[0.06] overflow-hidden" style="text-decoration:none;display:block">
         <div class="relative h-44 overflow-hidden">
-          <img src="svc-automation.png" alt="Reporting Automation" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;filter:brightness(.88) saturate(1.1)"/>
+          <img src="svc-automation.png" alt="Reporting Automation" width="400" height="176" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;filter:brightness(.88) saturate(1.1)"/>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,12,24,1) 100%);pointer-events:none"></div>
           <div class="absolute top-4 left-4 text-xs font-bold text-white/58 tracking-widest">02</div>
         </div>
@@ -760,7 +804,7 @@
       </a>
       <a href="service-integration.html" class="service-card group relative bg-white/[0.03] transition-all duration-300 hover:bg-white/[0.06] overflow-hidden" style="text-decoration:none;display:block">
         <div class="relative h-44 overflow-hidden">
-          <img src="svc-integration.png" alt="Data Integration" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;filter:brightness(.88) saturate(1.1)"/>
+          <img src="svc-integration.png" alt="Data Integration" width="400" height="176" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s ease;filter:brightness(.88) saturate(1.1)"/>
           <div style="position:absolute;inset:0;background:linear-gradient(to bottom,transparent 40%,rgba(6,12,24,1) 100%);pointer-events:none"></div>
           <div class="absolute top-4 left-4 text-xs font-bold text-white/58 tracking-widest">03</div>
         </div>
@@ -1328,7 +1372,8 @@
       <div>
         <div class="section-eyebrow"><div class="ey-line"></div><div class="ey-text">Get in touch</div></div>
         <h2 style="font-family:'Space Grotesk',system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;font-size:clamp(2rem,3.5vw,2.8rem);font-weight:700;letter-spacing:-.035em;line-height:1.08;color:#fff;margin-bottom:16px">Start with a<br/><span style="color:var(--blue2)">free 30-min call</span></h2>
-        <p class="text-white/68 leading-relaxed mb-10" style="max-width:400px">No commitment, no pressure. We'll talk through your data challenges and tell you exactly what we can build, and what it'll cost.</p>
+        <p class="text-white/68 leading-relaxed mb-4" style="max-width:400px">No commitment, no pressure. We'll talk through your data challenges and tell you exactly what we can build, and what it'll cost.</p>
+        <p class="text-white/45 text-xs leading-relaxed mb-10" style="max-width:400px">Serving Surrey, Langley, Burnaby, Richmond, Delta, and all of Metro Vancouver — remote and on-site available.</p>
         <ul class="space-y-5">
           <li class="flex items-start gap-4 pb-5 border-b border-white/[0.07]">
             <div class="w-9 h-9 flex-shrink-0 border border-white/[0.09] rounded-lg flex items-center justify-center text-base">📍</div>
