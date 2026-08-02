@@ -9,6 +9,15 @@ const CSEngine = (() => {
 
   const isBlank = (v) => v === null || v === undefined || String(v).trim() === "";
   const isNum = (v) => !isBlank(v) && !isNaN(parseFloat(String(v).replace(/[$,%]/g, ""))) && isFinite(String(v).replace(/[$,%]/g, ""));
+  const toNum = (v) => isNum(v) ? parseFloat(String(v).replace(/[$,%]/g, "")) : null;
+  // only numeric cells take part in an aggregation; blanks and text would
+  // otherwise turn every sum/avg/min/max into NaN
+  const numsOf = (arr) => arr.map(toNum).filter(n => n !== null);
+  // Math.min/max via spread blows the stack past ~100k args, and files here go to 1M rows
+  const minOf = (a) => a.reduce((m, v) => v < m ? v : m, Infinity);
+  const maxOf = (a) => a.reduce((m, v) => v > m ? v : m, -Infinity);
+  const sumOf = (a) => a.reduce((x, y) => x + y, 0);
+  const intOr = (v, dflt) => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : dflt; };
 
   const ops = {
     dedupe: {
@@ -65,7 +74,7 @@ const CSEngine = (() => {
     cleanColNames: {
       fn: (table) => ({
         ...table,
-        headers: table.headers.map(h => h.replace(/[^\w\s]/g, "").trim().replace(/\s+/g, "_"))
+        headers: table.headers.map(h => String(h ?? "").replace(/[^\w\s]/g, "").trim().replace(/\s+/g, "_"))
       }),
       labelFn: () => "Clean column names"
     },
@@ -98,7 +107,7 @@ const CSEngine = (() => {
           if (isBlank(v)) return r;
           const res = [...r];
           if (type === "number") {
-            res[colIndex] = parseFloat(String(v).replace(/[$,%]/g, "")) || null;
+            res[colIndex] = toNum(v); // `|| null` used to turn a real 0 into null
           } else if (type === "date") {
             const d = new Date(v);
             res[colIndex] = isNaN(d) ? null : d.toISOString().slice(0, 10);
@@ -148,7 +157,8 @@ const CSEngine = (() => {
     splitByDelimiter: {
       fn: (table, { colIndex, delimiter }) => {
         const base = table.headers[colIndex];
-        const max = Math.max(...table.rows.map(r => isBlank(r[colIndex]) ? 1 : String(r[colIndex]).split(delimiter).length), 1);
+        if (!delimiter) throw new Error("Enter a delimiter to split on");
+        const max = maxOf(table.rows.map(r => isBlank(r[colIndex]) ? 1 : String(r[colIndex]).split(delimiter).length).concat(1));
         if (max < 2) throw new Error("Nothing to split with that delimiter");
         const newHeads = Array.from({ length: max }, (_, k) => `${base}_part${k + 1}`);
         return {
@@ -183,8 +193,9 @@ const CSEngine = (() => {
         rows: table.rows.map(r => {
           const res = [...r];
           const v = String(r[colIndex] ?? "");
-          if (type === "first") res[colIndex] = v.substring(0, count);
-          else if (type === "last") res[colIndex] = v.substring(Math.max(0, v.length - count));
+          const c = Math.max(0, intOr(count, 0));
+          if (type === "first") res[colIndex] = v.substring(0, c);
+          else if (type === "last") res[colIndex] = v.substring(Math.max(0, v.length - c));
           return res;
         })
       }),
@@ -226,7 +237,9 @@ const CSEngine = (() => {
         rows: table.rows.map(r => {
           const res = [...r];
           const v = String(r[colIndex] ?? "");
-          res[colIndex] = side === "left" ? v.padStart(length, padChar) : v.padEnd(length, padChar);
+          const len = Math.max(0, intOr(length, 0));
+          const ch = (padChar === "" || padChar == null) ? " " : String(padChar);
+          res[colIndex] = side === "left" ? v.padStart(len, ch) : v.padEnd(len, ch);
           return res;
         })
       }),
@@ -239,7 +252,8 @@ const CSEngine = (() => {
           const res = [...r];
           if (isNum(r[colIndex])) {
             const n = parseFloat(String(r[colIndex]).replace(/[$,%]/g, ""));
-            res[colIndex] = Math.round(n * Math.pow(10, decimals)) / Math.pow(10, decimals);
+            const d = Math.max(0, intOr(decimals, 0));
+            res[colIndex] = Math.round(n * Math.pow(10, d)) / Math.pow(10, d);
           }
           return res;
         })
@@ -335,31 +349,33 @@ const CSEngine = (() => {
       labelFn: () => "Sort rows"
     },
     keepTopN: {
+      // an empty input used to reach slice() as NaN and silently wipe every row
       fn: (table, { n }) => ({
         ...table,
-        rows: table.rows.slice(0, n)
+        rows: table.rows.slice(0, Math.max(0, intOr(n, 0)))
       }),
       labelFn: (p) => `Keep top ${p.n} rows`
     },
     removeTopN: {
       fn: (table, { n }) => ({
         ...table,
-        rows: table.rows.slice(n)
+        rows: table.rows.slice(Math.max(0, intOr(n, 0)))
       }),
       labelFn: (p) => `Remove top ${p.n} rows`
     },
     removeBottomN: {
-      fn: (table, { n }) => ({
-        ...table,
-        rows: table.rows.slice(0, -n)
-      }),
+      fn: (table, { n }) => {
+        const k = Math.max(0, intOr(n, 0));
+        return { ...table, rows: k > 0 ? table.rows.slice(0, -k) : table.rows.slice() };
+      },
       labelFn: (p) => `Remove bottom ${p.n} rows`
     },
     firstRowAsHeaders: {
       fn: (table) => {
         if (table.rows.length === 0) return table;
         return {
-          headers: table.rows[0],
+          // headers must be strings — later ops call .replace/.trim on them
+          headers: table.rows[0].map(h => String(h ?? "")),
           rows: table.rows.slice(1)
         };
       },
@@ -380,24 +396,27 @@ const CSEngine = (() => {
       fn: (table, { groupCols, aggs }) => {
         const groups = new Map();
         table.rows.forEach(r => {
-          const key = groupCols.map(i => r[i]).join("|");
-          if (!groups.has(key)) groups.set(key, []);
-          groups.get(key).push(r);
+          // JSON key, not join("|") — a value containing "|" used to merge unrelated groups
+          const key = JSON.stringify(groupCols.map(i => r[i] ?? ""));
+          // keep the original cell values so the output row is not a re-parsed string
+          if (!groups.has(key)) groups.set(key, { vals: groupCols.map(i => r[i] ?? ""), rows: [] });
+          groups.get(key).rows.push(r);
         });
-        const headers = groupCols.map(i => table.headers[i]).concat(aggs.map(a => a.col ? table.headers[a.col] + "_" + a.fn : a.name || "agg"));
-        const rows = Array.from(groups.entries()).map(([key, group]) => {
-          const keyParts = key.split("|");
+        const headers = groupCols.map(i => table.headers[i]).concat(aggs.map(a => (a.col != null && table.headers[a.col] != null) ? table.headers[a.col] + "_" + a.fn : (a.name || "agg")));
+        const rows = Array.from(groups.values()).map(({ vals, rows: group }) => {
           const agg = aggs.map(a => {
-            const col = group.map(r => r[a.col] ?? 0);
-            if (a.fn === "sum") return col.reduce((x, y) => x + parseFloat(y), 0);
-            if (a.fn === "avg") return col.reduce((x, y) => x + parseFloat(y), 0) / col.length;
-            if (a.fn === "min") return Math.min(...col.map(v => parseFloat(v)));
-            if (a.fn === "max") return Math.max(...col.map(v => parseFloat(v)));
             if (a.fn === "count") return group.length;
-            if (a.fn === "countDistinct") return new Set(col).size;
+            const raw = group.map(r => r[a.col]);
+            if (a.fn === "countDistinct") return new Set(raw.map(v => String(v ?? ""))).size;
+            const nums = numsOf(raw);
+            if (!nums.length) return null;
+            if (a.fn === "sum") return sumOf(nums);
+            if (a.fn === "avg") return sumOf(nums) / nums.length;
+            if (a.fn === "min") return minOf(nums);
+            if (a.fn === "max") return maxOf(nums);
             return null;
           });
-          return [...keyParts, ...agg];
+          return [...vals, ...agg];
         });
         return { headers, rows };
       },
@@ -408,9 +427,9 @@ const CSEngine = (() => {
         const pivot = new Map();
         const rowVals = new Set(), colVals = new Set();
         table.rows.forEach(r => {
-          const rkey = r[rowCol], ckey = r[colCol];
+          const rkey = String(r[rowCol] ?? ""), ckey = String(r[colCol] ?? "");
           rowVals.add(rkey); colVals.add(ckey);
-          const pkey = `${rkey}|${ckey}`;
+          const pkey = JSON.stringify([rkey, ckey]);
           if (!pivot.has(pkey)) pivot.set(pkey, []);
           pivot.get(pkey).push(r[valueCol]);
         });
@@ -419,10 +438,12 @@ const CSEngine = (() => {
         const rows = Array.from(rowVals).sort().map(rv => {
           const row = [rv];
           for (const cv of colArray) {
-            const vals = pivot.get(`${rv}|${cv}`) || [0];
-            if (aggFn === "sum") row.push(vals.reduce((a, b) => a + parseFloat(b), 0));
-            else if (aggFn === "avg") row.push(vals.reduce((a, b) => a + parseFloat(b), 0) / vals.length);
-            else if (aggFn === "count") row.push(vals.length);
+            const vals = pivot.get(JSON.stringify([rv, cv]));
+            if (aggFn === "count") { row.push(vals ? vals.length : 0); continue; }
+            if (!vals) { row.push(null); continue; }
+            const nums = numsOf(vals);
+            if (aggFn === "sum") row.push(nums.length ? sumOf(nums) : null);
+            else if (aggFn === "avg") row.push(nums.length ? sumOf(nums) / nums.length : null);
             else row.push(vals[0]);
           }
           return row;
@@ -467,9 +488,10 @@ const CSEngine = (() => {
         table.rows.forEach(lr => {
           const rr = rightIdx.get(String(lr[leftKey]));
           if (joinType === "inner" && !rr) return;
-          if (joinType === "left" || (joinType === "inner" && rr)) {
+          if (joinType === "left" || joinType === "full" || (joinType === "inner" && rr)) {
             const row = [...lr];
-            if (rr) pickCols.forEach(i => row.push(rr[i]));
+            // always emit one cell per picked column so rows stay aligned with headers
+            pickCols.forEach(i => row.push(rr ? rr[i] : null));
             result.push(row);
           }
         });
@@ -477,7 +499,7 @@ const CSEngine = (() => {
           const used = new Set(table.rows.map(r => String(r[leftKey])));
           rightIdx.forEach((rr, key) => {
             if (!used.has(key)) {
-              const row = Array(leftKey + 1).fill(null);
+              const row = Array(table.headers.length).fill(null);
               row[leftKey] = key;
               pickCols.forEach(i => row.push(rr[i]));
               result.push(row);
@@ -512,11 +534,10 @@ const CSEngine = (() => {
 
   const applySteps = (tbl, stps) => {
     let result = JSON.parse(JSON.stringify(tbl));
-    stps.forEach((step, idx) => {
+    stps.forEach((step) => {
       if (!ops[step.op]) throw new Error(`Unknown op: ${step.op}`);
       try {
         result = ops[step.op].fn(result, step.params, result);
-        cache[idx] = JSON.parse(JSON.stringify(result));
       } catch (e) {
         throw new Error(`Step "${step.label}" failed: ${e.message}`);
       }
@@ -525,10 +546,18 @@ const CSEngine = (() => {
   };
 
   return {
-    init: (table) => { original = JSON.parse(JSON.stringify(table)); steps = []; cache = {}; },
+    init: (table) => {
+      original = JSON.parse(JSON.stringify(table));
+      steps = []; cache = {};
+      Object.keys(TABLES).forEach(k => delete TABLES[k]);
+    },
     addStep: (op, params, label) => {
       const id = stepIdCounter++;
-      const lbl = label || (ops[op]?.labelFn?.(params, original) || op);
+      // label against the table the step actually sees, not the raw upload —
+      // otherwise renamed/removed columns show their original names
+      let ctx = original;
+      try { ctx = applySteps(original, steps); } catch (_) { /* fall back to original */ }
+      const lbl = label || (ops[op]?.labelFn?.(params, ctx) || op);
       steps.push({ id, op, params, label: lbl });
       cache = {};
       return id;
@@ -565,7 +594,9 @@ const CSEngine = (() => {
       const recipes = JSON.parse(localStorage.getItem("cs_recipes") || "{}");
       const recipe = recipes[name];
       if (!recipe) throw new Error("Recipe not found");
-      steps = JSON.parse(JSON.stringify(recipe));
+      // fresh ids — recorded ids collide with the live counter and make
+      // removeStep/moveStep act on the wrong step
+      steps = JSON.parse(JSON.stringify(recipe)).map(s => ({ ...s, id: stepIdCounter++ }));
       cache = {};
       return applySteps(original, steps);
     },
@@ -577,6 +608,8 @@ const CSEngine = (() => {
     addSecondaryTable: (name, table) => {
       TABLES[name] = JSON.parse(JSON.stringify(table));
     },
+    removeSecondaryTable: (name) => { delete TABLES[name]; cache = {}; },
+    getSecondaryTable: (name) => TABLES[name] ? JSON.parse(JSON.stringify(TABLES[name])) : null,
     getSecondaryTables: () => Object.keys(TABLES)
   };
 })();

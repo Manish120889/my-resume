@@ -26,3 +26,8 @@ https://www.surreyaiautomation.online/*  https://surreyaiautomation.online/:spla
 # Portfolio aliases
 /portfolio        /showcase                     301
 /demos            /samples.html                 301
+
+# Legacy app URLs return to the CellShift product section. Launching from there opens
+# the isolated app origin so workbook storage is not shared with marketing scripts.
+/cellshift-app     /cellshift 301
+/cellshift-app/*   /cellshift 301

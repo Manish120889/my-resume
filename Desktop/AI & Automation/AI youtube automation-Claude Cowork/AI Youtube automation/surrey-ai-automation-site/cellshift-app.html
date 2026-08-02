@@ -259,7 +259,7 @@ details.exp .body{padding:14px 16px 16px}
         </div></details>
         <details class="exp"><summary>Combine tables</summary><div class="body row">
           <button class="btn2 btn-sm" onclick="tfShowDialog('append')">Append another file</button>
-          <button class="btn2 btn-sm" onclick="tfShowDialog('merge')">Merge with lookup table</button>
+          <button class="btn2 btn-sm" onclick="tfShowDialog('mergeTables')">Merge with lookup table</button>
         </div></details>
         <details class="exp"><summary>Custom column</summary><div class="body">
           <label>Column name</label><input id="tfCustomName" placeholder="e.g. Total">
@@ -413,7 +413,7 @@ const SB_ON = () => SUPABASE_URL && SUPABASE_ANON_KEY;
 
 const INDUSTRIES = {
  "Retail":{gst:.05,pst:.07,permits:["Surrey Business License","PST Registration","GST/HST Registration"],risks:["PST collection on taxable goods","Return/refund policy compliance"]},
- "Food & Restaurant":{gst:.05,pst:.10,permits:["Surrey Business License","Fraser Health Food Permit","Liquor License (if applicable)","GST/HST Registration"],risks:["Health inspection readiness","Liquor PST at 10%","Food handler certification"]},
+ "Food & Restaurant":{gst:.05,pst:0,permits:["Surrey Business License","Fraser Health Food Permit","Liquor License (if applicable)","GST/HST Registration"],risks:["Health inspection readiness","Liquor PST at 10%","Food handler certification"]},
  "Construction & Trades":{gst:.05,pst:0,permits:["Surrey Business License","WorkSafeBC Registration","Trade Qualification/Red Seal","City Building Permits per job"],risks:["WorkSafeBC premiums & claims","Holdback rules (Builders Lien Act)","Sub-contractor GST"]},
  "Professional Services":{gst:.05,pst:0,permits:["Surrey Business License","Professional body membership","GST/HST Registration ($30k+)"],risks:["Errors & omissions liability","Client data privacy (PIPA BC)"]},
  "Health & Wellness":{gst:.05,pst:0,permits:["Surrey Business License","Professional college registration","Fraser Health permits (if clinical)"],risks:["Patient privacy (PIPA/PIPEDA)","Professional college audits"]},
@@ -434,7 +434,6 @@ const TAX_CAL = [
 /* ================= STATE ================= */
 let S = { session:null, profile:null, guest:false,
   data:{ invoices:[], compliance_items:[], transform_history:[], permits_done:{} } };
-let DF=null, DF0=null; // {headers:[], rows:[[]]}
 
 /* ================= SUPABASE (REST, no SDK) ================= */
 async function sbAuth(path, body){
@@ -444,18 +443,47 @@ async function sbAuth(path, body){
   if(!r.ok) throw new Error(j.error_description||j.msg||j.message||"Auth failed");
   return j;
 }
-async function sbRest(path, opts={}){
+async function sbRefresh(){
+  const raw=localStorage.getItem("cs_session"); if(!raw) return false;
+  try{
+    const old=JSON.parse(raw);
+    if(!old.refresh_token) return false;
+    const j=await sbAuth("token?grant_type=refresh_token",{refresh_token:old.refresh_token});
+    S.session=j; localStorage.setItem("cs_session",JSON.stringify(j)); return true;
+  }catch(e){ return false; }
+}
+async function sbRest(path, opts={}, _retried){
+  if(!S.session?.access_token) throw new Error("Not signed in");
   const r = await fetch(`${SUPABASE_URL}/rest/v1/${path}`,{...opts,
     headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${S.session.access_token}`,
       "Content-Type":"application/json",...(opts.headers||{})}});
-  if(!r.ok) throw new Error("Request failed ("+r.status+")");
-  const t = await r.text(); return t?JSON.parse(t):null;
+  if(r.status===401&&!_retried&&await sbRefresh()) return sbRest(path,opts,true);
+  const t = await r.text();
+  if(!r.ok){
+    let msg="Request failed ("+r.status+")";
+    try{ const j=JSON.parse(t); msg=j.message||j.hint||j.details||msg; }catch(e){}
+    throw new Error(msg);
+  }
+  return t?JSON.parse(t):null;
+}
+function syncErr(m){
+  let e=document.getElementById("syncMsg");
+  if(!e){
+    e=document.createElement("div");
+    e.id="syncMsg";
+    e.style.cssText="position:fixed;right:16px;bottom:16px;z-index:9999;max-width:340px;padding:10px 14px;border-radius:8px;background:#7f1d1d;color:#fff;font-size:13px;box-shadow:0 4px 14px rgba(0,0,0,.3)";
+    document.body.appendChild(e);
+  }
+  e.textContent=m;
+  e.style.display="";
+  clearTimeout(syncErr._t);
+  syncErr._t=setTimeout(()=>{e.style.display="none";},8000);
 }
 async function loadCloudData(){
   try{
     const rows = await sbRest(`user_data?user_id=eq.${S.profile.id}&select=key,data`);
     for(const r of rows||[]) S.data[r.key]=r.data;
-  }catch(e){ console.warn("load data",e); }
+  }catch(e){ syncErr("Could not load your saved data: "+e.message); }
 }
 async function persist(key){
   if(S.guest||!SB_ON()){ localStorage.setItem("cs_guest_"+key,JSON.stringify(S.data[key])); return; }
@@ -463,7 +491,10 @@ async function persist(key){
     await sbRest(`user_data?on_conflict=user_id,key`,{method:"POST",
       headers:{Prefer:"resolution=merge-duplicates"},
       body:JSON.stringify({user_id:S.profile.id,key,data:S.data[key]})});
-  }catch(e){ console.warn("persist",e); }
+  }catch(e){
+    localStorage.setItem("cs_guest_"+key,JSON.stringify(S.data[key]));
+    syncErr("Could not save to the cloud ("+e.message+"). Kept a local copy.");
+  }
 }
 function logAction(action){
   S.data.transform_history.unshift({time:new Date().toISOString(),action,user:S.profile?.email||"guest"});
@@ -500,7 +531,8 @@ async function doRegister(){
     if(j.access_token){ // auto-confirmed
       S.session=j; S.guest=false;
       S.profile={id:j.user.id,email:j.user.email,name:rgName.value.trim(),company:rgCompany.value.trim(),industry:rgIndustry.value,tier:"Free"};
-      try{ await sbRest("profiles",{method:"POST",headers:{Prefer:"resolution=merge-duplicates"},body:JSON.stringify(S.profile)}); }catch(e){}
+      try{ await sbRest("profiles",{method:"POST",headers:{Prefer:"resolution=merge-duplicates"},body:JSON.stringify(S.profile)}); }
+      catch(e){ authErr("Account created, but your profile could not be saved: "+e.message); }
       localStorage.setItem("cs_session",JSON.stringify(j));
       enterApp();
     }else authErr("Check your email to confirm your account, then log in.",true);
@@ -509,13 +541,23 @@ async function doRegister(){
 function doGuest(){
   S.guest=true; S.session=null;
   S.profile={id:"guest",email:"guest@cellshift.ca",name:"Guest",company:"",industry:"Professional Services",tier:"Free"};
+  // restore any profile edits this device made in a previous guest session
+  const gp=localStorage.getItem("cs_guest_profile");
+  if(gp){try{Object.assign(S.profile,JSON.parse(gp),{id:"guest",tier:"Free"})}catch(e){}}
   for(const k of ["invoices","compliance_items","transform_history","permits_done"]){
     const v=localStorage.getItem("cs_guest_"+k); if(v){try{S.data[k]=JSON.parse(v)}catch(e){}}
   }
   enterApp();
 }
-function doLogout(){
+async function doLogout(){
+  const tok=S.session?.access_token;
+  if(tok){
+    try{ await fetch(`${SUPABASE_URL}/auth/v1/logout`,{method:"POST",
+      headers:{apikey:SUPABASE_ANON_KEY,Authorization:`Bearer ${tok}`}}); }catch(e){}
+  }
   localStorage.removeItem("cs_session");
+  // guest work stays on this device; only the signed-in fallback cache is cleared
+  if(!S.guest) Object.keys(localStorage).filter(k=>k.indexOf("cs_guest_")===0).forEach(k=>localStorage.removeItem(k));
   location.reload();
 }
 async function tryResume(){
@@ -545,8 +587,8 @@ function nav(p){
 function fillIndustrySelects(){
   const opts=Object.keys(INDUSTRIES).map(i=>`<option>${i}</option>`).join("");
   for(const id of ["rgIndustry","cpIndustry","stIndustry"]){const el=document.getElementById(id);if(el&&!el.options.length)el.innerHTML=opts;}
-  cpIndustry.value=S.profile?.industry||"Professional Services";
-  stIndustry.value=S.profile?.industry||"Professional Services";
+  const ind=S.profile?.industry||"Professional Services";
+  for(const id of ["cpIndustry","stIndustry"]){const el=document.getElementById(id);if(el)el.value=ind;}
 }
 function renderSbFoot(){
   document.getElementById("sbUser").textContent=(S.profile?.name||S.profile?.email||"Guest")+(S.guest?" (guest)":"");
@@ -572,7 +614,7 @@ function renderHome(){
 const isBlank=v=>v===null||v===undefined||String(v).trim()==="";
 const isNum=v=>!isBlank(v)&&!isNaN(parseFloat(String(v).replace(/[$,%]/g,"")))&&isFinite(String(v).replace(/[$,%]/g,""));
 function tfErr(m,ok){const e=document.getElementById("tfMsg");e.className="msg "+(ok?"ok":"err");e.textContent=m;setTimeout(()=>e.className="msg",4000);}
-function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");}
+function esc(s){return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;").replace(/'/g,"&#39;");}
 function dl(blob,name){const u=URL.createObjectURL(blob);const a=document.createElement("a");a.href=u;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(u),60000);}
 let tfCurrentTable=null, tfOriginal=null;
 dropZone.onclick=()=>fileInput.click();
@@ -636,12 +678,19 @@ function tfLoadSecondary(f){
     const table={headers:arr[0].map(h=>String(h)),rows:arr.slice(1)};
     CSEngine.addSecondaryTable(name,table);
     tfErr(`Added "${name}" for lookups`,true);
-    secondaryList.innerHTML+=`<div>${esc(name)} (${table.rows.length} rows) <button class="btn2 btn-sm danger" onclick="CSEngine.TABLES.delete('${name}');tfRefresh()">Remove</button></div>`;
+    const row=document.createElement("div");
+    row.innerHTML=`${esc(name)} (${table.rows.length} rows) <button class="btn2 btn-sm danger">Remove</button>`;
+    row.querySelector("button").onclick=()=>{CSEngine.removeSecondaryTable(name);row.remove();tfRefresh();};
+    secondaryList.appendChild(row);
     secondaryFile.value="";
   });
 }
 function tfRefresh(){
-  const curr=CSEngine.getAll();
+  let curr;
+  // a throwing step must not brick the UI — show the error, keep the step list
+  // visible so the user can remove or reorder the offending step
+  try{curr=CSEngine.getAll();}
+  catch(e){tfErr(e.message);tfRenderSteps();return;}
   tfCurrentTable=curr;
   const a=tfAnalyze(curr);
   tfStats.innerHTML=[[a.rows,"Rows"],[a.cols,"Columns"],[a.dups,"Duplicate rows"],[a.blanks,"Blank cells"]]
@@ -756,7 +805,7 @@ function tfShowDialog(type){
       d.close();
     };
   }else if(type==="merge"){
-    c.innerHTML=`<p>Select columns to merge (in order)</p><div id="mergeCols"></div><button class="btn2 btn-sm" onclick="document.getElementById('mergeCols').innerHTML+='<label><input type=checkbox class=mergeSel value=0> '+esc(curr.headers[0])+'</label>'">Add</button><label>Separator</label><input id="mergeSep" value=" ">`;
+    c.innerHTML=`<p>Select columns to merge (in order)</p><div id="mergeCols"></div><label>Separator</label><input id="mergeSep" value=" ">`;
     let html="";for(let i=0;i<curr.headers.length;i++)html+=`<label><input type=checkbox class=mergeSel value=${i}> ${esc(curr.headers[i])}</label><br>`;
     document.getElementById("mergeCols").innerHTML=html;
     document.getElementById("tfDialogApply").onclick=()=>{
@@ -766,6 +815,63 @@ function tfShowDialog(type){
       tfRefresh();
       d.close();
     };
+  }else if(type==="pivot"){
+    c.innerHTML=`<label>Rows (group by)</label><select id="pvRow">${colOpts}</select><label>Columns (spread across)</label><select id="pvCol">${colOpts}</select><label>Values</label><select id="pvVal">${colOpts}</select><label>Aggregate</label><select id="pvAgg"><option value="sum">Sum</option><option value="avg">Average</option><option value="count">Count</option><option value="first">First</option></select>`;
+    document.getElementById("tfDialogApply").onclick=()=>{
+      const rowCol=parseInt(pvRow.value),colCol=parseInt(pvCol.value),valueCol=parseInt(pvVal.value);
+      if(rowCol===colCol)return tfErr("Rows and Columns must be different columns");
+      CSEngine.addStep("pivot",{rowCol,colCol,valueCol,aggFn:pvAgg.value});
+      tfRefresh();
+      d.close();
+    };
+  }else if(type==="unpivot"){
+    c.innerHTML=`<p>Keep these columns as-is; every other column becomes a row.</p><div id="upCols"></div><label>Name for the attribute column</label><input id="upVar" value="Attribute"><label>Name for the value column</label><input id="upVal" value="Value">`;
+    let uh="";for(let i=0;i<curr.headers.length;i++)uh+=`<label><input type=checkbox class=upSel value=${i}> ${esc(curr.headers[i])}</label><br>`;
+    document.getElementById("upCols").innerHTML=uh;
+    document.getElementById("tfDialogApply").onclick=()=>{
+      const idCols=Array.from(document.querySelectorAll(".upSel:checked")).map(x=>parseInt(x.value));
+      if(!idCols.length)return tfErr("Select at least 1 column to keep");
+      if(idCols.length===curr.headers.length)return tfErr("Leave at least 1 column to unpivot");
+      CSEngine.addStep("unpivot",{idCols,varName:upVar.value||"Attribute",valName:upVal.value||"Value"});
+      tfRefresh();
+      d.close();
+    };
+  }else if(type==="append"){
+    const tbls=CSEngine.getSecondaryTables();
+    if(!tbls.length){c.innerHTML=`<p>No extra files loaded yet. Use "Add lookup table" above to load one, then try again.</p>`;document.getElementById("tfDialogApply").onclick=()=>d.close();}
+    else{
+      c.innerHTML=`<label>File to append</label><select id="apTbl">${tbls.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join("")}</select><p class="muted">Rows are added under the current table. Column counts should match.</p>`;
+      document.getElementById("tfDialogApply").onclick=()=>{
+        CSEngine.addStep("appendTable",{tableName:apTbl.value});
+        tfRefresh();
+        d.close();
+      };
+    }
+  }else if(type==="mergeTables"){
+    const tbls=CSEngine.getSecondaryTables();
+    if(!tbls.length){c.innerHTML=`<p>No lookup table loaded yet. Use "Add lookup table" above to load one, then try again.</p>`;document.getElementById("tfDialogApply").onclick=()=>d.close();}
+    else{
+      c.innerHTML=`<label>Lookup table</label><select id="mtTbl">${tbls.map(n=>`<option value="${esc(n)}">${esc(n)}</option>`).join("")}</select>`
+        +`<label>Match this column</label><select id="mtLeft">${colOpts}</select>`
+        +`<label>To this column in the lookup table</label><select id="mtRight"></select>`
+        +`<label>Join type</label><select id="mtJoin"><option value="left">Keep all current rows (left)</option><option value="inner">Only matching rows (inner)</option><option value="full">Keep everything (full)</option></select>`
+        +`<label>Columns to bring in</label><div id="mtCols"></div>`;
+      const fillRight=()=>{
+        const t=CSEngine.getSecondaryTable(mtTbl.value);
+        if(!t)return;
+        mtRight.innerHTML=t.headers.map((h,i)=>`<option value="${i}">${esc(h)}</option>`).join("");
+        mtCols.innerHTML=t.headers.map((h,i)=>`<label><input type=checkbox class=mtSel value=${i}> ${esc(h)}</label><br>`).join("");
+      };
+      mtTbl.onchange=fillRight;
+      fillRight();
+      document.getElementById("tfDialogApply").onclick=()=>{
+        const pickCols=Array.from(document.querySelectorAll(".mtSel:checked")).map(x=>parseInt(x.value));
+        if(!pickCols.length)return tfErr("Select at least 1 column to bring in");
+        CSEngine.addStep("mergeTables",{tableName:mtTbl.value,leftKey:parseInt(mtLeft.value),rightKey:parseInt(mtRight.value),joinType:mtJoin.value,pickCols});
+        tfRefresh();
+        d.close();
+      };
+    }
   }else if(type==="extract"){
     c.innerHTML=`<label>Column</label><select id="exCol">${colOpts}</select><label>Extract</label><select id="exType"><option value="first">first</option><option value="last">last</option></select><label>N characters</label><input id="exN" type=number value=5>`;
     document.getElementById("tfDialogApply").onclick=()=>{
@@ -837,12 +943,33 @@ function tfShowDialog(type){
     document.getElementById("tfDialogApply").onclick=()=>{
       const grpCols=Array.from(document.querySelectorAll(".gbSel:checked")).map(x=>parseInt(x.value));
       if(!grpCols.length)return tfErr("Select at least one group column");
-      CSEngine.addStep("groupBy",{groupCols:grpCols,aggs:[]});
+      const aggs=Array.from(document.querySelectorAll("#gbAggs .agg-row")).map(row=>({
+        col:parseInt(row.querySelector(".aggCol").value),
+        fn:row.querySelector(".aggFn").value
+      })).filter(a=>!isNaN(a.col));
+      CSEngine.addStep("groupBy",{groupCols:grpCols,aggs});
       tfRefresh();
       d.close();
     };
   }
   d.showModal();
+}
+function addAgg(){
+  const box=document.getElementById("gbAggs");
+  if(!box)return;
+  const cols=CSEngine.getAll().headers.map((h,i)=>`<option value="${i}">${esc(h)}</option>`).join("");
+  const row=document.createElement("div");
+  row.className="agg-row";
+  row.style.cssText="display:flex;gap:6px;align-items:center;margin-bottom:6px";
+  row.innerHTML=`<select class="aggCol">${cols}</select>
+    <select class="aggFn">
+      <option value="sum">Sum</option><option value="avg">Average</option>
+      <option value="min">Min</option><option value="max">Max</option>
+      <option value="count">Count</option><option value="countDistinct">Count distinct</option>
+    </select>
+    <button type="button" class="btn2 btn-sm danger">X</button>`;
+  row.querySelector("button").onclick=()=>row.remove();
+  box.appendChild(row);
 }
 function tfShowHelp(){
   const funcs=CSFormulas.functions();
@@ -877,7 +1004,8 @@ async function tfExportXlsxStyled(t){
   const wb=new ExcelJS.Workbook();
   wb.creator="CellShift";
   const ws=wb.addWorksheet("Data",{views:[{state:"frozen",ySplit:1}]});
-  const isNum=v=>v!==""&&v!==null&&!isNaN(v)&&String(v).trim()!=="";
+  // stricter than the module-level isNum: no $/% stripping, so "$5" stays text in Excel
+  const xlNum=v=>v!==""&&v!==null&&!isNaN(v)&&String(v).trim()!=="";
   const widths=t.headers.map((h,c)=>{
     let w=String(h).length;
     for(let r=0;r<Math.min(t.rows.length,200);r++)w=Math.max(w,String(t.rows[r][c]??"").length);
@@ -893,7 +1021,7 @@ async function tfExportXlsxStyled(t){
     c.border={bottom:{style:"medium",color:{argb:TEAL}}};
   });
   t.rows.forEach((row,ri)=>{
-    const r=ws.addRow(row.map(v=>isNum(v)?Number(v):(v??"")));
+    const r=ws.addRow(row.map(v=>xlNum(v)?Number(v):(v??"")));
     r.eachCell({includeEmpty:true},c=>{
       if(ri%2===1)c.fill={type:"pattern",pattern:"solid",fgColor:{argb:LIGHT}};
       c.font={name:"Calibri",size:10.5,color:{argb:"FF1F2937"}};
@@ -975,6 +1103,7 @@ function genInvoice(){
   if(!items.length)return invErr("Add at least one line item.");
   if(!ivBiz.value.trim())return invErr("Enter your business name.");
   const {sub,gst,pst,tot}=calcTotals();
+  if(!window.jspdf||!window.jspdf.jsPDF)return invErr("PDF library did not load. Check your connection and refresh.");
   const {jsPDF}=window.jspdf;
   const doc=new jsPDF({unit:"mm",format:"a4"});
   const navy=[30,58,95];
@@ -1033,6 +1162,30 @@ function renderInvHist(){
 }
 
 /* ================= COMPLIANCE ================= */
+/* BC/CRA filings are due the last day of the month following the period.
+   Returns the next such date after `now`, or null for unknown frequencies. */
+function nextDue(freq,now){
+  const eom=(y,m)=>new Date(y,m+1,0);           // last day of month m
+  const y=now.getFullYear(),m=now.getMonth();
+  if(freq==="monthly"){
+    const d=eom(y,m);
+    return d>=now?d:eom(y,m+1);
+  }
+  if(freq==="quarterly"){
+    // periods end Mar/Jun/Sep/Dec; filing due end of the following month
+    for(let q=0;q<5;q++){
+      const endMonth=Math.floor(m/3)*3+2+q*3;    // 2,5,8,11 relative to this year
+      const d=eom(y,endMonth+1);
+      if(d>=now)return d;
+    }
+    return null;
+  }
+  if(freq==="annual"){
+    const d=eom(y,5);                            // June 30 — BC annual report / T2 window
+    return d>=now?d:eom(y+1,5);
+  }
+  return null;
+}
 function renderCompliance(){
   const ind=cpIndustry.value||S.profile?.industry||"Professional Services";
   const info=INDUSTRIES[ind];
@@ -1044,15 +1197,20 @@ function renderCompliance(){
     const k=ind+"|"+p;
     return `<div class="chk"><input type="checkbox" ${done[k]?"checked":""} onchange="togglePermit('${k.replace(/'/g,"\\'")}')"><span>${p}</span></div>`;
   }).join("")+`<div style="margin-top:12px;font-size:.8rem;color:var(--muted)"><b>Risks to watch:</b> ${info.risks.join(" · ")}</div>`;
-  const pct=Math.round(100*info.permits.filter(p=>done[ind+"|"+p]).length/info.permits.length);
+  const pct=info.permits.length?Math.round(100*info.permits.filter(p=>done[ind+"|"+p]).length/info.permits.length):0;
   cpProg.style.width=pct+"%";
   const now=new Date();
-  cpCal.innerHTML=`<thead><tr><th>Obligation</th><th>Schedule</th><th>Agency</th><th>Status</th></tr></thead><tbody>${
+  cpCal.innerHTML=`<thead><tr><th>Obligation</th><th>Schedule</th><th>Agency</th><th>Next due</th><th>Status</th></tr></thead><tbody>${
     TAX_CAL.map(([n,s,a,freq])=>{
-      let b='<span class="badge b-green">OK</span>';
-      if(freq==="monthly"&&now.getDate()>10)b='<span class="badge b-red">Due soon</span>';
-      else if(freq==="quarterly"&&[2,5,8,11].includes(now.getMonth())&&now.getDate()>15)b='<span class="badge b-yellow">Upcoming</span>';
-      return `<tr><td>${n}</td><td>${s}</td><td>${a}</td><td>${b}</td></tr>`;}).join("")}</tbody>`;
+      const due=nextDue(freq,now);
+      let b='<span class="badge b-green">OK</span>',dueTxt="—";
+      if(due){
+        const days=Math.ceil((due-now)/864e5);
+        dueTxt=due.toISOString().slice(0,10);
+        if(days<=7)b=`<span class="badge b-red">Due in ${days}d</span>`;
+        else if(days<=30)b=`<span class="badge b-yellow">In ${days}d</span>`;
+      }
+      return `<tr><td>${n}</td><td>${s}</td><td>${a}</td><td>${dueTxt}</td><td>${b}</td></tr>`;}).join("")}</tbody>`;
   renderCustomItems();
 }
 function togglePermit(k){S.data.permits_done[k]=!S.data.permits_done[k];persist("permits_done");renderCompliance();}
@@ -1068,7 +1226,7 @@ function renderCustomItems(){
     const overdue=c.due&&!c.done&&new Date(c.due)<new Date();
     return `<div class="chk" style="justify-content:space-between;border-bottom:1px solid var(--line)">
       <span style="display:flex;gap:9px;align-items:center"><input type="checkbox" ${c.done?"checked":""} onchange="toggleCustom(${i})">
-      <span style="${c.done?"text-decoration:line-through;color:var(--faint)":""}">${c.name}${c.due?" · due "+c.due:""}${overdue?' <span class="badge b-red">OVERDUE</span>':""}</span></span>
+      <span style="${c.done?"text-decoration:line-through;color:var(--faint)":""}">${esc(c.name)}${c.due?" · due "+esc(c.due):""}${overdue?' <span class="badge b-red">OVERDUE</span>':""}</span></span>
       <button class="btn2 btn-sm danger" onclick="removeCustom(${i})">✕</button></div>`;}).join("")
     :`<div style="font-size:.82rem;color:var(--muted)">No custom items yet.</div>`;
 }
@@ -1080,6 +1238,8 @@ function renderSettings(){
   stName.value=S.profile?.name||"";stCompany.value=S.profile?.company||"";
   const t=(S.profile?.tier||"Free");
   stTier.textContent=t;stTier.className="badge "+(t==="Pro"?"b-pro":t==="Business"?"b-biz":"b-free");
+  const si=document.getElementById("stIndustry");
+  if(si)si.value=S.profile?.industry||"Professional Services";
 }
 async function saveProfile(){
   S.profile.name=stName.value.trim();S.profile.company=stCompany.value.trim();S.profile.industry=stIndustry.value;
@@ -1087,8 +1247,11 @@ async function saveProfile(){
   if(!S.guest&&SB_ON()){
     try{await sbRest(`profiles?id=eq.${S.profile.id}`,{method:"PATCH",body:JSON.stringify({name:S.profile.name,company:S.profile.company,industry:S.profile.industry})});}
     catch(err){e.className="msg err";e.textContent="Could not save to cloud: "+err.message;return;}
+  }else{
+    localStorage.setItem("cs_guest_profile",JSON.stringify(S.profile));
   }
-  cpIndustry.value=S.profile.industry;
+  const ci=document.getElementById("cpIndustry");
+  if(ci)ci.value=S.profile.industry;
   e.className="msg ok";e.textContent="Profile saved.";setTimeout(()=>e.className="msg",3000);
   renderSbFoot();renderCompliance();
 }
