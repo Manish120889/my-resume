@@ -240,6 +240,11 @@ h1.name{font-family:var(--f-text);font-weight:700;
 
 /* ═══════════ sections ═══════════ */
 .sec{padding:3rem 0 0;position:relative;z-index:2}
+/* touch: lift inline links and contents rows to a 24px target */
+@media (pointer:coarse){
+  .toc a{min-height:24px}
+  .lead .v a,.ident a,.ent .at a{display:inline-block;padding:.25rem 0}
+}
 .shead{display:flex;align-items:baseline;gap:.8rem;font-family:var(--f-mono);font-size:var(--t-label);
   letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:.4rem}
 .shead .no{color:var(--ruby);font-weight:600}
@@ -288,6 +293,7 @@ h2{font-family:var(--f-text);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.25re
 .plot i.neg{background:var(--ruby)}
 @media (max-width:620px){.plot{width:4.5rem}}
 
+
 /* ═══════════ trajectory ═══════════ */
 .gantt{font-family:var(--f-mono);--g-cols:10.5rem 1fr 4.6rem;--g-gap:.9rem}
 .grow{display:grid;grid-template-columns:var(--g-cols);gap:var(--g-gap);align-items:center;height:2.55rem}
@@ -309,6 +315,13 @@ h2{font-family:var(--f-text);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.25re
 .gmarks{position:relative;height:1.35rem;margin-top:.5rem}
 .gmark{position:absolute;bottom:0;transform:translateX(-50%);font-size:var(--t-micro);color:var(--ruby);white-space:nowrap}
 .gaxis{position:relative;height:1.5rem;border-top:2px solid var(--ink)}
+@media (max-width:620px){
+  .gantt{--g-cols:6.4rem 1fr 3.7rem;--g-gap:.5rem}
+  .gname{font-size:var(--t-micro);padding-left:.3rem}
+  .gname i{display:none}
+  .gspan{padding:0 .3rem}
+  .gdur{padding-right:.3rem}
+}
 .gtick{position:absolute;top:.3rem;transform:translateX(-50%);font-size:var(--t-micro);color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .gtick::before{content:"";position:absolute;top:-.3rem;left:50%;width:1px;height:.24rem;background:var(--rule)}
 @media (max-width:620px){
@@ -405,7 +418,7 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
 <header class="hero">
   <div class="hero-in">
     <figure class="plate" id="plate">
-      <img src="hero-portrait.jpg" width="474" height="640"
+      <img src="hero-portrait.jpg" width="474" height="640" fetchpriority="high" decoding="async"
            alt="Manish Dadhwal photographed against a painted forest valley at dusk.">
       <figcaption><span>Plate — the founder</span><span>Surrey / 2026</span></figcaption>
     </figure>
@@ -589,7 +602,7 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
         <li>Designed and built the site end to end — hand-written HTML, CSS and JS with no build step, a serverless contact endpoint, and automated validators that gate every page on structure, metadata and link integrity before it ships.</li>
       </ul>
       <figure class="fig-plate">
-        <img src="plate-founder.jpg" width="1265" height="640" loading="lazy"
+        <img src="plate-founder.jpg" width="1265" height="640" loading="lazy" decoding="async"
              alt="The Surrey AI Automation founder page: a painted forest valley at dusk behind the Founder Vision headline card.">
         <figcaption><span><b>Plate I</b> — Surrey AI Automation, founder page</span><span>Designed &amp; built end to end · 2026</span></figcaption>
       </figure>
@@ -690,10 +703,10 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
     </div>
   </section>
 
-  <div class="eor">
+  <footer class="eor">
     <span>■ End of report · PROF-01</span>
     <span>Dadhwal, M. · Surrey BC · 2026.09</span>
-  </div>
+  </footer>
 
 </div>
 </main>
@@ -750,7 +763,7 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
 }
 .rh-name{color:var(--ink);font-weight:500}
 .rh-sp{flex:1;border-bottom:1px dotted var(--rule);transform:translateY(-.28em)}
-.rh-sheet{color:var(--ink-soft);text-decoration:none;white-space:nowrap}
+.rh-sheet{color:var(--ink-soft);text-decoration:none;white-space:nowrap;display:inline-flex;align-items:center;min-height:24px}
 .rh-sheet b{color:var(--ruby);font-weight:600}
 .rh-sheet:hover{color:var(--ruby)}
 .rh-bar{height:2px;background:var(--rule-soft)}
