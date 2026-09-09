@@ -711,5 +711,230 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
   window.addEventListener('resize', place);
 })();
 </script>
+
+<!-- ═══════════ REFERENCE DESK — offline enquiry assistant ═══════════ -->
+<style>
+.rd-open{
+  position:fixed;right:1.15rem;bottom:1.15rem;z-index:60;
+  display:inline-flex;align-items:center;gap:.55rem;
+  font-family:var(--f-mono);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--canvas);background:var(--ink);border:1px solid var(--ink);
+  padding:.72rem 1.05rem;cursor:pointer;box-shadow:0 3px 14px #0000002e;
+}
+.rd-open:hover{background:var(--ruby);border-color:var(--ruby)}
+.rd-open .bulb{width:7px;height:7px;background:var(--ruby);border-radius:50%;flex:none}
+.rd-open:hover .bulb{background:var(--canvas)}
+.rd-open[aria-expanded="true"]{display:none}
+
+.rd-panel{
+  position:fixed;right:1.15rem;bottom:1.15rem;z-index:61;
+  width:min(24.5rem,calc(100vw - 2.3rem));
+  max-height:min(34rem,calc(100vh - 2.3rem));
+  display:flex;flex-direction:column;
+  background:var(--canvas);border:1px solid var(--rule);
+  box-shadow:0 10px 40px #00000038;
+}
+.rd-panel[hidden]{display:none}
+.rd-head{
+  display:flex;align-items:baseline;gap:.6rem;padding:.75rem .9rem .6rem;
+  border-bottom:1.5px solid var(--ink);
+  font-family:var(--f-mono);font-size:.66rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-faint);flex:none;
+}
+.rd-head b{color:var(--ink);font-weight:600;letter-spacing:.12em}
+.rd-head .sp{flex:1}
+.rd-x{font:inherit;background:none;border:1px solid var(--rule);color:var(--ink-faint);
+  cursor:pointer;padding:.15rem .45rem;line-height:1.4}
+.rd-x:hover{color:var(--ruby);border-color:var(--ruby)}
+
+.rd-log{flex:1;overflow-y:auto;padding:.85rem .9rem;display:flex;flex-direction:column;gap:.8rem}
+.rd-msg{font-family:var(--f-text);font-size:.93rem;line-height:1.55;max-width:100%}
+.rd-msg.you{
+  align-self:flex-end;background:var(--canvas-3);border:1px solid var(--rule-soft);
+  padding:.4rem .6rem;font-family:var(--f-mono);font-size:.73rem;color:var(--ink);max-width:85%;
+}
+.rd-msg.desk{color:var(--ink-soft)}
+.rd-msg.desk b{color:var(--ink);font-weight:600}
+.rd-msg .tag{
+  display:block;font-family:var(--f-mono);font-size:.6rem;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:.25rem;
+}
+.rd-msg a.jump{
+  display:inline-block;margin-top:.4rem;font-family:var(--f-mono);font-size:.63rem;
+  letter-spacing:.09em;text-transform:uppercase;color:var(--ruby);text-decoration:none;
+  border-bottom:1px solid var(--ruby);
+}
+.rd-chips{display:flex;flex-wrap:wrap;gap:.3rem;padding:0 .9rem .7rem;flex:none}
+.rd-chip{
+  font-family:var(--f-mono);font-size:.63rem;letter-spacing:.04em;
+  background:none;border:1px solid var(--rule);color:var(--ink-soft);
+  padding:.25rem .5rem;cursor:pointer;
+}
+.rd-chip:hover{border-color:var(--ruby);color:var(--ruby)}
+.rd-form{display:flex;gap:0;border-top:1px solid var(--rule);flex:none}
+.rd-in{
+  flex:1;min-width:0;font-family:var(--f-mono);font-size:.75rem;color:var(--ink);
+  background:var(--canvas-2);border:none;padding:.7rem .8rem;
+}
+.rd-in:focus{outline:2px solid var(--ruby);outline-offset:-2px}
+.rd-in::placeholder{color:var(--ink-faint)}
+.rd-send{
+  font-family:var(--f-mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;
+  background:var(--ink);color:var(--canvas);border:none;padding:.7rem .95rem;cursor:pointer;
+}
+.rd-send:hover{background:var(--ruby)}
+@media (max-width:560px){
+  .rd-panel{right:.6rem;left:.6rem;bottom:.6rem;width:auto;max-height:calc(100vh - 1.2rem)}
+  .rd-open{right:.6rem;bottom:.6rem}
+}
+@media print{.rd-open,.rd-panel{display:none!important}}
+</style>
+
+<button class="rd-open" id="rdOpen" aria-expanded="false" aria-controls="rdPanel">
+  <span class="bulb" aria-hidden="true"></span>Ask about this CV
+</button>
+
+<section class="rd-panel" id="rdPanel" role="dialog" aria-labelledby="rdTitle" hidden>
+  <div class="rd-head"><b id="rdTitle">Reference desk</b><span class="sp"></span>
+    <button class="rd-x" id="rdClose" aria-label="Close reference desk">&#10005;</button></div>
+  <div class="rd-log" id="rdLog" role="log" aria-live="polite"></div>
+  <div class="rd-chips" id="rdChips"></div>
+  <form class="rd-form" id="rdForm">
+    <input class="rd-in" id="rdIn" type="text" autocomplete="off"
+           placeholder="Ask about experience, tools, results…" aria-label="Ask a question">
+    <button class="rd-send" type="submit">Ask</button>
+  </form>
+</section>
+
+<script>
+(function () {
+  var KB = [
+    {k:"current role job title position now doing today employed work",s:"#work",sh:"Sheet 5",
+     a:"<b>ERP Data Analyst at Rubicon Organics</b>, Vancouver BC, since January 2024. He owns ERP data analysis, reporting and system support for <b>70&ndash;100 users</b> across Finance, Supply Chain, Production and Cultivation."},
+    {k:"experience years how long career total background seniority",s:"#profile",sh:"Sheet 2",
+     a:"<b>Ten years</b>, across three organisations: Tata Consultancy Services in Delhi (2016&ndash;2023), a Lululemon contract (2023&ndash;24), and Rubicon Organics (2024&ndash;present). The through-line is business systems analysis and ERP data."},
+    {k:"rubicon organics cannabis current employer cultivation",s:"#work",sh:"Sheet 5",
+     a:"At <b>Rubicon Organics</b> he configures and optimises Dynamics 365 Business Central and its integrations with SQL, Azure and Elevated Signals; built the validation and audit framework; runs root-cause analysis; and leads UAT and end-user training."},
+    {k:"lululemon warehouse contract retail apparel manhattan zebra bartender",s:"#work",sh:"Sheet 5",
+     a:"<b>System Analyst (contract) at Lululemon</b>, Oct 2023 &ndash; Jan 2024. He analysed warehouse operations, configured and integrated <b>Zebra, BarTender and Manhattan Active</b> against core ERP modules, and built ETL between warehouse systems and central databases."},
+    {k:"tcs tata consultancy india delhi previous first earlier",s:"#work",sh:"Sheet 5",
+     a:"<b>Senior Process Associate at Tata Consultancy Services</b>, Delhi, Aug 2016 &ndash; Oct 2023 &mdash; seven years. He formalised requirements, KPIs and reporting standards, built Power BI and Tableau dashboards, and ran UAT and change management."},
+    {k:"results metrics numbers impact achievements outcomes improved measurable proof",s:"#impact",sh:"Sheet 4",
+     a:"Four measured outcomes at Rubicon Organics: transaction data accuracy <b>+25%</b>, recurring incidents <b>&minus;30%</b>, ERP training adoption <b>+35%</b>, and data synchronisation time <b>&minus;40%</b>. All are plotted on one shared 0&ndash;50% scale."},
+    {k:"accuracy validation audit data quality errors",s:"#impact",sh:"Sheet 4",
+     a:"He built a validation and audit framework that lifted transaction accuracy <b>25%</b>, surfacing errors for correction before month-end rather than after. Validation sits at the point of entry, upstream of the dashboard."},
+    {k:"incidents support tickets root cause fixes reliability",s:"#method",sh:"Sheet 7",
+     a:"Recurring incidents fell <b>30%</b>. His stated principle: a recurring incident is a design defect wearing a support costume &mdash; trace it to origin and correct it there, rather than closing the ticket."},
+    {k:"skills tools stack technologies software platforms toolset",s:"#stack",sh:"Sheet 8",
+     a:"<b>Platform:</b> Dynamics 365 Business Central, Power BI, SQL Server, Azure, Power Apps, Power Automate, Elevated Signals, Manhattan Active, Tableau.<br><b>Data:</b> DAX, Power Query, data modelling, ETL, OData/REST, Excel &amp; Power Pivot, KPI design.<br><b>Practice:</b> requirements gathering, ERP configuration, UAT, data governance, root-cause analysis, SOPs."},
+    {k:"business central d365 dynamics erp bc navision",s:"#work",sh:"Sheet 5",
+     a:"<b>Dynamics 365 Business Central</b> is his core platform. He configures, tests and optimises its modules and integrations with SQL, Azure and Elevated Signals, and has written against its OData v4 endpoints with eTag concurrency control."},
+    {k:"power bi dashboard reporting dax visualisation visualization report",s:"#stack",sh:"Sheet 8",
+     a:"Power BI is daily-use. He maintains the Power BI and Excel models behind KPI review, and automates reporting with <b>Power Query, DAX and Power Automate</b>. At TCS he also built Tableau dashboards."},
+    {k:"sql database query azure cloud",s:"#stack",sh:"Sheet 8",
+     a:"SQL Server and Azure both feature in the Business Central integration work at Rubicon Organics, alongside ETL pipelines and OData/REST interfaces."},
+    {k:"education degree mba university study qualification school",s:"#stack",sh:"Sheet 8",
+     a:"<b>MBA in Data Analytics</b>, University Canada West, Vancouver, 2023. <b>BE in Electronics &amp; Telecommunication</b>, Amravati University, India, 2012."},
+    {k:"certification certified itil credential",s:"#stack",sh:"Sheet 8",
+     a:"<b>ITIL v4 Foundation</b> (2019) &mdash; service management. Alongside the MBA in Data Analytics (2023) and the BE in Electronics &amp; Telecommunication (2012)."},
+    {k:"projects built side portfolio personal work github",s:"#projects",sh:"Sheet 6",
+     a:"Three: <b>Surrey AI Automation</b> (his own practice), <b>batch-to-lot attribute propagation</b> on the Power Platform, and <b>Jarvis Agent OS</b>, a multi-agent orchestration desktop."},
+    {k:"surrey ai automation practice business consultancy own company freelance",s:"#projects",sh:"Sheet 6",
+     a:"<b>Surrey AI Automation</b> &mdash; his own practice serving data-heavy businesses in Metro Vancouver with Power BI dashboards, reporting automation and ERP/data integration on fixed-price engagements. He designed and built the site himself. surreyaiautomation.online"},
+    {k:"batch lot propagation power apps automate odata traceability",s:"#projects",sh:"Sheet 6",
+     a:"Operations manages product by <b>batch</b>; Business Central tracks attributes by <b>lot</b>, one to many. He built a canvas app and flow to edit once at batch level and propagate, with a preview before writing. The vendor API turned out read-only, so writes route through a maintained OData endpoint with eTag concurrency."},
+    {k:"jarvis agent os electron desktop ai coding agents",s:"#projects",sh:"Sheet 6",
+     a:"<b>Jarvis Agent OS</b> &mdash; a desktop app for running and supervising several AI coding agents side by side: embedded terminals, code editor, git integration and local persistence. Built with Electron, React, TypeScript, SQLite and node-pty."},
+    {k:"method approach how work philosophy principles style",s:"#method",sh:"Sheet 7",
+     a:"Four habits: <b>verify the path, do not assume it</b>; <b>fix the cause, not the ticket</b>; <b>validate upstream of the dashboard</b>; and <b>automate the second time you do it</b>. Each maps to one of the measured outcomes."},
+    {k:"contact email reach hire available get in touch phone",s:"#contact",sh:"End",
+     a:"Email <b>manish.mani27@outlook.com</b>. Also on LinkedIn at in/md7788379715 and GitHub as Manish120889. Based in Surrey, BC. He is open to business systems analysis, ERP data and reporting roles, and to automation engagements."},
+    {k:"location where based city live vancouver surrey canada relocate",s:"#profile",sh:"Sheet 2",
+     a:"<b>Surrey, British Columbia</b>, in Metro Vancouver, Canada. He has worked in Vancouver since 2023; before that, Delhi, India."},
+    {k:"industries domains sectors verticals worked",s:"#stack",sh:"Sheet 8",
+     a:"Four: <b>cannabis &amp; CPG</b> (cultivation, production, lot and batch traceability), <b>apparel retail</b> (warehouse, fulfilment), <b>IT services</b> (procurement, finance, enterprise reporting), and <b>finance operations</b> (month-end, audit readiness, KPI review)."},
+    {k:"automation power automate rpa workflow ai",s:"#method",sh:"Sheet 7",
+     a:"Automation is a stated principle &mdash; automate the second time you do it. Manual reporting was migrated to Power Query, DAX and Power Automate, cutting synchronisation time <b>40%</b>. He also runs an AI-automation practice, Surrey AI Automation."},
+    {k:"training uat adoption change management users stakeholders governance sop",s:"#work",sh:"Sheet 5",
+     a:"He leads UAT and end-user training &mdash; adoption up <b>35%</b> &mdash; and contributes to data governance, SOP documentation and pipeline improvements. Stakeholder liaison between business users and IT runs back to his TCS years."}
+  ];
+
+  var CHIPS = ["What does he do now?","What results has he delivered?","What tools does he use?",
+               "Tell me about his projects","How does he work?","How do I contact him?"];
+
+  var openBtn=document.getElementById('rdOpen'), panel=document.getElementById('rdPanel'),
+      closeBtn=document.getElementById('rdClose'), log=document.getElementById('rdLog'),
+      chips=document.getElementById('rdChips'), form=document.getElementById('rdForm'),
+      input=document.getElementById('rdIn'), greeted=false;
+
+  var STOP={the:1,a:1,an:1,is:1,are:1,was:1,were:1,of:1,to:1,in:1,on:1,at:1,for:1,and:1,or:1,
+            his:1,he:1,him:1,does:1,do:1,did:1,what:1,which:1,who:1,how:1,tell:1,me:1,about:1,
+            you:1,your:1,any:1,has:1,have:1,had:1,with:1,that:1,this:1,it:1,can:1,i:1,s:1};
+
+  function norm(t){
+    return String(t).toLowerCase().replace(/[^a-z0-9\s]/g,' ').split(/\s+/)
+      .map(function(w){ return w.length>4 && /(ies|es|s)$/.test(w) ? w.replace(/(ies|es|s)$/,'') : w; })
+      .filter(function(w){ return w && !STOP[w]; });
+  }
+
+  function answer(q){
+    var toks=norm(q); if(!toks.length) return null;
+    var best=null, bestScore=0;
+    KB.forEach(function(e){
+      var keys=norm(e.k), body=norm(e.a), score=0;
+      toks.forEach(function(t){
+        keys.forEach(function(k){ if(k===t) score+=3; else if(k.indexOf(t)===0||t.indexOf(k)===0) score+=1.5; });
+        if(body.indexOf(t)>-1) score+=0.6;
+      });
+      score = score / Math.sqrt(toks.length);
+      if(score>bestScore){ bestScore=score; best=e; }
+    });
+    return bestScore>=1.4 ? best : null;
+  }
+
+  function add(cls,html){
+    var d=document.createElement('div'); d.className='rd-msg '+cls; d.innerHTML=html;
+    log.appendChild(d); log.scrollTop=log.scrollHeight; return d;
+  }
+
+  function respond(q){
+    add('you', q.replace(/</g,'&lt;'));
+    var hit=answer(q);
+    if(hit){
+      add('desk','<span class="tag">Reference</span>'+hit.a+
+        ' <a class="jump" href="'+hit.s+'" data-jump="'+hit.s+'">Go to '+hit.sh+' &rarr;</a>');
+    } else {
+      add('desk','<span class="tag">No entry</span>I only hold what is printed on this CV, so I could not match that. '+
+        'Try asking about his <b>current role</b>, <b>results</b>, <b>tools</b>, <b>projects</b>, <b>education</b>, '+
+        '<b>method</b> or <b>contact details</b>. For anything else, email him at <b>manish.mani27@outlook.com</b>.');
+    }
+  }
+
+  function greet(){
+    if(greeted) return; greeted=true;
+    add('desk','<span class="tag">Reference desk</span>I answer from this CV only &mdash; no data leaves your browser. Ask about the roles, figures, tools, projects or how to get in touch.');
+    CHIPS.forEach(function(c){
+      var b=document.createElement('button'); b.type='button'; b.className='rd-chip'; b.textContent=c;
+      b.addEventListener('click',function(){ respond(c); });
+      chips.appendChild(b);
+    });
+  }
+
+  function openDesk(){ panel.hidden=false; openBtn.setAttribute('aria-expanded','true'); greet(); input.focus(); }
+  function closeDesk(){ panel.hidden=true; openBtn.setAttribute('aria-expanded','false'); openBtn.focus(); }
+
+  openBtn.addEventListener('click',openDesk);
+  closeBtn.addEventListener('click',closeDesk);
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape' && !panel.hidden) closeDesk(); });
+  form.addEventListener('submit',function(e){ e.preventDefault();
+    var v=input.value.trim(); if(!v) return; input.value=''; respond(v); });
+  log.addEventListener('click',function(e){
+    var a=e.target.closest('a[data-jump]'); if(!a) return;
+    e.preventDefault();
+    var t=document.querySelector(a.getAttribute('data-jump'));
+    if(t){ t.scrollIntoView({behavior:'smooth',block:'start'}); if(window.innerWidth<560) closeDesk(); }
+  });
+})();
+</script>
 </body>
 </html>
