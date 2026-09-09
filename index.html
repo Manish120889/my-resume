@@ -287,19 +287,26 @@ h2{font-family:var(--f-text);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.25re
 @media (max-width:620px){.plot{width:4.5rem}}
 
 /* ═══════════ trajectory ═══════════ */
-.gantt{font-family:var(--f-mono)}
-.grow{display:grid;grid-template-columns:10.5rem 1fr;gap:.9rem;align-items:center;height:var(--band-h)}
+.gantt{font-family:var(--f-mono);--g-cols:10.5rem 1fr 4.6rem;--g-gap:.9rem}
+.grow{display:grid;grid-template-columns:var(--g-cols);gap:var(--g-gap);align-items:center;height:2.55rem}
 .grow:nth-child(odd){background:var(--canvas-2)}
 .gname{font-size:var(--t-meta);color:var(--ink);padding-left:.45rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .gname i{font-style:normal;color:var(--ink-soft);font-size:var(--t-micro);display:block}
 .gtrack{position:relative;height:100%}
-.gspan{position:absolute;top:50%;transform:translateY(-50%);height:1rem;background:var(--ink);min-width:4px;
-  display:flex;align-items:center;padding:0 .45rem;font-size:var(--t-micro);letter-spacing:.05em;
+/* year gridlines, so a bar's start and end can be read against the axis */
+.gtrack::before{content:"";position:absolute;inset:0;
+  background:repeating-linear-gradient(90deg,var(--rule-soft) 0 1px,transparent 1px 18.6%)}
+.gspan{position:absolute;z-index:1;top:50%;transform:translateY(-50%);height:1.25rem;background:var(--ink);min-width:5px;
+  display:flex;align-items:center;padding:0 .5rem;font-size:var(--t-micro);letter-spacing:.05em;
   color:var(--canvas);white-space:nowrap;overflow:hidden}
 .gspan.live{background:var(--ruby);color:var(--on-dark)}
-.gmarks{position:relative;height:1.35rem;margin-left:11.4rem;margin-top:.5rem}
+.gdur{font-size:var(--t-micro);color:var(--ink-soft);text-align:right;padding-right:.45rem;
+  font-variant-numeric:tabular-nums;white-space:nowrap}
+.gdur.now{color:var(--ruby)}
+.grow-sub{display:grid;grid-template-columns:var(--g-cols);gap:var(--g-gap)}
+.gmarks{position:relative;height:1.35rem;margin-top:.5rem}
 .gmark{position:absolute;bottom:0;transform:translateX(-50%);font-size:var(--t-micro);color:var(--ruby);white-space:nowrap}
-.gaxis{position:relative;height:1.5rem;border-top:2px solid var(--ink);margin-left:11.4rem}
+.gaxis{position:relative;height:1.5rem;border-top:2px solid var(--ink)}
 .gtick{position:absolute;top:.3rem;transform:translateX(-50%);font-size:var(--t-micro);color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .gtick::before{content:"";position:absolute;top:-.3rem;left:50%;width:1px;height:.24rem;background:var(--rule)}
 @media (max-width:620px){
@@ -462,37 +469,41 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
     <div class="shead"><span class="no">02</span><span class="ttl">Trajectory</span><span class="fl"></span><span class="pg">Sheet 3</span></div>
     <hr class="perf">
     <h2>Ten years on one axis</h2>
-    <p class="dek">Posting periods to scale, 2016 to date. The Lululemon contract reads as a sliver because it genuinely was one — three months, by design.</p>
+    <p class="dek">Posting periods to scale, 2016 to date, with duration at right. The Lululemon engagement was a three-month contract by design.</p>
     <div class="scroll">
       <div class="gantt">
         <div class="grow">
           <div class="gname">Tata Consultancy<i>Delhi, India</i></div>
           <div class="gtrack"><div class="gspan" style="left:5.4%;width:66.7%" role="img" aria-label="Tata Consultancy Services, August 2016 to October 2023">Senior Process Associate</div></div>
+          <div class="gdur">7 yr 2 mo</div>
         </div>
         <div class="grow">
           <div class="gname">Lululemon<i>Vancouver, BC</i></div>
           <div class="gtrack"><div class="gspan" style="left:72.1%;width:2.3%" role="img" aria-label="Lululemon, October 2023 to January 2024"></div></div>
+          <div class="gdur">3 mo</div>
         </div>
         <div class="grow">
           <div class="gname">Rubicon Organics<i>Vancouver, BC</i></div>
           <div class="gtrack"><div class="gspan live" style="left:74.4%;width:25.6%" role="img" aria-label="Rubicon Organics, January 2024 to present">ERP Data Analyst</div></div>
+          <div class="gdur now">2 yr 8 mo</div>
         </div>
         <div class="grow">
           <div class="gname">Surrey AI Automation<i>Own practice</i></div>
           <div class="gtrack"><div class="gspan live" style="left:93%;width:7%" role="img" aria-label="Surrey AI Automation, 2026 to present"></div></div>
+          <div class="gdur now">Ongoing</div>
         </div>
-        <div class="gmarks">
+        <div class="grow-sub"><div></div><div class="gmarks">
           <span class="gmark" style="left:27.9%">ITIL v4 ↓</span>
           <span class="gmark" style="left:69.8%">MBA ↓</span>
-        </div>
-        <div class="gaxis">
+        </div><div></div></div>
+        <div class="grow-sub"><div></div><div class="gaxis">
           <span class="gtick" style="left:0%">2016</span>
           <span class="gtick" style="left:18.6%">2018</span>
           <span class="gtick" style="left:37.2%">2020</span>
           <span class="gtick" style="left:55.8%">2022</span>
           <span class="gtick" style="left:74.4%">2024</span>
           <span class="gtick" style="left:93%">2026</span>
-        </div>
+        </div><div></div></div>
       </div>
     </div>
   </section>
