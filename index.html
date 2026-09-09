@@ -315,21 +315,23 @@ h2{font-family:var(--f-text);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.25re
 .gmarks{position:relative;height:1.35rem;margin-top:.5rem}
 .gmark{position:absolute;bottom:0;transform:translateX(-50%);font-size:var(--t-micro);color:var(--ruby);white-space:nowrap}
 .gaxis{position:relative;height:1.5rem;border-top:2px solid var(--ink)}
+/* Narrow screens: stack the label above a full-width track instead of
+   squeezing the track between two fixed columns. Keeps every bar on the same
+   2016-2026 scale — the point of the chart — and buys the track ~46% more room. */
 @media (max-width:620px){
-  .gantt{--g-cols:6.4rem 1fr 3.7rem;--g-gap:.5rem}
-  .gname{font-size:var(--t-micro);padding-left:.3rem}
+  .grow{grid-template-columns:1fr auto;
+        grid-template-areas:"name dur" "track track";
+        gap:.2rem .5rem;height:auto;padding:.5rem .35rem .55rem;align-items:baseline}
+  .gname{grid-area:name;font-size:var(--t-micro);padding-left:0;white-space:normal}
   .gname i{display:none}
+  .gdur{grid-area:dur;padding-right:0}
+  .gtrack{grid-area:track;height:1.3rem}
   .gspan{padding:0 .3rem}
-  .gdur{padding-right:.3rem}
+  .grow-sub{grid-template-columns:1fr;gap:0;padding:0 .35rem}
+  .grow-sub>div:first-child,.grow-sub>div:last-child{display:none}
 }
 .gtick{position:absolute;top:.3rem;transform:translateX(-50%);font-size:var(--t-micro);color:var(--ink-faint);font-variant-numeric:tabular-nums}
 .gtick::before{content:"";position:absolute;top:-.3rem;left:50%;width:1px;height:.24rem;background:var(--rule)}
-@media (max-width:620px){
-  .grow{grid-template-columns:6.2rem 1fr;gap:.5rem}
-  .gname{font-size:var(--t-micro)}.gname i{display:none}
-  .gaxis,.gmarks{margin-left:6.7rem}
-  .gspan{font-size:var(--t-micro);padding:0 .25rem}
-}
 
 /* ═══════════ entries ═══════════ */
 .ent{padding:1.6rem 0;border-top:1px solid var(--rule-soft)}
@@ -914,6 +916,7 @@ figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
 @media (max-width:560px){
   .rd-panel{right:.6rem;left:.6rem;bottom:.6rem;width:auto;max-height:calc(100vh - 1.2rem)}
   .rd-open{right:.6rem;bottom:.6rem}
+  .eor{padding-bottom:4.6rem}
 }
 @media print{.rd-open,.rd-panel{display:none!important}}
 </style>
