@@ -1,843 +1,715 @@
-﻿<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manish Dadhwal — Digital Solutions Manager</title>
-<meta name="description" content="Manish Dadhwal — Digital Solutions Manager specializing in ERP, Power Platform, Python automation, and enterprise data solutions.">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Manish Dadhwal — ERP Data Analyst, Vancouver BC</title>
+<meta name="description" content="ERP Data Analyst in Metro Vancouver. Dynamics 365 Business Central, Power BI, SQL and the validation frameworks behind them. 10+ years across finance, supply chain, production and operations.">
+<link rel="canonical" href="https://manish120889.github.io/my-resume/">
+
+<meta property="og:type" content="profile">
+<meta property="og:url" content="https://manish120889.github.io/my-resume/">
+<meta property="og:title" content="Manish Dadhwal — ERP Data Analyst">
+<meta property="og:site_name" content="Manish Dadhwal">
+<meta property="og:description" content="I make enterprise data agree with itself. Dynamics 365 Business Central, Power BI, and the validation work behind them — 10+ years across finance, supply chain and operations.">
+<meta property="og:locale" content="en_CA">
+<meta property="profile:first_name" content="Manish">
+<meta property="profile:last_name" content="Dadhwal">
+<meta property="og:image" content="https://manish120889.github.io/my-resume/card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Curriculum vitae of Manish Dadhwal, ERP Data Analyst.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Manish Dadhwal — ERP Data Analyst">
+<meta name="twitter:description" content="I make enterprise data agree with itself. Dynamics 365 Business Central, Power BI, and the validation work behind them.">
+<meta name="twitter:image" content="https://manish120889.github.io/my-resume/card.png">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23E9DEC4'/%3E%3Cpath d='M0 22 L9 12 L15 18 L23 7 L32 17 L32 32 L0 32 Z' fill='%23282B20'/%3E%3Ccircle cx='24' cy='8' r='3' fill='%238E2A20'/%3E%3C/svg%3E">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;0,6..72,700;1,6..72,400;1,6..72,600&display=swap">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Manish Dadhwal",
+  "url": "https://manish120889.github.io/my-resume/",
+  "jobTitle": "ERP Data Analyst",
+  "email": "mailto:manish.mani27@outlook.com",
+  "address": { "@type": "PostalAddress", "addressLocality": "Surrey", "addressRegion": "BC", "addressCountry": "CA" },
+  "worksFor": { "@type": "Organization", "name": "Rubicon Organics" },
+  "alumniOf": [
+    { "@type": "CollegeOrUniversity", "name": "University Canada West" },
+    { "@type": "CollegeOrUniversity", "name": "Amravati University" }
+  ],
+  "sameAs": [
+    "https://www.linkedin.com/in/md7788379715",
+    "https://github.com/Manish120889",
+    "https://surreyaiautomation.online"
+  ],
+  "knowsAbout": ["Microsoft Dynamics 365 Business Central","Power BI","SQL","DAX","Power Query","Power Automate","Power Apps","OData","ERP data governance","Business systems analysis"]
+}
+</script>
+
 <style>
-*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+/* ═══════════ LUMINIST — palette sampled from the founder plate ═══════════
+   #CBB892 sky · #9C9073 haze · #756D58 · #4E4A3A · #39372A ·
+   #282B20 forest · #1A201B · #0E1614 depth.  Ruby is the hummingbird throat
+   and doubles as the ledger's negative-figure ink.                        */
 :root{
-  --bg:#050a14;--bg2:#0a1628;--surface:#0f1d32;--surface2:#142740;--surface3:#1a3050;
-  --border:#1e3a5f;--border2:#264a72;
-  --text:#e8edf5;--text2:#c8d6e5;--muted:#7a8da6;
-  --accent:#60a5fa;--accent-bright:#93c5fd;--accent-dim:#3b82f6;
-  --purple:#a78bfa;--purple-dim:#7c3aed;
-  --green:#34d399;--green-dim:#059669;
-  --amber:#fbbf24;
-  --pink:#f472b6;
-  --grad1:linear-gradient(135deg,var(--accent),var(--purple));
-  --grad2:linear-gradient(135deg,var(--green),var(--accent));
-  --grad3:linear-gradient(135deg,var(--purple),var(--pink));
-  --shadow-sm:0 2px 8px rgba(0,0,0,.3);
-  --shadow-md:0 8px 32px rgba(0,0,0,.4);
-  --shadow-lg:0 16px 64px rgba(0,0,0,.5);
-  --shadow-glow:0 0 40px rgba(96,165,250,.08);
-}
-html{scroll-behavior:smooth}
-body{font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
-a{color:var(--accent);text-decoration:none;transition:.25s}
-a:hover{color:var(--accent-bright)}
-code,.mono{font-family:'JetBrains Mono',monospace}
-.container{max-width:1140px;margin:auto;padding:0 2rem}
+  --canvas:#E9DEC4;
+  --canvas-2:#DFD2B3;
+  --canvas-3:#D4C5A2;
+  --ink:#191E18;
+  --ink-soft:#4A4636;
+  --ink-faint:#635E4D;
+  --rule:#BCAC88;
+  --rule-soft:#D2C4A3;
+  --gold:#755819;
+  --ruby:#8E2A20;
+  --forest:#282B20;
+  --on-dark:#E9DEC4;
+  --grain:#00000008;
 
-/* SCROLLBAR */
-::-webkit-scrollbar{width:6px}
-::-webkit-scrollbar-track{background:var(--bg)}
-::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+  --f-text:"Newsreader",Georgia,"Times New Roman",serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,Consolas,monospace;
 
-/* GRAIN OVERLAY */
-body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
-  opacity:.4}
-
-/* NAV */
-nav{position:fixed;top:0;width:100%;z-index:100;transition:background .3s,box-shadow .3s}
-nav.scrolled{background:rgba(5,10,20,.92);backdrop-filter:blur(20px);box-shadow:0 1px 0 var(--border)}
-nav .inner{max-width:1140px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1.1rem 2rem}
-nav .logo{font-weight:800;font-size:1.15rem;letter-spacing:-.3px}
-nav .logo span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-nav ul{list-style:none;display:flex;gap:2rem}
-nav ul a{color:var(--muted);font-size:.85rem;font-weight:500;letter-spacing:.3px;text-transform:uppercase;position:relative}
-nav ul a::after{content:'';position:absolute;bottom:-4px;left:0;width:0;height:2px;background:var(--grad1);transition:.3s}
-nav ul a:hover{color:var(--text)}
-nav ul a:hover::after{width:100%}
-.menu-btn{display:none;background:none;border:none;color:var(--text);font-size:1.4rem;cursor:pointer}
-
-/* HERO */
-.hero{min-height:100vh;display:flex;align-items:center;padding:8rem 0 6rem;position:relative}
-.hero-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
-.hero-bg .orb{position:absolute;border-radius:50%;filter:blur(100px);opacity:.12}
-.hero-bg .orb1{width:600px;height:600px;background:var(--accent-dim);top:-10%;right:-10%}
-.hero-bg .orb2{width:400px;height:400px;background:var(--purple-dim);bottom:10%;left:-5%}
-.hero-bg .orb3{width:300px;height:300px;background:var(--green-dim);top:40%;left:30%}
-.hero-grid{display:grid;grid-template-columns:1fr .85fr;gap:4rem;align-items:center;position:relative;z-index:1}
-.hero-label{display:inline-flex;align-items:center;gap:.5rem;background:rgba(96,165,250,.08);color:var(--accent);padding:.4rem 1rem;border-radius:999px;font-size:.78rem;font-weight:600;margin-bottom:1.5rem;border:1px solid rgba(96,165,250,.15)}
-.hero-label .pulse{width:6px;height:6px;border-radius:50%;background:var(--green);animation:pulse 2s infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.hero h1{font-size:clamp(2.4rem,5vw,3.6rem);font-weight:800;line-height:1.12;margin-bottom:1.2rem;letter-spacing:-.8px}
-.hero h1 .gradient{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.hero .subtitle{color:var(--muted);font-size:1.05rem;max-width:520px;margin-bottom:2rem}
-.hero .btns{display:flex;gap:1rem;flex-wrap:wrap;margin-bottom:3rem}
-.btn{display:inline-flex;align-items:center;gap:.5rem;padding:.8rem 1.8rem;border-radius:.6rem;font-weight:600;font-size:.9rem;transition:all .25s;border:none;cursor:pointer}
-.btn-primary{background:var(--grad1);color:#050a14;box-shadow:0 4px 20px rgba(96,165,250,.25)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(96,165,250,.35);color:#050a14}
-.btn-outline{border:1.5px solid var(--border2);color:var(--text2);background:transparent}
-.btn-outline:hover{border-color:var(--accent);color:var(--text);transform:translateY(-2px)}
-.hero-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
-.metric-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.2rem;text-align:center;transition:.3s}
-.metric-card:hover{border-color:var(--accent);box-shadow:var(--shadow-glow)}
-.metric-card .num{font-size:1.6rem;font-weight:800;background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.metric-card .label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px;margin-top:.2rem}
-
-/* HERO VISUAL */
-.hero-visual{position:relative}
-.hero-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;box-shadow:var(--shadow-lg)}
-.hero-card-header{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem}
-.avatar{width:64px;height:64px;border-radius:50%;background:var(--grad1);display:flex;align-items:center;justify-content:center;font-size:1.5rem;font-weight:800;color:#050a14}
-.hero-card-header .name{font-weight:700;font-size:1.1rem}
-.hero-card-header .role{color:var(--muted);font-size:.82rem}
-.code-block{background:var(--bg2);border:1px solid var(--border);border-radius:.6rem;padding:1rem 1.2rem;font-family:'JetBrains Mono',monospace;font-size:.75rem;line-height:1.8;overflow:hidden}
-.code-block .kw{color:var(--purple)}
-.code-block .str{color:var(--green)}
-.code-block .prop{color:var(--accent)}
-.code-block .cmt{color:var(--muted)}
-.floating-badge{position:absolute;background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.6rem 1rem;font-size:.75rem;font-weight:600;box-shadow:var(--shadow-md);white-space:nowrap}
-.badge-1{top:-12px;right:-12px;color:var(--green);animation:float 6s ease-in-out infinite}
-.badge-2{bottom:30px;left:-20px;color:var(--purple);animation:float 6s ease-in-out infinite 2s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
-
-/* SECTIONS */
-section{padding:6rem 0}
-.section-header{margin-bottom:3.5rem}
-.section-header.center{text-align:center}
-.section-label{display:inline-block;color:var(--accent);font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:.75rem}
-.section-title{font-size:2.2rem;font-weight:800;letter-spacing:-.5px;line-height:1.2}
-.section-title span{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.section-sub{color:var(--muted);margin-top:.6rem;max-width:560px}
-.section-header.center .section-sub{margin-left:auto;margin-right:auto}
-
-/* ABOUT */
-.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start}
-.about-text p{color:var(--text2);margin-bottom:1rem;font-size:.95rem}
-.info-cards{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
-.info-card{background:var(--surface);border:1px solid var(--border);border-radius:.75rem;padding:1.2rem;transition:.3s}
-.info-card:hover{border-color:var(--accent);transform:translateY(-2px)}
-.info-card .ic-icon{font-size:1.3rem;margin-bottom:.5rem}
-.info-card h4{font-size:.82rem;font-weight:700;margin-bottom:.2rem}
-.info-card p{color:var(--muted);font-size:.78rem;margin:0}
-
-/* EXPERIENCE */
-.exp-grid{display:flex;flex-direction:column;gap:2rem}
-.exp-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:2rem;transition:.3s;position:relative;overflow:hidden}
-.exp-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:var(--grad1);border-radius:0 2px 2px 0}
-.exp-card:hover{border-color:var(--border2);box-shadow:var(--shadow-glow)}
-.exp-top{display:flex;justify-content:space-between;align-items:start;flex-wrap:wrap;gap:.75rem;margin-bottom:1rem}
-.exp-top h3{font-size:1.05rem;font-weight:700}
-.exp-top .company{color:var(--accent);font-weight:500;font-size:.92rem}
-.exp-date{color:var(--muted);font-size:.78rem;font-weight:500;background:var(--bg2);padding:.3rem .8rem;border-radius:999px;white-space:nowrap}
-.exp-desc{color:var(--text2);font-size:.88rem;margin-bottom:1rem}
-.exp-highlights{display:grid;grid-template-columns:1fr 1fr;gap:.5rem .75rem}
-.exp-hl{display:flex;align-items:start;gap:.5rem;color:var(--muted);font-size:.82rem;line-height:1.5}
-.exp-hl .dot{width:5px;height:5px;border-radius:50%;background:var(--accent);margin-top:.5rem;flex-shrink:0}
-.exp-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border)}
-.exp-tag{font-size:.7rem;padding:.25rem .65rem;border-radius:999px;font-weight:500}
-
-/* SKILLS */
-.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.skill-group{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;transition:.3s}
-.skill-group:hover{border-color:var(--border2);box-shadow:var(--shadow-glow)}
-.sg-header{display:flex;align-items:center;gap:.75rem;margin-bottom:1.2rem}
-.sg-icon{width:38px;height:38px;border-radius:.6rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem}
-.sg-header h3{font-size:.92rem;font-weight:700}
-.skill-items{display:flex;flex-direction:column;gap:.6rem}
-.skill-item{display:flex;align-items:center;justify-content:space-between;padding:.5rem .75rem;background:var(--bg2);border-radius:.5rem;font-size:.82rem;transition:.2s}
-.skill-item:hover{background:var(--surface2)}
-.skill-item .level{display:flex;gap:3px}
-.skill-item .level span{width:16px;height:4px;border-radius:2px;background:var(--border)}
-.skill-item .level span.filled{background:var(--accent)}
-.skill-item .level span.filled.purple{background:var(--purple)}
-.skill-item .level span.filled.green{background:var(--green)}
-.skill-item .level span.filled.pink{background:var(--pink)}
-
-/* ACHIEVEMENTS */
-.achieve-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
-.achieve-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;text-align:center;transition:.3s;position:relative;overflow:hidden}
-.achieve-card::after{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:50%;height:2px;border-radius:0 0 4px 4px}
-.achieve-card:nth-child(1)::after{background:var(--grad1)}
-.achieve-card:nth-child(2)::after{background:var(--grad2)}
-.achieve-card:nth-child(3)::after{background:var(--grad3)}
-.achieve-card:nth-child(4)::after{background:linear-gradient(135deg,var(--amber),var(--pink))}
-.achieve-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.achieve-num{font-size:2.5rem;font-weight:800;line-height:1}
-.an1{background:var(--grad1);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.an2{background:var(--grad2);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.an3{background:var(--grad3);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.an4{background:linear-gradient(135deg,var(--amber),var(--pink));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.achieve-card h3{font-size:.88rem;font-weight:600;margin:.6rem 0 .3rem}
-.achieve-card p{color:var(--muted);font-size:.78rem;line-height:1.5}
-
-/* EDUCATION */
-.edu-row{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
-.edu-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;padding:1.8rem;transition:.3s}
-.edu-card:hover{border-color:var(--border2);transform:translateY(-2px)}
-.edu-icon{font-size:1.8rem;margin-bottom:1rem}
-.edu-card h3{font-size:.95rem;font-weight:700;margin-bottom:.3rem}
-.edu-card .school{color:var(--accent);font-size:.85rem;margin-bottom:.15rem}
-.edu-card .year{color:var(--muted);font-size:.78rem}
-
-/* BLOG */
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:1.5rem}
-.blog-card{background:var(--surface);border:1px solid var(--border);border-radius:1rem;overflow:hidden;transition:.3s;display:flex;flex-direction:column}
-.blog-card:hover{border-color:var(--border2);transform:translateY(-4px);box-shadow:var(--shadow-md)}
-.blog-banner{height:6px;width:100%}
-.blog-body{padding:1.8rem;flex:1;display:flex;flex-direction:column}
-.blog-cat{font-size:.7rem;font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:.75rem}
-.blog-body h3{font-size:1rem;font-weight:700;margin-bottom:.6rem;line-height:1.4}
-.blog-body .preview{color:var(--muted);font-size:.85rem;margin-bottom:1.2rem;flex:1;line-height:1.6}
-.blog-footer{display:flex;justify-content:space-between;align-items:center;padding-top:1rem;border-top:1px solid var(--border)}
-.blog-footer .read-time{color:var(--muted);font-size:.75rem}
-.blog-footer .copy-post{background:rgba(96,165,250,.1);color:var(--accent);border:none;padding:.4rem .9rem;border-radius:.4rem;font-size:.78rem;font-weight:600;cursor:pointer;transition:.2s}
-.blog-footer .copy-post:hover{background:rgba(96,165,250,.2)}
-.blog-modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);backdrop-filter:blur(8px);z-index:200;justify-content:center;align-items:center;padding:2rem}
-.blog-modal-overlay.active{display:flex}
-.blog-modal{background:var(--surface);border:1px solid var(--border);border-radius:1rem;max-width:680px;width:100%;max-height:80vh;overflow-y:auto;padding:2.5rem;position:relative}
-.blog-modal .close-modal{position:absolute;top:1rem;right:1.2rem;background:none;border:none;color:var(--muted);font-size:1.5rem;cursor:pointer}
-.blog-modal .close-modal:hover{color:var(--text)}
-.blog-modal h2{font-size:1.3rem;font-weight:800;margin-bottom:.5rem}
-.blog-modal .modal-cat{font-size:.75rem;color:var(--accent);font-weight:600;text-transform:uppercase;letter-spacing:1px;margin-bottom:1.5rem}
-.blog-modal .modal-content{color:var(--text2);font-size:.92rem;line-height:1.8;white-space:pre-wrap}
-.blog-modal .modal-actions{display:flex;gap:1rem;margin-top:1.5rem;padding-top:1rem;border-top:1px solid var(--border)}
-.blog-modal .modal-actions button{padding:.6rem 1.2rem;border-radius:.5rem;font-size:.85rem;font-weight:600;cursor:pointer;border:none;transition:.2s}
-.blog-modal .btn-copy{background:var(--accent);color:var(--bg)}
-.blog-modal .btn-linkedin{background:#0a66c2;color:#fff}
-
-/* CONTACT */
-.contact-layout{display:grid;grid-template-columns:1fr 1.1fr;gap:3.5rem}
-.contact-text{color:var(--text2);font-size:.95rem;margin-bottom:2rem}
-.contact-cards{display:flex;flex-direction:column;gap:.75rem}
-.cc{display:flex;align-items:center;gap:1rem;padding:1rem 1.2rem;background:var(--surface);border:1px solid var(--border);border-radius:.75rem;transition:.3s;color:var(--text2);font-size:.9rem}
-.cc:hover{border-color:var(--accent);transform:translateX(4px);color:var(--text)}
-.cc .cc-icon{width:40px;height:40px;border-radius:.5rem;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
-.cc .cc-label{color:var(--muted);font-size:.72rem;text-transform:uppercase;letter-spacing:.5px}
-form{display:flex;flex-direction:column;gap:.85rem}
-form .row{display:grid;grid-template-columns:1fr 1fr;gap:.85rem}
-input,textarea{background:var(--surface);border:1px solid var(--border);border-radius:.6rem;padding:.9rem 1.1rem;color:var(--text);font-family:inherit;font-size:.88rem;outline:none;transition:.25s;width:100%}
-input:focus,textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(96,165,250,.08)}
-textarea{resize:vertical;min-height:110px}
-input::placeholder,textarea::placeholder{color:var(--muted)}
-.form-btn{width:100%;text-align:center;justify-content:center}
-
-/* FOOTER */
-footer{border-top:1px solid var(--border);padding:2.5rem 0}
-.footer-inner{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
-footer p{color:var(--muted);font-size:.8rem}
-.footer-links{display:flex;gap:1.5rem}
-.footer-links a{color:var(--muted);font-size:.8rem}
-.footer-links a:hover{color:var(--accent)}
-
-/* MOBILE */
-@media(max-width:900px){
-  .hero-grid{grid-template-columns:1fr}
-  .hero-visual{display:none}
-  .hero-metrics{grid-template-columns:repeat(2,1fr)}
-}
-@media(max-width:768px){
-  .menu-btn{display:block}
-  nav ul{display:none;position:absolute;top:100%;left:0;width:100%;background:rgba(5,10,20,.97);backdrop-filter:blur(20px);flex-direction:column;padding:1.5rem 2rem;gap:1.2rem;border-bottom:1px solid var(--border)}
-  nav ul.open{display:flex}
-  .about-grid,.contact-layout{grid-template-columns:1fr}
-  .exp-highlights{grid-template-columns:1fr}
-  .achieve-row{grid-template-columns:repeat(2,1fr)}
-  .edu-row{grid-template-columns:1fr}
-  .hero-metrics{grid-template-columns:repeat(2,1fr)}
-  form .row{grid-template-columns:1fr}
-  section{padding:4rem 0}
+  --page:63rem;
+  --band-h:2.05rem;
 }
 
-/* ANIMATIONS */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
-.reveal.visible{opacity:1;transform:translateY(0)}
-.reveal-delay-1{transition-delay:.1s}
-.reveal-delay-2{transition-delay:.2s}
-.reveal-delay-3{transition-delay:.3s}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --canvas:#121711;
+    --canvas-2:#1A201B;
+    --canvas-3:#222820;
+    --ink:#E4DAC0;
+    --ink-soft:#AFA487;
+    --ink-faint:#8E8569;
+    --rule:#39372A;
+    --rule-soft:#252B22;
+    --gold:#D3AC5C;
+    --ruby:#E0685A;
+    --forest:#0E1614;
+    --on-dark:#121711;
+    --grain:#ffffff06;
+  }
+}
+:root[data-theme="dark"]{
+  --canvas:#121711;
+  --canvas-2:#1A201B;
+  --canvas-3:#222820;
+  --ink:#E4DAC0;
+  --ink-soft:#AFA487;
+  --ink-faint:#8E8569;
+  --rule:#39372A;
+  --rule-soft:#252B22;
+  --gold:#D3AC5C;
+  --ruby:#E0685A;
+  --forest:#0E1614;
+  --on-dark:#121711;
+  --grain:#ffffff06;
+}
+
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--canvas);
+  color:var(--ink);
+  font-family:var(--f-text);
+  font-size:17px;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--ruby);outline-offset:3px}
+
+/* aged canvas grain over the whole page */
+body::before{
+  content:"";position:fixed;inset:0;z-index:1;pointer-events:none;
+  background-image:
+    radial-gradient(circle at 18% 12%, var(--grain) 0 1px, transparent 1px),
+    radial-gradient(circle at 63% 47%, var(--grain) 0 1px, transparent 1px),
+    radial-gradient(circle at 87% 78%, var(--grain) 0 1px, transparent 1px);
+  background-size:37px 37px, 53px 53px, 71px 71px;
+}
+
+.wrap{max-width:var(--page);margin:0 auto;padding:0 1.75rem;position:relative;z-index:2}
+@media (max-width:700px){.wrap{padding:0 1.15rem}body{font-size:16px}}
+
+.skip{position:absolute;left:-9999px;top:0;z-index:99;font-family:var(--f-mono);font-size:.72rem;
+  letter-spacing:.08em;text-transform:uppercase;background:var(--ink);color:var(--canvas);padding:.65rem 1rem;text-decoration:none}
+.skip:focus{left:.5rem;top:.5rem}
+
+.neg{color:var(--ruby)}
+.perf{border:none;border-top:1px solid var(--rule);margin:0}
+.solid{border:none;border-top:2px solid var(--ink);margin:0}
+
+/* ═══════════ HERO — parallax plate + title ═══════════ */
+.hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule)}
+.hero-in{
+  display:grid;grid-template-columns:minmax(0,0.8fr) minmax(0,1fr);
+  gap:3rem;align-items:stretch;
+  max-width:var(--page);margin:0 auto;padding:0 1.75rem;
+  position:relative;z-index:2;
+}
+.plate{
+  position:relative;overflow:hidden;min-height:35rem;margin:0;
+  border-left:1px solid var(--rule);border-right:1px solid var(--rule);
+  background:var(--forest);
+}
+.plate img{
+  position:absolute;left:50%;top:-14%;
+  width:100%;height:128%;object-fit:cover;object-position:52% 30%;
+  transform:translate(-50%,var(--py,0px));
+  will-change:transform;
+}
+.plate::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,#0E161438 0%,transparent 26%,transparent 60%,#0E1614B0 100%);
+}
+.plate figcaption{
+  position:absolute;left:0;right:0;bottom:0;z-index:3;padding:.85rem 1rem;
+  font-family:var(--f-mono);font-size:.62rem;letter-spacing:.13em;text-transform:uppercase;
+  color:#E9DEC4;display:flex;justify-content:space-between;gap:.75rem;
+}
+
+.hero-copy{padding:3.5rem 0 3rem;display:flex;flex-direction:column;justify-content:center}
+.stub{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;
+  font-family:var(--f-mono);font-size:.65rem;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--ink-faint);padding-bottom:.5rem;border-bottom:1px solid var(--rule);margin-bottom:1.6rem}
+.stub b{color:var(--ink-soft);font-weight:500}
+.of{font-family:var(--f-text);font-style:italic;font-size:clamp(1rem,2vw,1.35rem);
+  color:var(--ink-soft);margin:0 0 .35rem;line-height:1}
+h1.name{font-family:var(--f-text);font-weight:700;
+  font-size:clamp(2.7rem,6.4vw,5rem);line-height:.88;letter-spacing:-.035em;
+  margin:0 0 .9rem;text-wrap:balance}
+.thesis{font-size:clamp(1.1rem,2vw,1.42rem);line-height:1.38;font-style:italic;
+  max-width:26ch;margin:0 0 1.9rem;color:var(--ink)}
+.thesis b{font-style:normal;font-weight:600;border-bottom:2px solid var(--ruby);padding-bottom:1px}
+
+.card{max-width:33rem}
+.lead{display:flex;align-items:baseline;gap:.5rem;font-family:var(--f-mono);font-size:.72rem;letter-spacing:.02em;line-height:2}
+.lead .k{flex:none;color:var(--ink-faint);text-transform:uppercase;letter-spacing:.08em;font-size:.66rem}
+.lead .fl{flex:1;border-bottom:1px dotted var(--rule);transform:translateY(-.3em)}
+.lead .v{flex:none;color:var(--ink);font-weight:500}
+.lead .v a{text-decoration:none;border-bottom:1px solid var(--ruby)}
+.lead .v a:hover{color:var(--ruby)}
+.cursor{display:inline-block;width:.5em;height:1em;background:var(--ruby);vertical-align:-.15em;margin-left:.3em}
+@media (prefers-reduced-motion:no-preference){
+  .cursor{animation:blink 1.15s steps(1) infinite}
+  @keyframes blink{0%,55%{opacity:1}56%,100%{opacity:0}}
+}
+@media (max-width:860px){
+  .hero-in{grid-template-columns:1fr;gap:0}
+  .plate{min-height:23rem;border:none;border-bottom:1px solid var(--rule);margin:0 -1.75rem}
+  .hero-copy{padding:2.25rem 0 2.5rem}
+}
+@media (max-width:700px){.plate{margin:0 -1.15rem;min-height:19rem}}
+
+/* ═══════════ parallax valley band ═══════════ */
+.band{
+  height:15rem;position:relative;overflow:hidden;
+  border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);
+  background:var(--forest) url("band-valley.jpg") center/cover no-repeat;
+  background-attachment:fixed;
+}
+.band::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(90deg,var(--canvas) 0%,#0E161440 30%,#0E161440 70%,var(--canvas) 100%),
+             linear-gradient(180deg,var(--canvas) 0%,transparent 24%,transparent 76%,var(--canvas) 100%);
+}
+.band q{
+  position:absolute;inset:0;z-index:2;display:flex;align-items:center;justify-content:center;
+  padding:0 2rem;text-align:center;quotes:none;
+  font-family:var(--f-text);font-style:italic;font-size:clamp(1.05rem,2.3vw,1.5rem);
+  color:#F2E9D3;text-shadow:0 2px 18px #0E1614;
+}
+.band q span{max-width:34ch}
+@media (hover:none),(max-width:860px){.band{background-attachment:scroll;height:11rem}}
+
+/* ═══════════ sections ═══════════ */
+.sec{padding:3rem 0 0;position:relative;z-index:2}
+.shead{display:flex;align-items:baseline;gap:.8rem;font-family:var(--f-mono);font-size:.68rem;
+  letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);padding-bottom:.4rem}
+.shead .no{color:var(--ruby);font-weight:600}
+.shead .ttl{color:var(--ink);font-weight:600;letter-spacing:.14em}
+.shead .fl{flex:1;border-bottom:1px dotted var(--rule);transform:translateY(-.28em)}
+.shead .pg{flex:none}
+h2{font-family:var(--f-text);font-weight:600;font-size:clamp(1.6rem,3.2vw,2.25rem);
+  letter-spacing:-.022em;line-height:1.14;margin:1.15rem 0 .9rem;text-wrap:balance;max-width:24ch}
+.dek{font-size:1.02rem;line-height:1.62;color:var(--ink-soft);max-width:62ch;margin:0 0 1.6rem}
+.prose p{max-width:66ch;margin:0 0 1.05rem;color:var(--ink-soft);font-size:1.03rem}
+.prose p:last-child{margin-bottom:0}
+.prose i{font-style:italic;color:var(--ink)}
+
+/* contents */
+.toc{margin:2.2rem 0 0;padding:.95rem 0 0;border-top:1px solid var(--rule)}
+.toc .cap{font-family:var(--f-mono);font-size:.64rem;letter-spacing:.15em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 .3rem}
+.toc .list{column-count:2;column-gap:2.4rem}
+.toc a{text-decoration:none;display:flex;align-items:baseline;gap:.5rem;font-family:var(--f-mono);
+  font-size:.68rem;letter-spacing:.03em;line-height:2;break-inside:avoid}
+.toc .n{color:var(--ruby);flex:none;font-weight:500}
+.toc .t{color:var(--ink-soft);flex:none;text-transform:uppercase;letter-spacing:.09em;font-size:.65rem}
+.toc .fl{flex:1;border-bottom:1px dotted var(--rule);transform:translateY(-.3em)}
+.toc .s{color:var(--ink-faint);flex:none;font-size:.64rem}
+.toc a:hover .t{color:var(--ruby)}
+@media (max-width:620px){.toc .list{column-count:1}}
+
+/* ═══════════ ledger table ═══════════ */
+.bar{width:100%;border-collapse:collapse;font-family:var(--f-mono);font-size:.77rem}
+.bar caption{text-align:left;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.11em;
+  text-transform:uppercase;color:var(--ink-faint);padding-bottom:.5rem}
+.bar th{text-align:left;font-weight:500;font-size:.645rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);padding:.3rem .7rem .45rem 0;border-bottom:2px solid var(--ink);white-space:nowrap}
+.bar th.r,.bar td.r{text-align:right;padding-right:0}
+.bar td{padding:0 .7rem 0 0;height:var(--band-h);border-bottom:1px solid var(--rule-soft);
+  color:var(--ink-soft);vertical-align:middle}
+.bar tbody tr:nth-child(odd){background:var(--canvas-2)}
+.bar td.k{color:var(--ink);font-weight:500}
+.bar td.n{font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar .fig{font-size:.92rem;font-weight:600;color:var(--ink);font-variant-numeric:tabular-nums}
+.bar .fig.neg{color:var(--ruby)}
+.bar tfoot td{border-top:2px solid var(--ink);border-bottom:none;height:auto;padding-top:.5rem;
+  font-size:.645rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+.scroll{overflow-x:auto}
+.plot{display:block;width:8.5rem;height:8px;background:var(--canvas-3);position:relative}
+.plot i{position:absolute;left:0;top:0;bottom:0;background:var(--ink);display:block}
+.plot i.neg{background:var(--ruby)}
+@media (max-width:620px){.plot{width:4.5rem}}
+
+/* ═══════════ trajectory ═══════════ */
+.gantt{font-family:var(--f-mono)}
+.grow{display:grid;grid-template-columns:10.5rem 1fr;gap:.9rem;align-items:center;height:var(--band-h)}
+.grow:nth-child(odd){background:var(--canvas-2)}
+.gname{font-size:.71rem;color:var(--ink);padding-left:.45rem;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.gname i{font-style:normal;color:var(--ink-faint);font-size:.62rem;display:block}
+.gtrack{position:relative;height:100%}
+.gspan{position:absolute;top:50%;transform:translateY(-50%);height:1rem;background:var(--ink);min-width:4px;
+  display:flex;align-items:center;padding:0 .45rem;font-size:.62rem;letter-spacing:.05em;
+  color:var(--canvas);white-space:nowrap;overflow:hidden}
+.gspan.live{background:var(--ruby);color:var(--on-dark)}
+.gmarks{position:relative;height:1.35rem;margin-left:11.4rem;margin-top:.5rem}
+.gmark{position:absolute;bottom:0;transform:translateX(-50%);font-size:.61rem;color:var(--ruby);white-space:nowrap}
+.gaxis{position:relative;height:1.5rem;border-top:2px solid var(--ink);margin-left:11.4rem}
+.gtick{position:absolute;top:.3rem;transform:translateX(-50%);font-size:.63rem;color:var(--ink-faint);font-variant-numeric:tabular-nums}
+.gtick::before{content:"";position:absolute;top:-.3rem;left:50%;width:1px;height:.24rem;background:var(--rule)}
+@media (max-width:620px){
+  .grow{grid-template-columns:6.2rem 1fr;gap:.5rem}
+  .gname{font-size:.62rem}.gname i{display:none}
+  .gaxis,.gmarks{margin-left:6.7rem}
+  .gspan{font-size:.55rem;padding:0 .25rem}
+}
+
+/* ═══════════ entries ═══════════ */
+.ent{padding:1.6rem 0;border-top:1px solid var(--rule-soft)}
+.ent:first-of-type{border-top:none}
+.ehead{display:flex;align-items:baseline;gap:.7rem;flex-wrap:wrap;margin-bottom:.15rem}
+.ent h3{font-family:var(--f-text);font-weight:600;font-size:1.34rem;letter-spacing:-.015em;margin:0;line-height:1.25}
+.ent .at{font-family:var(--f-mono);font-size:.73rem;letter-spacing:.04em;color:var(--ruby)}
+.ent .at a{text-decoration:none;border-bottom:1px solid var(--ruby)}
+.emeta{font-family:var(--f-mono);font-size:.65rem;letter-spacing:.09em;text-transform:uppercase;
+  color:var(--ink-faint);margin:0 0 .85rem;display:flex;gap:.55rem;flex-wrap:wrap;align-items:center}
+.emeta i{font-style:normal;color:var(--rule)}
+.ent ul{list-style:none;margin:0;padding:0;max-width:70ch;display:flex;flex-direction:column;gap:.5rem}
+.ent li{position:relative;padding-left:1.35rem;font-size:1rem;line-height:1.58;color:var(--ink-soft)}
+.ent li::before{content:"—";position:absolute;left:0;top:0;font-family:var(--f-mono);font-size:.8rem;color:var(--ruby);line-height:1.72}
+.ent li b{font-weight:600;color:var(--ink)}
+.ent .tools{margin-top:.9rem;font-family:var(--f-mono);font-size:.65rem;letter-spacing:.07em;
+  text-transform:uppercase;color:var(--ink-faint);line-height:1.9;max-width:70ch}
+.ent .tools b{color:var(--ink-soft);font-weight:400}
+
+figure.fig-plate{margin:1.25rem 0 0;border:1px solid var(--rule);background:var(--forest)}
+figure.fig-plate img{width:100%;height:auto}
+figure.fig-plate figcaption{
+  font-family:var(--f-mono);font-size:.64rem;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--ink-faint);background:var(--canvas);padding:.6rem .75rem;border-top:1px solid var(--rule);
+  display:flex;justify-content:space-between;gap:.9rem;flex-wrap:wrap}
+figure.fig-plate figcaption b{color:var(--ink-soft);font-weight:500}
+
+/* ═══════════ method ═══════════ */
+.mth{display:grid;grid-template-columns:2.6rem 1fr;gap:1.1rem;padding:1.15rem 0;border-top:1px solid var(--rule-soft)}
+.mth:first-of-type{border-top:none}
+.mth .no{font-family:var(--f-mono);font-size:.7rem;color:var(--ruby);letter-spacing:.06em;padding-top:.35rem}
+.mth b{display:block;font-family:var(--f-text);font-weight:600;font-size:1.14rem;letter-spacing:-.012em;margin-bottom:.3rem}
+.mth p{margin:0;font-size:1rem;line-height:1.58;color:var(--ink-soft);max-width:62ch}
+.mth cite{display:inline-block;margin-top:.45rem;font-style:normal;font-family:var(--f-mono);
+  font-size:.63rem;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-faint);
+  border-left:2px solid var(--ruby);padding-left:.5rem}
+
+/* ═══════════ close ═══════════ */
+.close{padding:3rem 0 0}
+.close h2{max-width:20ch}
+.close p{font-size:1.05rem;line-height:1.6;color:var(--ink-soft);max-width:62ch;margin:0 0 1.7rem}
+.acts{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:.55rem;font-family:var(--f-mono);font-size:.71rem;
+  letter-spacing:.11em;text-transform:uppercase;text-decoration:none;padding:.8rem 1.35rem;cursor:pointer;
+  background:var(--ink);color:var(--canvas);border:2px solid var(--ink)}
+.btn:hover{background:transparent;color:var(--ink)}
+.btn.alt{background:transparent;color:var(--ink);border-color:var(--rule)}
+.btn.alt:hover{border-color:var(--ruby);color:var(--ruby)}
+.eor{margin-top:3rem;padding:1rem 0 2.6rem;font-family:var(--f-mono);font-size:.64rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+  display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-top:1px solid var(--rule)}
+
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+
+/* ═══════════ print ═══════════ */
+@media print{
+  @page{margin:11mm 10mm}
+  :root,:root[data-theme="dark"]{
+    --canvas:#fff;--canvas-2:#F1EEE4;--canvas-3:#DDD;--ink:#000;--ink-soft:#2A2A2A;--ink-faint:#666;
+    --rule:#BBB;--rule-soft:#DDD;--ruby:#8E2A20;--gold:#6B5215;--forest:#fff;--on-dark:#fff;
+  }
+  body{font-size:10.2pt;line-height:1.4;background:#fff}
+  body::before,.band,.toc,.acts,.plate figcaption{display:none}
+  .wrap,.hero-in{max-width:none;padding:0}
+  .hero{border:none}
+  .hero-in{grid-template-columns:1fr;gap:0}
+  .plate{min-height:0;height:56mm;border:1px solid #BBB;break-inside:avoid}
+  .hero-copy{padding:.5rem 0 0}
+  h1.name{font-size:27pt}
+  .thesis{font-size:12pt;margin-bottom:.6rem}
+  .sec{padding:.75rem 0 0;break-inside:avoid}
+  h2{font-size:15pt;margin:.6rem 0 .35rem}
+  .dek{font-size:10pt;margin-bottom:.55rem}
+  .ent{padding:.6rem 0;break-inside:avoid}
+  .ent li{font-size:9.6pt}
+  .mth,.grow,.bar tr,figure.fig-plate{break-inside:avoid}
+  .close{padding:.8rem 0 0}
+  .eor{margin-top:.8rem;padding:.5rem 0 0}
+  a{text-decoration:none}
+}
 </style>
 </head>
 <body>
+<a class="skip" href="#profile">Skip to contents</a>
 
-<nav id="nav">
-  <div class="inner">
-    <a href="#" class="logo">manish<span>.</span></a>
-    <button class="menu-btn" onclick="document.querySelector('nav ul').classList.toggle('open')">&#9776;</button>
-    <ul>
-      <li><a href="#about">About</a></li>
-      <li><a href="#experience">Experience</a></li>
-      <li><a href="#skills">Skills</a></li>
-      <li><a href="#achievements">Impact</a></li>
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#insights">Insights</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </div>
-</nav>
+<header class="hero">
+  <div class="hero-in">
+    <figure class="plate" id="plate">
+      <img src="hero-portrait.jpg" width="474" height="640"
+           alt="Manish Dadhwal photographed against a painted forest valley at dusk.">
+      <figcaption><span>Plate — the founder</span><span>Surrey / 2026</span></figcaption>
+    </figure>
 
-<!-- ===== HERO ===== -->
-<section class="hero">
-  <div class="hero-bg">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-  </div>
-  <div class="container">
-    <div class="hero-grid">
-      <div>
-        <div class="hero-label"><span class="pulse"></span> Open to Opportunities</div>
-        <h1>I'm <span class="gradient">Manish Dadhwal</span>,<br>Digital Solutions<br>Manager.</h1>
-        <p class="subtitle">10+ years designing scalable ERP systems, data platforms, and automation pipelines. I turn complex business problems into elegant technical solutions.</p>
-        <div class="btns">
-          <a href="#experience" class="btn btn-primary">View Experience &darr;</a>
-          <a href="#contact" class="btn btn-outline">Let's Connect</a>
-        </div>
-        <div class="hero-metrics">
-          <div class="metric-card reveal"><div class="num">10+</div><div class="label">Years Exp.</div></div>
-          <div class="metric-card reveal reveal-delay-1"><div class="num">150+</div><div class="label">Users Served</div></div>
-          <div class="metric-card reveal reveal-delay-2"><div class="num">40%</div><div class="label">Sync Faster</div></div>
-          <div class="metric-card reveal reveal-delay-3"><div class="num">35%</div><div class="label">Adoption Up</div></div>
-        </div>
+    <div class="hero-copy">
+      <div class="stub">
+        <span>Report <b>PROF-01</b> · Revision <b>2026.09</b></span>
+        <span>Sheet <b>1</b> of <b>8</b></span>
       </div>
-      <div class="hero-visual reveal">
-        <div class="hero-card">
-          <div class="hero-card-header">
-            <div class="avatar">MD</div>
-            <div><div class="name">Manish Dadhwal</div><div class="role">Digital Solutions Lead @ Rubicon Organics</div></div>
-          </div>
-          <div class="code-block">
-            <span class="cmt">// what I do</span><br>
-            <span class="kw">const</span> <span class="prop">expertise</span> = {<br>
-            &nbsp;&nbsp;<span class="prop">erp</span>: <span class="str">"Dynamics 365 BC"</span>,<br>
-            &nbsp;&nbsp;<span class="prop">data</span>: <span class="str">"Power BI + SQL"</span>,<br>
-            &nbsp;&nbsp;<span class="prop">cloud</span>: <span class="str">"Azure + Power Automate"</span>,<br>
-            &nbsp;&nbsp;<span class="prop">code</span>: <span class="str">"Python automation"</span>,<br>
-            &nbsp;&nbsp;<span class="prop">impact</span>: <span class="str">"measurable"</span><br>
-            };
-          </div>
-          <div class="floating-badge badge-1">&#10003; ITIL v4 Certified</div>
-          <div class="floating-badge badge-2">&#9733; MBA — Data Analysis</div>
-        </div>
+      <p class="of">Curriculum vitae of</p>
+      <h1 class="name">Manish <br>Dadhwal</h1>
+      <p class="thesis">I make enterprise data <b>agree with itself.</b></p>
+
+      <div class="card">
+        <div class="lead"><span class="k">Position</span><span class="fl"></span><span class="v">ERP Data Analyst</span></div>
+        <div class="lead"><span class="k">Employer</span><span class="fl"></span><span class="v">Rubicon Organics</span></div>
+        <div class="lead"><span class="k">Located</span><span class="fl"></span><span class="v">Surrey, BC · Canada</span></div>
+        <div class="lead"><span class="k">System</span><span class="fl"></span><span class="v">Dynamics 365 Business Central</span></div>
+        <div class="lead"><span class="k">Service</span><span class="fl"></span><span class="v">10 years, 1 month</span></div>
+        <div class="lead"><span class="k">Email</span><span class="fl"></span><span class="v"><a href="mailto:manish.mani27@outlook.com">manish.mani27@outlook.com</a></span></div>
+        <div class="lead"><span class="k">LinkedIn</span><span class="fl"></span><span class="v"><a href="https://www.linkedin.com/in/md7788379715" target="_blank" rel="noopener">in/md7788379715</a></span></div>
+        <div class="lead"><span class="k">Practice</span><span class="fl"></span><span class="v"><a href="https://surreyaiautomation.online" target="_blank" rel="noopener">surreyaiautomation.online</a></span></div>
+        <!-- Phone withheld from the public sheet. To print it, uncomment:
+        <div class="lead"><span class="k">Telephone</span><span class="fl"></span><span class="v">+1 (778) 837-9715</span></div> -->
+        <div class="lead"><span class="k">Status</span><span class="fl"></span><span class="v">Open to engagement<span class="cursor"></span></span></div>
       </div>
     </div>
   </div>
-</section>
+</header>
 
-<!-- ===== ABOUT ===== -->
-<section id="about" style="background:var(--bg2)">
-  <div class="container">
-    <div class="about-grid">
-      <div>
-        <div class="section-header reveal">
-          <div class="section-label">About Me</div>
-          <h2 class="section-title">Building the bridge between <span>business & technology</span></h2>
-        </div>
-        <div class="about-text reveal">
-          <p>I'm a hands-on Digital Solutions professional who thrives at the intersection of ERP systems, data engineering, and cloud automation. At Rubicon Organics, I architect end-to-end solutions across Dynamics 365 Business Central, Power Platform, and custom Python pipelines.</p>
-          <p>My approach is pragmatic: understand the business problem first, then build the simplest solution that scales. I've streamlined data sync by 40%, boosted user adoption by 35%, and eliminated entire categories of manual work through intelligent automation.</p>
-        </div>
-      </div>
-      <div class="info-cards reveal">
-        <div class="info-card"><div class="ic-icon">&#x1F4CD;</div><h4>Surrey, BC</h4><p>Greater Vancouver Area</p></div>
-        <div class="info-card"><div class="ic-icon">&#x1F393;</div><h4>MBA</h4><p>University Canada West '23</p></div>
-        <div class="info-card"><div class="ic-icon">&#x1F4DC;</div><h4>ITIL v4</h4><p>Foundation Certified</p></div>
-        <div class="info-card"><div class="ic-icon">&#x26A1;</div><h4>10+ Years</h4><p>Enterprise Solutions</p></div>
-      </div>
+<main>
+<div class="wrap">
+
+  <section class="sec" id="profile">
+    <div class="shead"><span class="no">01</span><span class="ttl">Profile</span><span class="fl"></span><span class="pg">Sheet 2</span></div>
+    <hr class="perf">
+    <h2>Between the requirement and the record</h2>
+    <div class="prose">
+      <p>Most ERP problems aren't software problems. They're a mismatch between what a team meant to record and what the system let them record. My work sits in that gap: gathering the requirement properly, configuring the module to match it, then proving with data that the match held.</p>
+      <p>At Rubicon Organics I support Finance, Supply Chain, Production and Cultivation on a single Business Central instance, with integrations reaching into SQL, Azure and <i>Elevated Signals</i> on the cultivation side. The reporting layer — Power BI, Power Query, DAX — is where the work becomes visible, but the durable part is upstream: validation rules, audit trails, SOPs, and root-cause fixes that stop an incident from returning.</p>
+      <p>Before Canada, seven years at <i>Tata Consultancy Services</i> in Delhi doing the same discipline at enterprise scale — KPI definition, reporting standards, and the liaison work between business users and IT. Outside the day job I build the automation side of the same problem through my own practice, <i>Surrey AI Automation</i>.</p>
     </div>
-  </div>
-</section>
 
-<!-- ===== EXPERIENCE ===== -->
-<section id="experience">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="section-label">Career Path</div>
-      <h2 class="section-title">Professional <span>Experience</span></h2>
-      <p class="section-sub">A track record of delivering scalable enterprise solutions across ERP, data, and cloud platforms.</p>
-    </div>
-    <div class="exp-grid">
-      <div class="exp-card reveal">
-        <div class="exp-top">
-          <div><h3>Digital Solutions Lead / ERP Data Analyst</h3><div class="company">Rubicon Organics &middot; Vancouver, BC</div></div>
-          <div class="exp-date">Jan 2024 &mdash; Present</div>
-        </div>
-        <p class="exp-desc">Delivering end-to-end digital solutions across ERP, SaaS integrations, and data platforms for 100&ndash;150 users spanning Finance, Supply Chain, Production, and Cultivation.</p>
-        <div class="exp-highlights">
-          <div class="exp-hl"><span class="dot"></span>Configured REST API integrations reducing data sync by 40%</div>
-          <div class="exp-hl"><span class="dot"></span>Built Power BI dashboards replacing manual reporting</div>
-          <div class="exp-hl"><span class="dot"></span>Architected Python ETL pipeline for ERP batch uploads</div>
-          <div class="exp-hl"><span class="dot"></span>Designed Power Automate hybrid cloud workflows</div>
-          <div class="exp-hl"><span class="dot"></span>Improved data accuracy 25% via governance frameworks</div>
-          <div class="exp-hl"><span class="dot"></span>Increased system adoption 35% through UAT training</div>
-        </div>
-        <div class="exp-tags">
-          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">D365 BC</span>
-          <span class="exp-tag" style="background:rgba(167,139,250,.1);color:var(--purple)">Power BI</span>
-          <span class="exp-tag" style="background:rgba(52,211,153,.1);color:var(--green)">Python</span>
-          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">SQL</span>
-          <span class="exp-tag" style="background:rgba(244,114,182,.1);color:var(--pink)">Azure</span>
-          <span class="exp-tag" style="background:rgba(251,191,36,.1);color:var(--amber)">Power Automate</span>
-        </div>
+    <nav class="toc" aria-label="Contents">
+      <p class="cap">Contents</p>
+      <div class="list">
+        <a href="#trajectory"><span class="n">02</span><span class="t">Trajectory</span><span class="fl"></span><span class="s">Sheet 3</span></a>
+        <a href="#impact"><span class="n">03</span><span class="t">Measured outcomes</span><span class="fl"></span><span class="s">Sheet 4</span></a>
+        <a href="#work"><span class="n">04</span><span class="t">Experience</span><span class="fl"></span><span class="s">Sheet 5</span></a>
+        <a href="#projects"><span class="n">05</span><span class="t">Selected projects</span><span class="fl"></span><span class="s">Sheet 6</span></a>
+        <a href="#method"><span class="n">06</span><span class="t">Method</span><span class="fl"></span><span class="s">Sheet 7</span></a>
+        <a href="#stack"><span class="n">07</span><span class="t">Register</span><span class="fl"></span><span class="s">Sheet 8</span></a>
+        <a href="#contact"><span class="n">■</span><span class="t">Contact</span><span class="fl"></span><span class="s">End</span></a>
       </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-top">
-          <div><h3>System Analyst</h3><div class="company">Lululemon (via Randstad) &middot; Vancouver, BC</div></div>
-          <div class="exp-date">Oct &mdash; Jan 2024</div>
-        </div>
-        <p class="exp-desc">Administered IT infrastructure for warehouse management operations including WMS, servers, networking, and Zebra label printing systems.</p>
-        <div class="exp-highlights">
-          <div class="exp-hl"><span class="dot"></span>Managed asset lifecycle in hybrid cloud environment</div>
-          <div class="exp-hl"><span class="dot"></span>Ensured system uptime and operational continuity</div>
-        </div>
-        <div class="exp-tags">
-          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">WMS</span>
-          <span class="exp-tag" style="background:rgba(167,139,250,.1);color:var(--purple)">Bartender</span>
-          <span class="exp-tag" style="background:rgba(52,211,153,.1);color:var(--green)">Manhattan Active</span>
-        </div>
-      </div>
-
-      <div class="exp-card reveal">
-        <div class="exp-top">
-          <div><h3>Senior Process Associate</h3><div class="company">Tata Consultancy Services &middot; Delhi, India</div></div>
-          <div class="exp-date">Aug 2016 &mdash; Oct 2023</div>
-        </div>
-        <p class="exp-desc">Led enterprise analytics initiatives, defining KPIs and delivering dashboard solutions at scale across business operations.</p>
-        <div class="exp-highlights">
-          <div class="exp-hl"><span class="dot"></span>Delivered Power BI and Tableau dashboards at scale</div>
-          <div class="exp-hl"><span class="dot"></span>Built automated reporting with Power Query & Pivot</div>
-          <div class="exp-hl"><span class="dot"></span>Defined enterprise KPIs and reporting standards</div>
-          <div class="exp-hl"><span class="dot"></span>Streamlined procurement reporting and analytics</div>
-        </div>
-        <div class="exp-tags">
-          <span class="exp-tag" style="background:rgba(167,139,250,.1);color:var(--purple)">Power BI</span>
-          <span class="exp-tag" style="background:rgba(52,211,153,.1);color:var(--green)">Tableau</span>
-          <span class="exp-tag" style="background:rgba(96,165,250,.1);color:var(--accent)">Excel</span>
-          <span class="exp-tag" style="background:rgba(244,114,182,.1);color:var(--pink)">Power Query</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== SKILLS ===== -->
-<section id="skills" style="background:var(--bg2)">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="section-label">Tech Stack</div>
-      <h2 class="section-title">Skills & <span>Expertise</span></h2>
-      <p class="section-sub">A deep toolkit spanning ERP systems, analytics platforms, cloud services, and automation frameworks.</p>
-    </div>
-    <div class="skills-grid">
-      <div class="skill-group reveal">
-        <div class="sg-header">
-          <div class="sg-icon" style="background:rgba(96,165,250,.1)">&#x2699;</div>
-          <h3>ERP & Business Systems</h3>
-        </div>
-        <div class="skill-items">
-          <div class="skill-item">Dynamics 365 Business Central<div class="level"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div>
-          <div class="skill-item">REST API / BC Web Services<div class="level"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span></span></div></div>
-          <div class="skill-item">ERP Configuration & UAT<div class="level"><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span><span class="filled"></span></div></div>
-        </div>
-      </div>
-      <div class="skill-group reveal reveal-delay-1">
-        <div class="sg-header">
-          <div class="sg-icon" style="background:rgba(167,139,250,.1)">&#x1F4CA;</div>
-          <h3>Data & Analytics</h3>
-        </div>
-        <div class="skill-items">
-          <div class="skill-item">Power BI / DAX / Power Query<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span></div></div>
-          <div class="skill-item">SQL<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span></span></div></div>
-          <div class="skill-item">Tableau<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span></span></div></div>
-          <div class="skill-item">Excel (Advanced)<div class="level"><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span><span class="filled purple"></span></div></div>
-        </div>
-      </div>
-      <div class="skill-group reveal reveal-delay-2">
-        <div class="sg-header">
-          <div class="sg-icon" style="background:rgba(52,211,153,.1)">&#x2601;</div>
-          <h3>Cloud & Automation</h3>
-        </div>
-        <div class="skill-items">
-          <div class="skill-item">Azure<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span></span></div></div>
-          <div class="skill-item">Power Automate<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span></div></div>
-          <div class="skill-item">Python<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span></span></div></div>
-          <div class="skill-item">SharePoint / OneDrive<div class="level"><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span class="filled green"></span><span></span></div></div>
-        </div>
-      </div>
-      <div class="skill-group reveal reveal-delay-3">
-        <div class="sg-header">
-          <div class="sg-icon" style="background:rgba(244,114,182,.1)">&#x1F4CB;</div>
-          <h3>Methods & Governance</h3>
-        </div>
-        <div class="skill-items">
-          <div class="skill-item">Data Governance<div class="level"><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span></div></div>
-          <div class="skill-item">Master Data Management<div class="level"><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span></span></div></div>
-          <div class="skill-item">ITIL v4 / Agile<div class="level"><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span class="filled pink"></span><span></span></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== ACHIEVEMENTS ===== -->
-<section id="achievements">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="section-label">Results</div>
-      <h2 class="section-title">Measurable <span>Impact</span></h2>
-    </div>
-    <div class="achieve-row">
-      <div class="achieve-card reveal">
-        <div class="achieve-num an1">40%</div>
-        <h3>Faster Data Sync</h3>
-        <p>Streamlined BC integrations with SQL and Elevated Signals</p>
-      </div>
-      <div class="achieve-card reveal reveal-delay-1">
-        <div class="achieve-num an2">35%</div>
-        <h3>User Adoption</h3>
-        <p>Structured ERP training and onboarding programs</p>
-      </div>
-      <div class="achieve-card reveal reveal-delay-2">
-        <div class="achieve-num an3">25%</div>
-        <h3>Data Accuracy</h3>
-        <p>Governance frameworks reducing repeat incidents 30%</p>
-      </div>
-      <div class="achieve-card reveal reveal-delay-3">
-        <div class="achieve-num an4">Zero</div>
-        <h3>Manual Reports</h3>
-        <p>Migrated to dynamic Power BI dashboards</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== PROJECTS BUILT ===== -->
-<section id="projects">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="section-label">Projects Built</div>
-      <h2 class="section-title">Shipped to <span>Production</span></h2>
-      <p class="section-sub">AI platforms and analytics tools built and deployed under Surrey AI Automation. Each project documents what was built, why, and the technical decisions behind it.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.5rem">
-
-      <!-- Surrey AI Automation Business Website -->
-      <a href="surrey-ai-automation.html" style="text-decoration:none;display:block" class="reveal">
-        <div class="exp-card" style="height:100%;transition:.3s;cursor:pointer" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-4px)'" onmouseleave="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
-            <span style="font-size:2rem">🌌</span>
-            <span style="background:rgba(0,212,200,.12);border:1px solid rgba(0,212,200,.3);color:#00d4c8;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:999px">Live</span>
-          </div>
-          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem;color:var(--text)">Surrey AI Automation Website</h3>
-          <p style="font-size:.85rem;color:var(--text-muted);line-height:1.6;margin-bottom:1rem">Full production business website — Power BI &amp; data automation consulting for Metro Vancouver SMBs. Space-theme, Cloudflare edge, zero frameworks.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem">
-            <span style="background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:.2rem .55rem;font-size:.7rem;color:var(--text-muted);font-family:monospace">Cloudflare Pages</span>
-            <span style="background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:.2rem .55rem;font-size:.7rem;color:var(--text-muted);font-family:monospace">Vanilla JS</span>
-            <span style="background:var(--surface-2);border:1px solid var(--border);border-radius:4px;padding:.2rem .55rem;font-size:.7rem;color:var(--text-muted);font-family:monospace">Power BI</span>
-          </div>
-        </div>
-      </a>
-
-      <!-- Email Intelligence -->
-      <a href="email-intelligence.html" style="text-decoration:none;display:block" class="reveal">
-        <div class="exp-card" style="height:100%;transition:.3s;cursor:pointer" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-4px)'" onmouseleave="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
-            <span style="font-size:2rem">📧</span>
-            <span style="background:rgba(139,92,246,.12);border:1px solid rgba(139,92,246,.3);color:#a78bfa;font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:999px">Archived</span>
-          </div>
-          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem;color:var(--text)">Email Intelligence Platform</h3>
-          <p style="color:var(--muted);font-size:.82rem;line-height:1.6;margin-bottom:1.2rem">AI-powered inbox analytics that classifies every sender, maps relationship graphs, surfaces noise signals, and delivers weekly digest reports — all processed client-side with zero data storage.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem">
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">Vanilla JS</span>
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">Gmail OAuth</span>
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">AI Classification</span>
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">REST APIs</span>
-          </div>
-          <span style="color:var(--accent);font-size:.82rem;font-weight:600">View case study →</span>
-        </div>
-      </a>
-
-      <!-- Neural Intelligence -->
-      <a href="neural-intelligence.html" style="text-decoration:none;display:block" class="reveal reveal-delay-1">
-        <div class="exp-card" style="height:100%;transition:.3s;cursor:pointer" onmouseenter="this.style.borderColor='var(--accent)';this.style.transform='translateY(-4px)'" onmouseleave="this.style.borderColor='var(--border)';this.style.transform='translateY(0)'">
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1rem">
-            <span style="font-size:2rem">🧠</span>
-            <span style="background:rgba(96,165,250,.1);border:1px solid rgba(96,165,250,.3);color:var(--accent);font-size:.65rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;padding:.25rem .65rem;border-radius:999px">Archived</span>
-          </div>
-          <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:.5rem;color:var(--text)">Neural Intelligence Platform</h3>
-          <p style="color:var(--muted);font-size:.82rem;line-height:1.6;margin-bottom:1.2rem">AI-powered business command centre with 5 intelligence modules: real-time KPI dashboards, automated decision workflows, data mesh (50+ connectors), anomaly alerts, and 30/60/90-day revenue forecasting.</p>
-          <div style="display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.2rem">
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">Power BI</span>
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">Python ETL</span>
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">SQL Server</span>
-            <span style="background:var(--surface2);border:1px solid var(--border);color:var(--text2);font-size:.65rem;font-weight:600;padding:.2rem .6rem;border-radius:5px;font-family:'JetBrains Mono',monospace">AI Forecasting</span>
-          </div>
-          <span style="color:var(--accent);font-size:.82rem;font-weight:600">View case study →</span>
-        </div>
-      </a>
-
-    </div>
-  </div>
-</section>
-
-<!-- ===== EDUCATION ===== -->
-<section style="background:var(--bg2)">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="section-label">Education</div>
-      <h2 class="section-title">Academic <span>Background</span></h2>
-    </div>
-    <div class="edu-row">
-      <div class="edu-card reveal">
-        <div class="edu-icon">&#x1F393;</div>
-        <h3>MBA &mdash; Data Analysis & PM</h3>
-        <div class="school">University Canada West, Vancouver</div>
-        <div class="year">2023</div>
-      </div>
-      <div class="edu-card reveal reveal-delay-1">
-        <div class="edu-icon">&#x1F3DB;</div>
-        <h3>B.E. &mdash; Electronics & Telecom</h3>
-        <div class="school">Amravati University, India</div>
-        <div class="year">2012</div>
-      </div>
-      <div class="edu-card reveal reveal-delay-2">
-        <div class="edu-icon">&#x1F4DC;</div>
-        <h3>ITIL v4 Foundation</h3>
-        <div class="school">Credential: GR671097346MD</div>
-        <div class="year">2019</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== INSIGHTS / BLOG ===== -->
-<section id="insights" style="background:var(--bg2)">
-  <div class="container">
-    <div class="section-header center reveal">
-      <div class="section-label">Insights</div>
-      <h2 class="section-title">Thoughts & <span>Articles</span></h2>
-      <p class="section-sub">Practical insights from 10+ years of building enterprise solutions. Click any card to read the full post.</p>
-    </div>
-    <div class="blog-grid">
-
-      <div class="blog-card reveal" onclick="openPost(0)">
-        <div class="blog-banner" style="background:var(--grad1)"></div>
-        <div class="blog-body">
-          <div class="blog-cat" style="color:var(--accent)">Automation</div>
-          <h3>One Line of Python Saved Our Team 6 Hours a Week</h3>
-          <p class="preview">How I replaced manual Excel-to-ERP data entry with a Python pipeline that brought upload failures to near zero.</p>
-          <div class="blog-footer">
-            <span class="read-time">2 min read</span>
-            <button class="copy-post" onclick="event.stopPropagation();copyPost(0)">Copy for LinkedIn</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="blog-card reveal reveal-delay-1" onclick="openPost(1)">
-        <div class="blog-banner" style="background:var(--grad2)"></div>
-        <div class="blog-body">
-          <div class="blog-cat" style="color:var(--green)">Data Governance</div>
-          <h3>Why Most ERP Implementations Fail (It's Not the Technology)</h3>
-          <p class="preview">The real reason ERP projects struggle isn't configuration — it's data governance. Here's how we fixed it at Rubicon Organics.</p>
-          <div class="blog-footer">
-            <span class="read-time">2 min read</span>
-            <button class="copy-post" onclick="event.stopPropagation();copyPost(1)">Copy for LinkedIn</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="blog-card reveal reveal-delay-2" onclick="openPost(2)">
-        <div class="blog-banner" style="background:var(--grad3)"></div>
-        <div class="blog-body">
-          <div class="blog-cat" style="color:var(--purple)">Career</div>
-          <h3>From Electronics Engineer to Digital Solutions Lead</h3>
-          <p class="preview">My 10-year journey from India to Vancouver — through TCS, Lululemon, an MBA, and building ERP solutions.</p>
-          <div class="blog-footer">
-            <span class="read-time">2 min read</span>
-            <button class="copy-post" onclick="event.stopPropagation();copyPost(2)">Copy for LinkedIn</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="blog-card reveal" onclick="openPost(3)">
-        <div class="blog-banner" style="background:linear-gradient(135deg,var(--amber),var(--pink))"></div>
-        <div class="blog-body">
-          <div class="blog-cat" style="color:var(--amber)">Power BI</div>
-          <h3>5 Power BI Mistakes I See in Every Organization</h3>
-          <p class="preview">From building dashboards before defining KPIs to skipping row-level security — common mistakes and how to fix them.</p>
-          <div class="blog-footer">
-            <span class="read-time">2 min read</span>
-            <button class="copy-post" onclick="event.stopPropagation();copyPost(3)">Copy for LinkedIn</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="blog-card reveal reveal-delay-1" onclick="openPost(4)">
-        <div class="blog-banner" style="background:linear-gradient(135deg,var(--accent),var(--green))"></div>
-        <div class="blog-body">
-          <div class="blog-cat" style="color:var(--accent)">Open to Work</div>
-          <h3>Looking for My Next Challenge in Vancouver</h3>
-          <p class="preview">10+ years in enterprise digital solutions. Targeting Data Analyst, ERP Analyst, and BI roles in the Greater Vancouver Area.</p>
-          <div class="blog-footer">
-            <span class="read-time">1 min read</span>
-            <button class="copy-post" onclick="event.stopPropagation();copyPost(4)">Copy for LinkedIn</button>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-
-<!-- Post Modal -->
-<div class="blog-modal-overlay" id="postModal" onclick="if(event.target===this)closePost()">
-  <div class="blog-modal">
-    <button class="close-modal" onclick="closePost()">&times;</button>
-    <h2 id="modalTitle"></h2>
-    <div class="modal-cat" id="modalCat"></div>
-    <div class="modal-content" id="modalContent"></div>
-    <div class="modal-actions">
-      <button class="btn-copy" onclick="copyCurrentPost()">Copy to Clipboard</button>
-      <button class="btn-linkedin" onclick="window.open('https://www.linkedin.com/feed/?shareActive=true','_blank')">Post on LinkedIn</button>
-    </div>
-  </div>
+    </nav>
+  </section>
 </div>
 
-<!-- ===== CONTACT ===== -->
-<section id="contact">
-  <div class="container">
-    <div class="section-header reveal">
-      <div class="section-label">Get In Touch</div>
-      <h2 class="section-title">Let's <span>Connect</span></h2>
-    </div>
-    <div class="contact-layout">
-      <div class="reveal">
-        <p class="contact-text">I'm always interested in discussing ERP modernization, data-driven solutions, or new career opportunities. Let's talk.</p>
-        <div class="contact-cards">
-          <a href="mailto:manish.mani27@outlook.com" class="cc">
-            <div class="cc-icon" style="background:rgba(96,165,250,.1)">&#x2709;</div>
-            <div><div class="cc-label">Email</div>manish.mani27@outlook.com</div>
-          </a>
-          <a href="tel:+17788379715" class="cc">
-            <div class="cc-icon" style="background:rgba(52,211,153,.1)">&#x260E;</div>
-            <div><div class="cc-label">Phone</div>+1 (778) 837-9715</div>
-          </a>
-          <a href="https://linkedin.com/in/md7788379715" target="_blank" class="cc">
-            <div class="cc-icon" style="background:rgba(167,139,250,.1)">&#x1F310;</div>
-            <div><div class="cc-label">LinkedIn</div>linkedin.com/in/md7788379715</div>
-          </a>
-          <a href="https://github.com/Manish120889" target="_blank" class="cc">
-            <div class="cc-icon" style="background:rgba(244,114,182,.1)">&#x2B22;</div>
-            <div><div class="cc-label">GitHub</div>github.com/Manish120889</div>
-          </a>
-        </div>
-      </div>
-      <form class="reveal" action="https://formspree.io/f/your-form-id" method="POST">
-        <div class="row">
-          <input type="text" name="name" placeholder="Your Name" required>
-          <input type="email" name="email" placeholder="Your Email" required>
-        </div>
-        <input type="text" name="subject" placeholder="Subject">
-        <textarea name="message" placeholder="Your Message" required></textarea>
-        <button type="submit" class="btn btn-primary form-btn">Send Message</button>
-      </form>
-    </div>
-  </div>
-</section>
+<div class="band" role="presentation"><q><span>Technology should make the next decision clearer — not make the business feel more complicated.</span></q></div>
 
-<footer>
-  <div class="container">
-    <div class="footer-inner">
-      <p>&copy; 2026 Manish Dadhwal. Built with purpose.</p>
-      <div class="footer-links">
-        <a href="https://linkedin.com/in/md7788379715" target="_blank">LinkedIn</a>
-        <a href="https://github.com/Manish120889" target="_blank">GitHub</a>
-        <a href="mailto:manish.mani27@outlook.com">Email</a>
+<div class="wrap">
+  <section class="sec" id="trajectory">
+    <div class="shead"><span class="no">02</span><span class="ttl">Trajectory</span><span class="fl"></span><span class="pg">Sheet 3</span></div>
+    <hr class="perf">
+    <h2>Ten years on one axis</h2>
+    <p class="dek">Posting periods to scale, 2016 to date. The Lululemon contract reads as a sliver because it genuinely was one — three months, by design.</p>
+    <div class="scroll">
+      <div class="gantt">
+        <div class="grow">
+          <div class="gname">Tata Consultancy<i>Delhi, India</i></div>
+          <div class="gtrack"><div class="gspan" style="left:5.4%;width:66.7%" role="img" aria-label="Tata Consultancy Services, August 2016 to October 2023">Senior Process Associate</div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Lululemon<i>Vancouver, BC</i></div>
+          <div class="gtrack"><div class="gspan" style="left:72.1%;width:2.3%" role="img" aria-label="Lululemon, October 2023 to January 2024"></div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Rubicon Organics<i>Vancouver, BC</i></div>
+          <div class="gtrack"><div class="gspan live" style="left:74.4%;width:25.6%" role="img" aria-label="Rubicon Organics, January 2024 to present">ERP Data Analyst</div></div>
+        </div>
+        <div class="grow">
+          <div class="gname">Surrey AI Automation<i>Own practice</i></div>
+          <div class="gtrack"><div class="gspan live" style="left:93%;width:7%" role="img" aria-label="Surrey AI Automation, 2026 to present"></div></div>
+        </div>
+        <div class="gmarks">
+          <span class="gmark" style="left:27.9%">ITIL v4 ↓</span>
+          <span class="gmark" style="left:69.8%">MBA ↓</span>
+        </div>
+        <div class="gaxis">
+          <span class="gtick" style="left:0%">2016</span>
+          <span class="gtick" style="left:18.6%">2018</span>
+          <span class="gtick" style="left:37.2%">2020</span>
+          <span class="gtick" style="left:55.8%">2022</span>
+          <span class="gtick" style="left:74.4%">2024</span>
+          <span class="gtick" style="left:93%">2026</span>
+        </div>
       </div>
     </div>
+  </section>
+
+  <section class="sec" id="impact">
+    <div class="shead"><span class="no">03</span><span class="ttl">Measured outcomes</span><span class="fl"></span><span class="pg">Sheet 4</span></div>
+    <hr class="perf">
+    <h2>What changed, and by how much</h2>
+    <p class="dek">Delivered at Rubicon Organics, January 2024 onward. Figures are printed in <span class="neg">red where negative</span>, per ledger convention — here every negative is an improvement.</p>
+    <div class="scroll">
+      <table class="bar">
+        <caption>Variance against pre-implementation baseline · scale 0–50%</caption>
+        <thead><tr><th scope="col">Measure</th><th scope="col">Basis</th><th scope="col">Magnitude</th><th scope="col" class="r">Change</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Data synchronisation time</td><td>Integration</td><td><span class="plot"><i class="neg" style="width:80%"></i></span></td><td class="r n"><span class="fig neg">−40%</span></td></tr>
+          <tr><td class="k">ERP training adoption</td><td>Enablement</td><td><span class="plot"><i style="width:70%"></i></span></td><td class="r n"><span class="fig">+35%</span></td></tr>
+          <tr><td class="k">Recurring incidents</td><td>Support</td><td><span class="plot"><i class="neg" style="width:60%"></i></span></td><td class="r n"><span class="fig neg">−30%</span></td></tr>
+          <tr><td class="k">Transaction data accuracy</td><td>Audit</td><td><span class="plot"><i style="width:50%"></i></span></td><td class="r n"><span class="fig">+25%</span></td></tr>
+        </tbody>
+        <tfoot><tr><td colspan="2">Four measures · one shared scale</td><td>0% ————— 25% ————— 50%</td><td class="r">Verified</td></tr></tfoot>
+      </table>
+    </div>
+  </section>
+
+  <section class="sec" id="work">
+    <div class="shead"><span class="no">04</span><span class="ttl">Experience</span><span class="fl"></span><span class="pg">Sheet 5</span></div>
+    <hr class="perf">
+    <h2>Three systems, one discipline</h2>
+
+    <div class="ent">
+      <div class="ehead"><h3>ERP Data Analyst</h3><span class="at">Rubicon Organics</span></div>
+      <p class="emeta"><span>Jan 2024 — Present</span><i>·</i><span>Vancouver, BC</span><i>·</i><span>Full-time</span></p>
+      <ul>
+        <li>Own ERP data analysis, reporting and system support for <b>70–100 users</b> across Finance, Supply Chain, Production and Cultivation.</li>
+        <li>Configure, test and optimise Dynamics 365 Business Central modules and their integrations with SQL, Azure and Elevated Signals.</li>
+        <li>Built the validation and audit framework that lifted transaction accuracy <b>25%</b> and surfaced errors for correction before month-end.</li>
+        <li>Run root-cause analysis and ship permanent fixes — recurring incidents down <b>30%</b>.</li>
+        <li>Automate reporting with Power Query, DAX and Power Automate; maintain the Power BI and Excel models behind KPI review.</li>
+        <li>Lead UAT and end-user training, and contribute to data governance, SOP documentation and pipeline improvements.</li>
+      </ul>
+      <p class="tools"><b>Dynamics 365 BC · Power BI · SQL · Azure · DAX · Power Query · Power Automate</b></p>
+    </div>
+
+    <div class="ent">
+      <div class="ehead"><h3>System Analyst</h3><span class="at">Lululemon</span></div>
+      <p class="emeta"><span>Oct 2023 — Jan 2024</span><i>·</i><span>Vancouver, BC</span><i>·</i><span>Contract</span></p>
+      <ul>
+        <li>Analysed warehouse operations to gather requirements for system enhancements that improved order accuracy.</li>
+        <li>Configured and integrated label-printing and inventory applications — <b>Zebra, BarTender, Manhattan Active</b> — against core ERP modules.</li>
+        <li>Built ETL between warehouse label and inventory systems and central databases.</li>
+        <li>Performed root-cause analysis on data discrepancies and corrected them at source with the operations team, minimising supply-chain disruption.</li>
+        <li>Managed IT asset provisioning and user roles through a period of organisational change, supporting access security and continuity.</li>
+      </ul>
+      <p class="tools"><b>Manhattan Active · Zebra · BarTender · ETL · Excel</b></p>
+    </div>
+
+    <div class="ent">
+      <div class="ehead"><h3>Senior Process Associate</h3><span class="at">Tata Consultancy Services</span></div>
+      <p class="emeta"><span>Aug 2016 — Oct 2023</span><i>·</i><span>Delhi, India</span><i>·</i><span>7 years</span></p>
+      <ul>
+        <li>Collected and formalised business requirements, KPIs and reporting standards, driving enterprise-wide alignment across procurement, finance and operations.</li>
+        <li>Designed resource and asset allocation models in Excel Power Query and Power Pivot, supporting planning and capacity reporting.</li>
+        <li>Built BI dashboards in Power BI and Tableau, and ran statistical analysis to surface trends that informed business strategy.</li>
+        <li>Streamlined data collection and reporting, automating repeated tasks to cut manual effort and raise accuracy.</li>
+        <li>Facilitated UAT cycles and change management through successive rollouts, acting as the standing liaison between business users and IT.</li>
+      </ul>
+      <p class="tools"><b>Power BI · Tableau · Power Pivot · Power Query · UAT</b></p>
+    </div>
+  </section>
+
+  <section class="sec" id="projects">
+    <div class="shead"><span class="no">05</span><span class="ttl">Selected projects</span><span class="fl"></span><span class="pg">Sheet 6</span></div>
+    <hr class="perf">
+    <h2>Built outside the ticket queue</h2>
+
+    <div class="ent">
+      <div class="ehead"><h3>Surrey AI Automation</h3><span class="at"><a href="https://surreyaiautomation.online" target="_blank" rel="noopener">surreyaiautomation.online</a></span></div>
+      <p class="emeta"><span>2026</span><i>·</i><span>Own practice</span><i>·</i><span>Metro Vancouver</span></p>
+      <ul>
+        <li>Founded an AI-automation practice serving data-heavy businesses in Metro Vancouver: Power BI dashboards, reporting automation and ERP/data integration on fixed-price engagements.</li>
+        <li>Designed and built the site end to end — hand-written HTML, CSS and JS with no build step, a serverless contact endpoint, and automated validators that gate every page on structure, metadata and link integrity before it ships.</li>
+      </ul>
+      <figure class="fig-plate">
+        <img src="plate-founder.jpg" width="1265" height="640" loading="lazy"
+             alt="The Surrey AI Automation founder page: a painted forest valley at dusk behind the Founder Vision headline card.">
+        <figcaption><span><b>Plate I</b> — Surrey AI Automation, founder page</span><span>Designed &amp; built end to end · 2026</span></figcaption>
+      </figure>
+      <p class="tools"><b>Power BI · Cloudflare Pages · Serverless · HTML/CSS/JS</b></p>
+    </div>
+
+    <div class="ent">
+      <div class="ehead"><h3>Batch-to-lot attribute propagation</h3><span class="at">Power Platform × Business Central</span></div>
+      <p class="emeta"><span>2026</span><i>·</i><span>Internal tooling</span></p>
+      <ul>
+        <li>Operations manages product by <b>batch</b>; Business Central tracks attributes by <b>lot</b>, one batch to many. Every lot was edited by hand. Built a canvas app and flow that edits once at batch level and propagates, with a preview before writing and a per-lot result after.</li>
+        <li>Established the write path by testing rather than assuming — the vendor API turned out to be read-only, so writes were routed through a maintained OData endpoint with proper eTag concurrency control.</li>
+        <li>Encoded the integrity rules the dashboards depend on: coupled fields stay in step, propagation is scoped to a single item so one QA status cannot leak across unrelated SKUs, and destructive blank writes are refused outright.</li>
+      </ul>
+      <p class="tools"><b>Power Apps · Power Automate · OData v4 · Business Central · Python</b></p>
+    </div>
+
+    <div class="ent">
+      <div class="ehead"><h3>Jarvis Agent OS</h3><span class="at">Multi-agent orchestration desktop</span></div>
+      <p class="emeta"><span>2026</span><i>·</i><span>Personal</span></p>
+      <ul>
+        <li>A desktop application for running and supervising multiple AI coding agents side by side — embedded terminals, a code editor, git integration and local persistence in one workspace.</li>
+        <li>Built to scratch a real itch: keeping several long-running agent sessions legible without living in a dozen terminal tabs.</li>
+      </ul>
+      <p class="tools"><b>Electron · React · TypeScript · SQLite · node-pty</b></p>
+    </div>
+  </section>
+
+  <section class="sec" id="method">
+    <div class="shead"><span class="no">06</span><span class="ttl">Method</span><span class="fl"></span><span class="pg">Sheet 7</span></div>
+    <hr class="perf">
+    <h2>How I work</h2>
+    <p class="dek">Four habits that account for most of the figures posted in section 03.</p>
+    <div class="mth"><span class="no">i.</span><div><b>Verify the path, don't assume it</b>
+      <p>Documentation describes the happy case. I test the actual endpoint before designing against it — which is how a read-only vendor API got caught before it became a shipped dead end.</p>
+      <cite>Batch propagation</cite></div></div>
+    <div class="mth"><span class="no">ii.</span><div><b>Fix the cause, not the ticket</b>
+      <p>A recurring incident is a design defect wearing a support costume. Tracing each one to its origin and correcting it there is what took recurrences down by a third.</p>
+      <cite>−30% incidents</cite></div></div>
+    <div class="mth"><span class="no">iii.</span><div><b>Validate upstream of the dashboard</b>
+      <p>A report that renders a wrong number confidently is worse than no report at all. Validation and audit rules sit at the point of entry, so errors surface while they are still correctable.</p>
+      <cite>+25% accuracy</cite></div></div>
+    <div class="mth"><span class="no">iv.</span><div><b>Automate the second time you do it</b>
+      <p>Manual reporting is a standing tax. Power Query, DAX and Power Automate retire the repeat work, and the hours go back into analysis nobody was doing before.</p>
+      <cite>−40% sync time</cite></div></div>
+  </section>
+
+  <section class="sec" id="stack">
+    <div class="shead"><span class="no">07</span><span class="ttl">Register</span><span class="fl"></span><span class="pg">Sheet 8</span></div>
+    <hr class="perf">
+    <h2>Tools, domains, credentials</h2>
+
+    <div class="scroll">
+      <table class="bar">
+        <caption>Capability register</caption>
+        <thead><tr><th scope="col">Class</th><th scope="col">Holdings</th><th scope="col" class="r">Daily</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Platform</td><td>Dynamics 365 Business Central, Power BI, SQL Server, Azure, Power Apps, Power Automate, Elevated Signals, Manhattan Active, Tableau</td><td class="r n">2</td></tr>
+          <tr><td class="k">Data</td><td>DAX, Power Query, data modelling, ETL pipelines, OData / REST, Excel &amp; Power Pivot, KPI design, statistical analysis</td><td class="r n">2</td></tr>
+          <tr><td class="k">Practice</td><td>Requirements gathering, ERP configuration, UAT &amp; change management, data governance, root-cause analysis, SOP documentation, process mapping, stakeholder management</td><td class="r n">2</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scroll" style="margin-top:2rem">
+      <table class="bar">
+        <caption>Domains worked in</caption>
+        <thead><tr><th scope="col">Sector</th><th scope="col">Exposure</th><th scope="col" class="r">Via</th></tr></thead>
+        <tbody>
+          <tr><td class="k">Cannabis &amp; CPG</td><td>Cultivation, production, lot and batch traceability</td><td class="r">Rubicon</td></tr>
+          <tr><td class="k">Apparel retail</td><td>Warehouse, fulfilment, high-volume distribution</td><td class="r">Lululemon</td></tr>
+          <tr><td class="k">IT services</td><td>Procurement, finance, enterprise reporting</td><td class="r">TCS</td></tr>
+          <tr><td class="k">Finance operations</td><td>Month-end, audit readiness, KPI review</td><td class="r">All three</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="scroll" style="margin-top:2rem">
+      <table class="bar">
+        <caption>Education and certification</caption>
+        <thead><tr><th scope="col">Award</th><th scope="col">Institution</th><th scope="col" class="r">Year</th></tr></thead>
+        <tbody>
+          <tr><td class="k">MBA, Data Analytics</td><td>University Canada West — Vancouver, BC</td><td class="r n">2023</td></tr>
+          <tr><td class="k">ITIL v4 Foundation</td><td>Service management certification</td><td class="r n">2019</td></tr>
+          <tr><td class="k">BE, Electronics &amp; Telecommunication</td><td>Amravati University — India</td><td class="r n">2012</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="close" id="contact">
+    <hr class="solid">
+    <h2>Open to conversations</h2>
+    <p>Business systems analysis, ERP data work, and reporting roles — particularly where a Business Central instance needs someone who can hold both the requirement and the query. Automation engagements through Surrey AI Automation as well.</p>
+    <div class="acts">
+      <a class="btn" href="mailto:manish.mani27@outlook.com">Get in touch →</a>
+      <button class="btn alt" type="button" onclick="window.print()">Print this sheet</button>
+    </div>
+  </section>
+
+  <div class="eor">
+    <span>■ End of report · PROF-01</span>
+    <span>Dadhwal, M. · Surrey BC · 2026.09</span>
   </div>
-</footer>
+
+</div>
+</main>
 
 <script>
-// Nav scroll effect
-const nav=document.getElementById('nav');
-window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>50));
+/* Parallax: the painted plate drifts slower than the page it sits on. */
+(function () {
+  var plate = document.getElementById('plate');
+  if (!plate) return;
+  var img = plate.querySelector('img');
+  if (!img || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-// Reveal on scroll
-const ro=new IntersectionObserver(e=>{e.forEach(el=>{if(el.isIntersecting){el.target.classList.add('visible');ro.unobserve(el.target)}})},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-document.querySelectorAll('.reveal').forEach(el=>ro.observe(el));
+  var ticking = false, visible = true, DEPTH = 0.16;
 
-// Mobile menu close
-document.querySelectorAll('nav ul a').forEach(a=>a.addEventListener('click',()=>document.querySelector('nav ul').classList.remove('open')));
+  function place() {
+    var r = plate.getBoundingClientRect();
+    var mid = r.top + r.height / 2 - window.innerHeight / 2;
+    var shift = Math.max(-90, Math.min(90, -mid * DEPTH));
+    img.style.setProperty('--py', shift.toFixed(1) + 'px');
+    ticking = false;
+  }
+  function onScroll() { if (!ticking && visible) { ticking = true; requestAnimationFrame(place); } }
 
-// Smooth anchor offset
-document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
-
-// Blog posts data
-const posts=[
-{title:"One Line of Python Saved Our Team 6 Hours a Week",cat:"Automation",content:`One line of Python saved our team 6 hours a week.
-
-At Rubicon Organics, we had analysts manually copying data from Excel into Dynamics 365 Business Central. Every batch upload was a risk — wrong formats, missed fields, failed imports.
-
-So I built a Python pipeline that ingests raw Excel, validates every row, transforms it into ERP-ready templates, and uploads in one click. Upload failures dropped to near zero.
-
-The lesson: automation isn't about replacing people. It's about freeing them to do work that actually matters.
-
-#ERP #Python #Dynamics365 #Automation #DataEngineering`},
-{title:"Why Most ERP Implementations Fail (It's Not the Technology)",cat:"Data Governance",content:`Most ERP implementations fail not because of technology — but because of data governance.
-
-I've seen it repeatedly: teams invest months configuring Dynamics 365, only to have users lose trust because the data is wrong. Duplicate records, stale master data, no validation rules.
-
-At Rubicon Organics, we flipped the approach. We built governance frameworks FIRST — validation workflows, master data standards, ownership rules. Then we configured the system around them.
-
-Result: 25% improvement in data accuracy and 30% fewer repeat incidents.
-
-If your ERP data isn't trusted, your ERP isn't useful.
-
-#DataGovernance #ERP #Dynamics365 #BusinessCentral #DigitalTransformation`},
-{title:"From Electronics Engineer to Digital Solutions Lead",cat:"Career",content:`10 years ago I was an electronics engineer in India. Today I lead digital solutions across ERP, cloud, and data platforms in Vancouver.
-
-The path wasn't linear: 7 years at TCS building enterprise dashboards, an MBA at University Canada West, a contract at Lululemon's warehouse, and now architecting end-to-end solutions at Rubicon Organics.
-
-What connected it all: a stubborn belief that technology should make people's jobs easier, not harder.
-
-Currently exploring new opportunities in the Greater Vancouver area — Data Analyst, ERP Analyst, or Digital Solutions roles. If you know someone hiring, I'd appreciate the connection.
-
-#OpenToWork #DataAnalyst #ERP #PowerBI #Vancouver`},
-{title:"5 Power BI Mistakes I See in Every Organization",cat:"Power BI",content:`5 Power BI mistakes I see in every organization:
-
-1. Building dashboards before defining KPIs. If you can't explain what "good" looks like, don't build a chart.
-
-2. Using Import mode for everything. DirectQuery exists for a reason.
-
-3. Skipping Power Query transformations. If you're doing VLOOKUP gymnastics in Excel first, you're doing it wrong.
-
-4. No row-level security. Everyone sees everything. That's not transparency, it's a compliance risk.
-
-5. No documentation. When the dashboard creator leaves, the dashboard dies.
-
-I've built Power BI solutions serving 150+ users across supply chain, production, and finance. These patterns show up everywhere.
-
-What would you add to this list?
-
-#PowerBI #DAX #DataAnalytics #BusinessIntelligence #SQL`},
-{title:"Looking for My Next Challenge in Vancouver",cat:"Open to Work",content:`I'm actively looking for my next role in the Greater Vancouver area.
-
-What I bring: 10+ years in enterprise digital solutions — Dynamics 365 Business Central, Power BI, Power Automate, Python automation, SQL, and Azure. I've served 150+ users, cut data sync times by 40%, and built pipelines that eliminated entire categories of manual work.
-
-Roles I'm targeting: Data Analyst, ERP Data Analyst, BI Analyst, Business Systems Analyst, Digital Solutions Manager.
-
-If your team needs someone who can bridge the gap between business needs and technical execution, let's talk.
-
-Resume and portfolio: https://manish120889.github.io/my-resume/
-
-#OpenToWork #Hiring #DataAnalyst #ERP #PowerBI #Vancouver #Surrey`}
-];
-
-let currentPostIdx=0;
-function openPost(i){currentPostIdx=i;const p=posts[i];document.getElementById('modalTitle').textContent=p.title;document.getElementById('modalCat').textContent=p.cat;document.getElementById('modalContent').textContent=p.content;document.getElementById('postModal').classList.add('active');document.body.style.overflow='hidden'}
-function closePost(){document.getElementById('postModal').classList.remove('active');document.body.style.overflow=''}
-function copyPost(i){navigator.clipboard.writeText(posts[i].content).then(()=>{const btns=document.querySelectorAll('.copy-post');btns[i].textContent='Copied!';setTimeout(()=>btns[i].textContent='Copy for LinkedIn',2000)})}
-function copyCurrentPost(){navigator.clipboard.writeText(posts[currentPostIdx].content).then(()=>{const btn=document.querySelector('.btn-copy');btn.textContent='Copied!';setTimeout(()=>btn.textContent='Copy to Clipboard',2000)})}
-document.addEventListener('keydown',e=>{if(e.key==='Escape')closePost()});
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (e) {
+      visible = e[0].isIntersecting;
+      if (visible) place();
+    }, { rootMargin: '140px' }).observe(plate);
+  }
+  place();
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', place);
+})();
 </script>
 </body>
 </html>
